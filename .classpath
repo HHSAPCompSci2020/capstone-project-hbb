@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/gif-decoder.jar"/>
+	<classpathentry kind="lib" path="lib/gst1-java-core-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jna.jar"/>
+	<classpathentry kind="lib" path="lib/kryo5-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/kryonet-2.21-all.jar"/>
+	<classpathentry kind="lib" path="lib/processing_core.jar"/>
+	<classpathentry kind="lib" path="lib/video.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

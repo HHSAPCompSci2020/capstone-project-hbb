@@ -97,6 +97,8 @@ public void dispose() {
 	cursor = null;
 	button.removeListener();
 	button = null;
+	prev = null;
+
 }
 
 }

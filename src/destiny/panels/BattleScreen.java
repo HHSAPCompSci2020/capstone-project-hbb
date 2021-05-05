@@ -92,12 +92,14 @@ public class BattleScreen implements Screen {
 }
 	
 
-@Override
-public void dispose() {
-	background = null;
-	cursor = null;
-	button.removeListener();
-	button = null;
-}
+	@Override
+	public void dispose() {
+		background = null;
+		cursor = null;
+		button.removeListener();
+		button = null;
+		pause = null;
+	
+	}
 
 }

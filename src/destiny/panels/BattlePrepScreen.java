@@ -16,6 +16,7 @@ public class BattlePrepScreen implements Screen {
 	private RippleCursor cursor;
 	private PButton button, back;
 	private FadeImage play, prev;
+	private boolean first, second, third, selectFirst, selectSecond, selectThird;
 	
 	@Override
 	public void setup(PApplet window) {
@@ -23,6 +24,9 @@ public class BattlePrepScreen implements Screen {
 		play = new FadeImage("res/generalAssets/play.png");
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
+		first = false;
+		second = false;
+		third = false;
 		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), false);
 		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 400, Constants.SCREEN_HEIGHT), false);
 		background.setCoords(0, 0);
@@ -92,12 +96,14 @@ public class BattlePrepScreen implements Screen {
 }
 	
 
-@Override
-public void dispose() {
-	background = null;
-	cursor = null;
-	button.removeListener();
-	button = null;
-}
+	@Override
+	public void dispose() {
+		background = null;
+		cursor = null;
+		button.removeListener();
+		button = null;
+		prev = null;
+	
+	}
 
 }

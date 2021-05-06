@@ -33,13 +33,20 @@ public class LevelSelectScreen implements Screen {
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		levelButtons = new PButton[Constants.TOTAL_LEVELS];
 		levels = new FadeImage[Constants.TOTAL_LEVELS];
+		
 
 		for(int i = 0; i < Constants.TOTAL_LEVELS; i++) {
-			PButton b = new PButton(new Rectangle(250+(i%20%5*300), 100+(i%20/5*200), 250+(i%20%5*250)+200, 100+(i%20/5*200)+ 200), false);
+			PButton b = new PButton(new Rectangle(250+((i%20%5)*300), 100+((i%20/5)*200), 250+((i%20%5)*300)+100, 100+((i%20/5)*200)+ 100), false);
 			int level = i+1;
 			b.addListener(new Runnable() {
 				@Override
 				public void run() {
+					for(FadeImage pic : levels) {
+						pic.setFadeSpeed(40);
+						pic.setTint(255);
+						pic.setTargetTint(0);
+						pic.fadeWhite(true);
+					}
 					background.setFadeSpeed(40);
 					background.setTint(255);
 					background.setTargetTint(0);
@@ -51,7 +58,6 @@ public class LevelSelectScreen implements Screen {
 					prev.fadeWhite(true);
 					System.out.println(level);
 					background.addListener(new Runnable() {
-
 						@Override
 						public void run() {
 							ScreenManager.setCurrentScreenByName("prep", window);
@@ -62,7 +68,7 @@ public class LevelSelectScreen implements Screen {
 			});
 			levelButtons[i] = b;
 			FadeImage img = new FadeImage("res/generalAssets/obama.png");
-			img.setCoords(250+(i%20%5*300), 100+(i%20/5*200));
+			img.setCoords(250+((i%20%5)*300), 100+((i%20/5)*200));
 			img.resize(200, 200);
 			levels[i] = img;
 		}
@@ -70,7 +76,6 @@ public class LevelSelectScreen implements Screen {
 
 	public void draw(PApplet window) {
 		background.draw(window);
-		prev.draw(window);
 		
 		for(int i = 20*(page-1); i < 20*page; i++) {
 			levels[i].draw(window);
@@ -83,6 +88,12 @@ public class LevelSelectScreen implements Screen {
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
+				for(FadeImage pic : levels) {
+					pic.setFadeSpeed(40);
+					pic.setTint(255);
+					pic.setTargetTint(0);
+					pic.fadeWhite(true);
+				}
 				background.setFadeSpeed(40);
 				background.setTint(255);
 				background.setTargetTint(0);

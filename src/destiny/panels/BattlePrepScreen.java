@@ -14,13 +14,15 @@ public class BattlePrepScreen implements Screen {
 	
 	private FadeImage background;
 	private RippleCursor cursor;
-	private PButton button, back;
+	private PButton button, back, one, two, three;
 	private FadeImage play, prev;
 	private boolean first, second, third, selectFirst, selectSecond, selectThird;
 	private int[] revs;
 	private PButton[] select;
+	private PButton[] selection;
 	private int page;
-	private FadeImage[] profile;
+	private FadeImage[] profiles;
+	private FadeImage[] selected;
 	
 	@Override
 	public void setup(PApplet window) {
@@ -45,11 +47,14 @@ public class BattlePrepScreen implements Screen {
 		prev.setCoords(50, Constants.SCREEN_HEIGHT-200);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		
-		select = new PButton[Constants.TOTAL_LEVELS];
-		profile = new FadeImage[Constants.TOTAL_LEVELS];
+		select = new PButton[Constants.TOTAL_CHARACTERS];
+		profiles = new FadeImage[Constants.TOTAL_CHARACTERS];
+		selection = new PButton[3]; 
+		selected = new FadeImage[3];
+
 
 		for(int i = 0; i < Constants.TOTAL_LEVELS; i++) {
-			PButton b = new PButton(new Rectangle(250+(i%20%5*300), 100+(i%20/5*200), 250+(i%20%5*250)+200, 100+(i%20/5*200)+ 200), false);
+			PButton b = new PButton(new Rectangle(800+(i%20%5*200), 100+(i%20/5*200), 400+(i%20%5*250)+200, 100+(i%20/5*200)+ 200), false);
 			int id = i+1;
 			b.addListener(new Runnable() {
 				@Override
@@ -75,20 +80,52 @@ public class BattlePrepScreen implements Screen {
 			});
 			select[i] = b;
 			FadeImage img = new FadeImage("res/generalAssets/obama.png");
-			img.setCoords(250+(i%20%5*300), 100+(i%20/5*200));
+			img.setCoords(800+(i%20%5*200), 100+(i%20/5*200));
 			img.resize(200, 200);
-			profile[i] = img;
+			profiles[i] = img;
+		}
+		for(int i = 0; i < 3; i++) {
+			PButton b = new PButton(new Rectangle(100, 100+(200*i), 300, 100+(200*i)+ 200), false);
+			int sel = i;
+			b.addListener(new Runnable() {
+				@Override
+				public void run() {
+					if(sel == 1) {
+						selectFirst = true;
+						selectSecond = false;
+						selectThird = false;
+					} else if(sel == 2) {
+						selectFirst = false;
+						selectSecond = true;
+						selectThird = false;
+					}
+					else if(sel == 3) {
+						selectFirst = false;
+						selectSecond = false;
+						selectThird = true;
+					}
+				}
+			});
+			selection[i] = b;
+			FadeImage img = new FadeImage("res/generalAssets/obama.png");
+			img.setCoords(100, 100+(200*i));
+			img.resize(200, 200);
+			selected[i] = img;
 		}
 	}
 
 	public void draw(PApplet window) {
 		background.draw(window);
-		if(first&&second&&third)
-			play.draw(window);
+		
 		prev.draw(window);
 		for(int i = 20*(page-1); i < 20*page; i++) {
-			profile[i].draw(window);
+			profiles[i].draw(window);
 		}
+		for(int i =0; i < 3; i++) {
+			selected[i].draw(window);
+		}
+		if(first&&second&&third)
+			play.draw(window);
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {

@@ -24,12 +24,12 @@ public class MainScreen implements Screen {
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), false);
-		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 400, Constants.SCREEN_HEIGHT), false);
+		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 200, Constants.SCREEN_HEIGHT), false);
 		background.setCoords(0, 0);
 		play.resize(400, 200);
 		play.setCoords(Constants.SCREEN_WIDTH-500, 200);
-		prev.resize(400, 200);
-		prev.setCoords(0, Constants.SCREEN_HEIGHT-200);
+		prev.resize(150, 150);
+		prev.setCoords(50, Constants.SCREEN_HEIGHT-200);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	}
 
@@ -53,6 +53,10 @@ public class MainScreen implements Screen {
 				play.setTint(255);
 				play.setTargetTint(0);
 				play.fadeWhite(true);
+				prev.setFadeSpeed(40);
+				prev.setTint(255);
+				prev.setTargetTint(0);
+				prev.fadeWhite(true);
 				background.addListener(new Runnable() {
 
 					@Override

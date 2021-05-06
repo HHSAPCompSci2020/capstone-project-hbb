@@ -15,31 +15,28 @@ public class LevelSelectScreen implements Screen {
 	
 	private FadeImage background;
 	private RippleCursor cursor;
-	private PButton button, back;
-	private FadeImage play, prev;
+	private PButton  back;
+	private FadeImage prev;
 	private PButton[] levelButtons;
 	private FadeImage[] levels;
 	private int page;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/levelSelectScreen/210322.jpg");
-		play = new FadeImage("res/generalAssets/play.png");
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		page = 1;
-		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), false);
-		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 400, Constants.SCREEN_HEIGHT), false);
+		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 200, Constants.SCREEN_HEIGHT), false);
 		background.setCoords(0, 0);
-		play.resize(400, 200);
-		play.setCoords(Constants.SCREEN_WIDTH-500, 200);
-		prev.resize(400, 200);
-		prev.setCoords(0, Constants.SCREEN_HEIGHT-200);
+		prev.resize(150, 150);
+		prev.setCoords(50, Constants.SCREEN_HEIGHT-200);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		levelButtons = new PButton[Constants.TOTAL_LEVELS];
 		levels = new FadeImage[Constants.TOTAL_LEVELS];
 
 		for(int i = 0; i < Constants.TOTAL_LEVELS; i++) {
-			PButton b = new PButton(new Rectangle(400+(i%20%5*300), 100+(i%20/5*250), 400+(i%20%5*300)+200, 100+(i%20/5*250)+ 200), false);
+			PButton b = new PButton(new Rectangle(250+(i%20%5*300), 100+(i%20/5*200), 250+(i%20%5*250)+200, 100+(i%20/5*200)+ 200), false);
+			int level = i+1;
 			b.addListener(new Runnable() {
 				@Override
 				public void run() {
@@ -47,14 +44,12 @@ public class LevelSelectScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
-					play.setFadeSpeed(40);
-					play.setTint(255);
-					play.setTargetTint(0);
-					play.fadeWhite(true);
+
 					prev.setFadeSpeed(40);
 					prev.setTint(255);
 					prev.setTargetTint(0);
 					prev.fadeWhite(true);
+					System.out.println(level);
 					background.addListener(new Runnable() {
 
 						@Override
@@ -67,7 +62,7 @@ public class LevelSelectScreen implements Screen {
 			});
 			levelButtons[i] = b;
 			FadeImage img = new FadeImage("res/generalAssets/obama.png");
-			img.setCoords(400+(i%20%5*300), 100+(i%20/5*250));
+			img.setCoords(250+(i%20%5*300), 100+(i%20/5*200));
 			img.resize(200, 200);
 			levels[i] = img;
 		}
@@ -75,7 +70,6 @@ public class LevelSelectScreen implements Screen {
 
 	public void draw(PApplet window) {
 		background.draw(window);
-		play.draw(window);
 		prev.draw(window);
 		
 		for(int i = 20*(page-1); i < 20*page; i++) {
@@ -86,31 +80,6 @@ public class LevelSelectScreen implements Screen {
 		} else {
 			cursor.clearTrail();
 		}
-		button.addListener(new Runnable() {
-			@Override
-			public void run() {
-				background.setFadeSpeed(40);
-				background.setTint(255);
-				background.setTargetTint(0);
-				background.fadeWhite(true);
-				play.setFadeSpeed(40);
-				play.setTint(255);
-				play.setTargetTint(0);
-				play.fadeWhite(true);
-				prev.setFadeSpeed(40);
-				prev.setTint(255);
-				prev.setTargetTint(0);
-				prev.fadeWhite(true);
-				background.addListener(new Runnable() {
-
-					@Override
-					public void run() {
-						ScreenManager.setCurrentScreenByName("prep", window);
-					}
-					
-				});
-			}
-		});
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
@@ -118,10 +87,6 @@ public class LevelSelectScreen implements Screen {
 				background.setTint(255);
 				background.setTargetTint(0);
 				background.fadeWhite(true);
-				play.setFadeSpeed(40);
-				play.setTint(255);
-				play.setTargetTint(0);
-				play.fadeWhite(true);
 				prev.setFadeSpeed(40);
 				prev.setTint(255);
 				prev.setTargetTint(0);
@@ -143,8 +108,8 @@ public class LevelSelectScreen implements Screen {
 	public void dispose() {
 		background = null;
 		cursor = null;
-		button.removeListener();
-		button = null;
+		back.removeListener();
+		back = null;
 		prev = null;
 	}
 

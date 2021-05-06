@@ -3,9 +3,14 @@ package destiny.panels;
 import destiny.core.*;
 
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import destiny.assets.*;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.video.Movie;
 
 /**
@@ -78,7 +83,8 @@ public class OpeningScreen implements Screen {
 				});
 			}
 			background.draw(window);
-			
+
+			button.draw(window);
 			if (background.getSecondMark() > 5 && !clicked) {
 				touchScreen.draw(window);
 			}

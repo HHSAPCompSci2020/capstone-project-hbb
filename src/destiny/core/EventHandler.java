@@ -20,6 +20,10 @@ public class EventHandler {
 	@SuppressWarnings("rawtypes")
 	private static Deque[] allComps = {clickables, draggables};
 	
+	/**
+	 * removes a click event from the clickables
+	 * @param ClickEvent clicker
+	 */
 	static void addClickable(ClickEvent clicker) {
 		
 		if (clickables.contains(clicker))
@@ -28,12 +32,20 @@ public class EventHandler {
 		
 	}
 	
+	/**
+	 * removes a click event from the clickables
+	 * @param ClickEvent clicker
+	 */
 	static void removeClickable(ClickEvent clicker) {
 		
 		clickables.remove(clicker);
 		
 	}
 	
+	/**
+	 * adds a drag event from the draggables
+	 * @param DragEvent drag
+	 */
 	static void addDraggable(DragEvent drag) {
 		
 		if (draggables.contains(drag))
@@ -42,6 +54,10 @@ public class EventHandler {
 		
 	}
 	
+	/**
+	 * removes a drag event from the draggables
+	 * @param DragEvent drag
+	 */
 	static void removeDraggable(DragEvent drag) {
 		
 		draggables.remove(drag);
@@ -93,6 +109,9 @@ public class EventHandler {
 		
 	}
 	
+	/**
+	 * clears the screen of all draggables and clickables
+	 */
 	static void clearScreen() {
 		
 		for (int i = 0; i < allComps.length; i ++)

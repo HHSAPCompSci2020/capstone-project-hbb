@@ -10,6 +10,12 @@ import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 
+/**
+ * BattleScreen is the screen which all battles will occur
+ * @author Jay Paek
+ * @version 5/7/2021
+ *
+ */
 public class BattleScreen implements Screen {
 	
 	private FadeImage background;

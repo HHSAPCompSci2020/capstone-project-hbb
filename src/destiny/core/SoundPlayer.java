@@ -32,8 +32,7 @@ public class SoundPlayer {
 				
 				clip.setMicrosecondPosition(0);
 				
-			}
-			
+			}	
 		}
 		
 	});

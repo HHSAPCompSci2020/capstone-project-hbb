@@ -1,18 +1,17 @@
 package destiny.core;
 
+
+import java.util.Deque;
+import java.util.LinkedList;
+
+import processing.core.PApplet;
 /**
- * 
  * This class handles all events that are triggered in the PApplet and filters them
  * to any listeners on those events
  * 
  * @author Nathaniel
  * @version 12/5/2020
  */
-import java.util.Deque;
-import java.util.LinkedList;
-
-import processing.core.PApplet;
-
 public class EventHandler {
 	
 	private static Deque<ClickEvent> clickables = new LinkedList<ClickEvent>();

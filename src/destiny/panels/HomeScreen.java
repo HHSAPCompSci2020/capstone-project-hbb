@@ -15,6 +15,12 @@ import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * HomeScreen is the screen right after the opening screen
+ * @author Jay Paek
+ * @version 5/7/2021
+ *
+ */
 public class HomeScreen implements Screen {
 
 	private FadeImage background;

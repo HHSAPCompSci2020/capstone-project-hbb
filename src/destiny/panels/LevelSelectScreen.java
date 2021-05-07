@@ -15,6 +15,12 @@ import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * LevelSelect screen is where the user select which level to play in.
+ * @author Jay Paek
+ * @version 5/7/2021
+ *
+ */
 public class LevelSelectScreen implements Screen {
 	
 	private FadeImage background;
@@ -22,7 +28,6 @@ public class LevelSelectScreen implements Screen {
 	private PButton  back;
 	private FadeImage prev;
 	private PButton[] levelButtons;
-	private FadeImage[] levels;
 	private int page;
 	
 	@Override

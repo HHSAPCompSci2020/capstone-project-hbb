@@ -17,8 +17,8 @@ import processing.video.Movie;
  * 
  * This class represents the opening/startup screen for the game
  * 
- * @author Nathaniel
- * @version 12/5/2020
+ * @author Nathaniel Thomas and Jay Paek
+ * @version 5/7/2021
  */
 public class OpeningScreen implements Screen {
 

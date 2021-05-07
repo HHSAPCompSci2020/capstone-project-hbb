@@ -15,6 +15,12 @@ import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * BattlePrepScreen is where the user can select which revolutionaries they want to use for battle
+ * @author Jay Paek
+ * @version 5/7/2021
+ *
+ */
 public class BattlePrepScreen implements Screen {
 	
 	private FadeImage background;

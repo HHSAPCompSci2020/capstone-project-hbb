@@ -1,6 +1,10 @@
 package destiny.panels;
 
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
@@ -9,30 +13,33 @@ import destiny.core.PButton;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class HomeScreen implements Screen {
 
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button;
-	private FadeImage play;
 	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/homeScreen/unknown.png");
-		play = new FadeImage("res/generalAssets/play.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), false);		
+		try {
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200),new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+
 		background.setCoords(0, 0);
-		play.resize(400, 200);
-		play.setCoords(Constants.SCREEN_WIDTH-500, 200);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	}
 
 	@Override
 	public void draw(PApplet window) {
 			background.draw(window);
-			play.draw(window);
+			button.draw(window);
 			
 			if (window.mousePressed) {
 				cursor.draw(window);
@@ -46,10 +53,6 @@ public class HomeScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
-					play.setFadeSpeed(40);
-					play.setTint(255);
-					play.setTargetTint(0);
-					play.fadeWhite(true);
 					background.addListener(new Runnable() {
 
 						@Override
@@ -69,7 +72,6 @@ public class HomeScreen implements Screen {
 		cursor = null;
 		button.removeListener();
 		button = null;
-		play = null;
 	}
 
 }

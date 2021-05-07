@@ -36,6 +36,14 @@ public class PGif {
 	private Runnable exec;
 	private boolean listenerFired = false;
 	
+	/**
+	 * 
+	 * Creates a gif at the given with the given gif
+	 * 
+	 * @param x The x coordinate of the top left of the gif
+	 * @param y The y coordinate of the top left of the gif
+	 * @param pathName The path to the gif
+	 */
 	public PGif(int x, int y, String pathName) {
 		
 		this.pathName = pathName;
@@ -96,6 +104,13 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Draws the gif to the given window
+	 * 
+	 * @param window The PApplet that the gif should be drawn to
+	 * @post The PApplet will have a gif drawn to it
+	 */
 	public void draw(PApplet window) {
 		
 		window.image(imageFrames[frameCount], (float)(x), (float)(y));
@@ -139,12 +154,25 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Gives the current image frame the gif is on
+	 * 
+	 * @return A PImage of the current frame 
+	 */
 	public PImage getCurrentImage() {
 		
 		return imageFrames[frameCount];
 		
 	}
 	
+	/**
+	 * 
+	 * Sets the coordinates of the gif
+	 * 
+	 * @param xCord The x coordinate of the top left of the gif
+	 * @param yCord The y coordinate of the top left of the gif
+	 */
 	public void setCoords(int xCord, int yCord) {
 		
 		x = xCord;
@@ -152,6 +180,12 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Adds a listener for code to be run in the event that the gif stops playing
+	 * 
+	 * @param listener The code that should be run in the event the gif stops playing
+	 */
 	public void addListener(Runnable listener) {
 		
 		exec = listener;
@@ -159,10 +193,22 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Removes the code that should be run in the even the gif stops playing
+	 * 
+	 */
 	public void removeListener() {
 		exec = null;
 	}
 	
+	/**
+	 * 
+	 * Shifts the top left corner of the gif by the specified amount
+	 * 
+	 * @param xShift
+	 * @param yShift
+	 */
 	public void translate(int xShift, int yShift) {
 		
 		x += xShift;

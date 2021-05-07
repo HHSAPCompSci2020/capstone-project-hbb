@@ -40,7 +40,7 @@ public class BattlePrepScreen implements Screen {
 		selectSecond = false;
 		selectThird = false;
 		page = 1;
-		revs = new int[3];
+		revs = new int[] {-1,-2,-3};
 		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, Constants.SCREEN_HEIGHT-300, Constants.SCREEN_WIDTH-100, Constants.SCREEN_HEIGHT-100), false);
 		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 200, Constants.SCREEN_HEIGHT), false);
 		background.setCoords(0, 0);
@@ -106,7 +106,7 @@ public class BattlePrepScreen implements Screen {
 							selectSecond = true;
 							selectThird = false;
 						}
-						else if(sel == 2) {
+						else if(sel == 2	) {
 							selectFirst = false;
 							selectSecond = false;
 							selectThird = true;
@@ -134,6 +134,7 @@ public class BattlePrepScreen implements Screen {
 		}
 		if(first&&second&&third)
 			play.draw(window);
+		
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {

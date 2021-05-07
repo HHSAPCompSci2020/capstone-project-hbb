@@ -10,13 +10,13 @@ interface ClickEvent {
 	
 	/**
 	 * detection of whether there was a click of a mouse button
-	 * @param Event e
+	 * @param e The event
 	 * @return if there was a click of a mouse button
 	 */
 	public boolean click(Event e);
 	/**
 	 * detection of whether there was a release of a mouse button
-	 * @param Event e
+	 * @param e The event
 	 * @return if there was a release of a mouse button
 	 */
 	public boolean release(Event e);

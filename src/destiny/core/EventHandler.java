@@ -64,6 +64,10 @@ public class EventHandler {
 		
 	}
 	
+	/**
+	 * communicates with the window for clickable events
+	 * @param window
+	 */
 	public static void notifyClickables(PApplet window) {
 		
 		if (!window.mousePressed)
@@ -80,6 +84,10 @@ public class EventHandler {
 		
 	}
 	
+	/**
+	 * communicates with the window for draggable events
+	 * @param window
+	 */
 	public static void notifyDraggables(PApplet window) {
 		
 		Event pack = makeEvent(window);
@@ -93,6 +101,10 @@ public class EventHandler {
 		
 	}
 	
+	/**
+	 * communicates with the window for release events
+	 * @param window
+	 */
 	public static void notifyRelease(PApplet window) {
 		
 		if (window.mousePressed)

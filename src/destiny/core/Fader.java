@@ -20,7 +20,15 @@ class Fader {
 	private boolean white = false;
 	private Runnable listener = null;
 	
-	public Fader(float startTint, float targetTint, float fadeSpeed) {
+	/**
+	 * 
+	 * Creates a Fader with the specified values for tint and speed of the fade
+	 * 
+	 * @param startTint The tint that the fade will start from
+	 * @param targetTint The tint that the fader should attempt to reach with its fade
+	 * @param fadeSpeed The speed that the fader should fade at
+	 */
+	protected Fader(float startTint, float targetTint, float fadeSpeed) {
 		
 		if (fadeSpeed < 0)
 			throw new IllegalArgumentException("Fade speed must be greater than 0");
@@ -31,6 +39,12 @@ class Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Applies the tint to the window
+	 * 
+	 * @param window The PApplet that the 
+	 */
 	public void draw(PApplet window) {
 		
 		if (!white)

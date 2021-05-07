@@ -14,13 +14,14 @@ public interface Screen {
 
 	/**
 	 * initialize all objects and variables that would be used in the Screen
-	 * @param window
+	 * @param window The PApplet that represents the window the Screen should be on
 	 */
 	public void setup(PApplet window);
 	
 	/**
 	 * draw the Screen
-	 * @param window
+	 * @param window The PApplet that the Screen is drawn to
+	 * @post The PApplet will have the Screen drawn to it
 	 */
 	public void draw(PApplet window);
 	

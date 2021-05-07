@@ -33,8 +33,8 @@ public class ScreenManager {
 	}
 	/**
 	 * set the screen to the given screen name
-	 * @param screen name
-	 * @param Screen object
+	 * @param key screen name
+	 * @param s Screen object
 	 * @param window
 	 */
 	public static void setScreen(String key, Screen s, PApplet window) {
@@ -79,7 +79,7 @@ public class ScreenManager {
 	
 	/**
 	 * set the screen with the given screen name
-	 * @param screen name
+	 * @param name The name of the screen
 	 * @param window
 	 */
 	public static void setCurrentScreenByName(String name, PApplet window) {

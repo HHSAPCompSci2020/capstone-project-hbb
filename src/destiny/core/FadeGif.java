@@ -84,7 +84,7 @@ public class FadeGif extends Fader {
 	
 	/**
 	 * create a FadeGif from PGif object
-	 * @param pathname
+	 * @param gif pathname
 	 */
 	public FadeGif(PGif gif) {
 		
@@ -93,10 +93,7 @@ public class FadeGif extends Fader {
 		
 	}
 	
-	/**
-	 * create a FadeGif from desired opacities and fadespeed
-	 * @param pathname
-	 */
+	
 	public FadeGif(PGif gif, float startTint, float targetTint, float fadeSpeed) {
 		
 		super(startTint, targetTint, fadeSpeed);

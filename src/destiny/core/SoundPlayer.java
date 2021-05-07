@@ -36,6 +36,7 @@ public class SoundPlayer {
 		}
 		
 	});
+
 	
 	public SoundPlayer(String FileName) {	
 		fileName = FileName;
@@ -69,6 +70,7 @@ public class SoundPlayer {
 		
 	}
 	
+
 	public void play() {
 		if (!clip.isRunning()) {
 			new Thread(new Runnable() {

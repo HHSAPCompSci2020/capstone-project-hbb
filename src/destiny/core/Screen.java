@@ -26,7 +26,6 @@ public interface Screen {
 	
 	/**
 	 * set all objects to null to conserve RAM
-	 * @param window
 	 */
 	public void dispose();
 

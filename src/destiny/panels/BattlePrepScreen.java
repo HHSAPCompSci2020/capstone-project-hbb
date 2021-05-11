@@ -11,6 +11,7 @@ import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
+import destiny.core.ScreenFader;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -26,18 +27,17 @@ public class BattlePrepScreen implements Screen {
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back;
-	private FadeImage play, prev;
 	private boolean first, second, third, selectFirst, selectSecond, selectThird;
 	private int[] revs;
 	private PButton[] select;
 	private PButton[] selection;
 	private int page;
+	private ScreenFader fader = new ScreenFader();
+
 	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
-		play = new FadeImage("res/generalAssets/play.png");
-		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		first = false;
 		second = false;
@@ -47,13 +47,16 @@ public class BattlePrepScreen implements Screen {
 		selectThird = false;
 		page = 1;
 		revs = new int[] {-1,-2,-3};
-		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, Constants.SCREEN_HEIGHT-300, Constants.SCREEN_WIDTH-100, Constants.SCREEN_HEIGHT-100), false);
-		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 200, Constants.SCREEN_HEIGHT), false);
+		try {
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - 500, 200, 400, 200),
+					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+			back = new PButton(new Rectangle(50, Constants.SCREEN_HEIGHT - 250, 200, 200),
+					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		background.setCoords(0, 0);
-		play.resize(400, 200);
-		play.setCoords(Constants.SCREEN_WIDTH-500, Constants.SCREEN_HEIGHT-300);
-		prev.resize(150, 150);
-		prev.setCoords(50, Constants.SCREEN_HEIGHT-200);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		
 		select = new PButton[Constants.TOTAL_CHARACTERS];
@@ -149,14 +152,7 @@ public class BattlePrepScreen implements Screen {
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
-				background.setFadeSpeed(40);
-				background.setTint(255);
-				background.setTargetTint(0);
-				background.fadeWhite(true);
-				play.setFadeSpeed(40);
-				play.setTint(255);
-				play.setTargetTint(0);
-				play.fadeWhite(true);
+				fader.fadeToWhite();
 				background.addListener(new Runnable() {
 
 					@Override
@@ -170,18 +166,7 @@ public class BattlePrepScreen implements Screen {
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
-				background.setFadeSpeed(40);
-				background.setTint(255);
-				background.setTargetTint(0);
-				background.fadeWhite(true);
-				play.setFadeSpeed(40);
-				play.setTint(255);
-				play.setTargetTint(0);
-				play.fadeWhite(true);
-				prev.setFadeSpeed(40);
-				prev.setTint(255);
-				prev.setTargetTint(0);
-				prev.fadeWhite(true);
+				fader.fadeToWhite();
 				background.addListener(new Runnable() {
 
 					@Override

@@ -1,8 +1,7 @@
 package destiny.assets;
 
-import destiny.core.FadeImage;
 
-public class Character extends FadeImage{
+public class Character {
 		
 	public Character(int id) {
 		

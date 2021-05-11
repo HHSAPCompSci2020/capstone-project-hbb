@@ -67,7 +67,7 @@ public class BattleScreen implements Screen {
 			PButton b;
 			int id = i+1;
 			try {
-				b = new PButton(new Rectangle(100+(i*300), Constants.SCREEN_HEIGHT-300, 250, 250), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(100+(i*300), Constants.SCREEN_HEIGHT-300, 300, 250), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {

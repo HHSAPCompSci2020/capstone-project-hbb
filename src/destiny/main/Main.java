@@ -1,5 +1,6 @@
 package destiny.main;
 import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 import destiny.assets.Constants;
@@ -10,7 +11,6 @@ import processing.core.PApplet;
 public class Main {
 
 	public static void main(String[] args) {
-		
 		Window drawing = new Window();
 		PApplet.runSketch(new String[]{""}, drawing);
 		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
@@ -28,5 +28,4 @@ public class Main {
 		canvas.requestFocus();
 
 	}
-
 }

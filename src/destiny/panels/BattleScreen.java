@@ -7,6 +7,7 @@ import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
+import destiny.core.ScreenFader;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 
@@ -22,7 +23,7 @@ public class BattleScreen implements Screen {
 	private RippleCursor cursor;
 	private PButton button, back;
 	private FadeImage play, pause;
-	
+	private ScreenFader fader = new ScreenFader();
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");

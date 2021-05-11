@@ -38,7 +38,7 @@ public class PGif {
 	
 	/**
 	 * 
-	 * Creates a gif at the given with the given gif
+	 * Creates a gif at the given from the given path
 	 * 
 	 * @param x The x coordinate of the top left of the gif
 	 * @param y The y coordinate of the top left of the gif
@@ -206,8 +206,8 @@ public class PGif {
 	 * 
 	 * Shifts the top left corner of the gif by the specified amount
 	 * 
-	 * @param xShift
-	 * @param yShift
+	 * @param xShift The amount you want to shift along the x axis. Positive is to the right
+	 * @param yShift The amount you want to shift along the y axis. Positive is down
 	 */
 	public void translate(int xShift, int yShift) {
 		
@@ -216,24 +216,49 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Gets the width of the gif
+	 * 
+	 * @return The width of the gif
+	 */
 	public int getWidth() {
 		
 		return width;
 		
 	}
 	
+	/**
+	 * 
+	 * Gets the height of the gif 
+	 * 
+	 * @return The height of the gif
+	 */
 	public int getHeight() {
 		
 		return height;
 		
 	}
 	
+	/**
+	 * 
+	 * Calculates whether or not the gif is done playing
+	 * 
+	 * @return Whether or not the gif is done playing
+	 */
 	public boolean isFinished() {
 		
 		return  (!looping && frameCount == 0) && !tempPlaying;
 		
 	}
 	
+	/**
+	 * 
+	 * Resizes the gif with the given specifications
+	 * 
+	 * @param w The new width of the gif
+	 * @param h The new height of the gif
+	 */
 	public void resize(int w, int h) {
 		
 		if (w == width && h == height)
@@ -250,12 +275,23 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Scales the gif by the given factor
+	 * 
+	 * @param s The factor to be scaled by
+	 */
 	public void scale(double s) {
 		
 		this.resize((int)(width * s), (int)(height * s));
 		
 	}
 	
+	/**
+	 * 
+	 * Stops looping the gif
+	 * 
+	 */
 	public void stopLooping() {
 		
 		looping  = false;
@@ -263,6 +299,11 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Starts looping the gif again
+	 * 
+	 */
 	public void startLooping() {
 		
 		looping = true;
@@ -271,6 +312,11 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Plays the gif once
+	 * 
+	 */
 	public void playOnce() {
 		
 		restart();
@@ -280,12 +326,23 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Restarts the gif to frame 0
+	 * 
+	 */
 	public void restart() {
 		
 		frameCount = 0;
 		
 	}
 	
+	/**
+	 * 
+	 * Overrides the default delay between gif frames
+	 * 
+	 * @param delay The new desired gif between frames
+	 */
 	public void overrideDelay(double delay) {
 		
 		overrideDelay = true;
@@ -293,6 +350,12 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Scales the gif perfectly given a new desired width
+	 * 
+	 * @param width Desired new width
+	 */
 	public void scaleByWidth(int width) {
 		
 		double scale = (double)width/this.width;
@@ -301,12 +364,23 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Returns the gif to playing with its default delays between frames
+	 * 
+	 */
 	public void defaultDelay() {
 		
 		overrideDelay = false;
 		
 	}
 	
+	/**
+	 * 
+	 * Makes a deep copy of itself and returns it
+	 * 
+	 * @return A deep copy of this object
+	 */
 	public PGif copy() {
 		
 		return new PGif(pathName, frameCount, lastTimeStamp, x, y, width, height, firstDraw, looping, tempPlaying, delay, overrideDelay);

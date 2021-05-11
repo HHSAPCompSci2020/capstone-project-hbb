@@ -10,9 +10,10 @@ package destiny.core;
 interface DragEvent extends ClickEvent {
 
 	/**
-	 * detection of whether there was a drag of mouse on the window
-	 * @param Event e
-	 * @return if there was a click of a mouse button
+	 * Called on the event of a mouse being dragged anywhere on the screen. Information about the drag will be passed as an Event
+	 * 
+	 * @param e Information about the click that took place
+	 * @return Whether or not the mouse was dragged over this object
 	 */
 	public boolean drag(Event e);
 	

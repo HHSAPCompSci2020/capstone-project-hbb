@@ -12,9 +12,10 @@ class Event {
 	private final int mouseX, mouseY;
 	
 	/**
-	 * create Event bawsedon mouse x and y
-	 * @param mX
-	 * @param mY
+	 * Creates an Event object storing the x and y coordinates of the mouse
+	 * 
+	 * @param mX The x coordinate of the mouse
+	 * @param mY The y coordinate of the mouse
 	 */
 	public Event(int mX, int mY) {
 		
@@ -23,12 +24,24 @@ class Event {
 		
 	}
 	
+	/**
+	 * 
+	 * Gets the x coordinate of the mouse that was stored when creating this event
+	 * 
+	 * @return The x coordinate of the mouse
+	 */
 	public int getMouseX() {
 		
 		return mouseX;
 		
 	}
 	
+	/**
+	 * 
+	 * Gets the y coordinate of the mouse that was stored when creating this event
+	 * 
+	 * @return The x coordinate of the mouse
+	 */
 	public int getMouseY() {
 		
 		return mouseY;

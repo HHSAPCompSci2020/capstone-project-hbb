@@ -206,8 +206,8 @@ public class PGif {
 	 * 
 	 * Shifts the top left corner of the gif by the specified amount
 	 * 
-	 * @param xShift
-	 * @param yShift
+	 * @param xShift The amount you want to shift along the x axis. Positive is to the right
+	 * @param yShift The amount you want to shift along the y axis. Positive is down
 	 */
 	public void translate(int xShift, int yShift) {
 		

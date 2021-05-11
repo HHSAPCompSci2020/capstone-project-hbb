@@ -315,7 +315,7 @@ public class FadeGif extends Fader {
 	 * 
 	 * Overrides the default delay between the gif frames
 	 * 
-	 * @param delay
+	 * @param delay The delay you want between gif frames
 	 */
 	
 	public void overrideDelay(double delay) {

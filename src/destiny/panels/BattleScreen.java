@@ -1,6 +1,10 @@
 package destiny.panels;
 
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
@@ -10,9 +14,10 @@ import destiny.core.Screen;
 import destiny.core.ScreenFader;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
- * BattleScreen is the screen which all battles will occur
+ * BattlePrepScreen is where the user can select which revolutionaries they want to use for battle
  * @author Jay Paek
  * @version 5/7/2021
  *
@@ -22,50 +27,121 @@ public class BattleScreen implements Screen {
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back;
-	private FadeImage play, pause;
-	private ScreenFader fader = new ScreenFader();
+	private boolean first, second, third, selectFirst, selectSecond, selectThird;
+	private int[] revs;
+	private PButton[] select;
+	private PButton[] selection;
+	private int page;
+//	private ScreenFader fader = new ScreenFader();
+
+	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/mainScreen/big.jpg");
-//		play = new FadeImage("res/generalAssets/play.png");
-		pause = new FadeImage("res/generalAssets/back.png");
+		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
 		cursor = RippleCursor.createLowPerformanceCursor();
-//		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), false);
-		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 400, Constants.SCREEN_HEIGHT), false);
+		first = false;
+		second = false;
+		third = false;
+		selectFirst = true;
+		selectSecond = false;
+		selectThird = false;
+		page = 1;
+		revs = new int[] {-1,-2,-3};
+		try {
+			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH-450, Constants.SCREEN_HEIGHT - 250, 400, 200),
+					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+			back = new PButton(new Rectangle(50, Constants.SCREEN_HEIGHT - 250, 200, 200),
+					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		background.setCoords(0, 0);
-//		play.resize(400, 200);
-//		play.setCoords(Constants.SCREEN_WIDTH-500, 200);
-		pause.resize(400, 200);
-		pause.setCoords(0, Constants.SCREEN_HEIGHT-200);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-	}
-
-	public void draw(PApplet window) {
-		background.draw(window);
-//		play.draw(window);
-		pause.draw(window);
 		
-		if (window.mousePressed) {
-			cursor.draw(window);
-		} else {
-			cursor.clearTrail();
+		select = new PButton[5];
+		selection = new PButton[3]; 
+
+
+		for(int i = 0; i < 5; i++) {
+			PButton b;
+			int id = i+1;
+			try {
+				b = new PButton(new Rectangle(100+(i*300), Constants.SCREEN_HEIGHT-300, 250, 250), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b.addListener(new Runnable() {
+					@Override
+					public void run() {
+						if(selectFirst) {
+							revs[0] = id;
+							selectFirst = false;
+							selectSecond = true;
+							first = true;
+						} else if(selectSecond) {
+							revs[1] = id;
+							selectSecond = false;
+							selectThird = true;
+							second = true;
+						}
+						else if(selectThird) {
+							revs[2] = id;
+							selectThird = false;
+							third = true;
+						}
+						System.out.println(""+revs[0]+revs[1]+revs[2]);
+					}
+				});
+				select[i] = b;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+		}
+		for(int i = 0; i < 3; i++) {
+			PButton b;
+			try {
+				b = new PButton(new Rectangle(100+(i*300), 200, 200, 500),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				int sel = i;
+				b.addListener(new Runnable() {
+					@Override
+					public void run() {
+						if(sel == 0) {
+							selectFirst = true;
+							selectSecond = false;
+							selectThird = false;
+						} else if(sel == 1) {
+							selectFirst = false;
+							selectSecond = true;
+							selectThird = false;
+						}
+						else if(sel == 2	) {
+							selectFirst = false;
+							selectSecond = false;
+							selectThird = true;
+						}
+					}
+				});
+				selection[i] = b;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
+//				fader.fadeToWhite();
 				background.setFadeSpeed(40);
 				background.setTint(255);
 				background.setTargetTint(0);
 				background.fadeWhite(true);
-				play.setFadeSpeed(40);
-				play.setTint(255);
-				play.setTargetTint(0);
-				play.fadeWhite(true);
 				background.addListener(new Runnable() {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("main", window);
+						ScreenManager.setCurrentScreenByName("battle", window);
 					}
 					
 				});
@@ -74,28 +150,41 @@ public class BattleScreen implements Screen {
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
+//				fader.fadeToWhite();
 				background.setFadeSpeed(40);
 				background.setTint(255);
 				background.setTargetTint(0);
 				background.fadeWhite(true);
-				play.setFadeSpeed(40);
-				play.setTint(255);
-				play.setTargetTint(0);
-				play.fadeWhite(true);
-				pause.setFadeSpeed(40);
-				pause.setTint(255);
-				pause.setTargetTint(0);
-				pause.fadeWhite(true);
 				background.addListener(new Runnable() {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("prep", window);
+						ScreenManager.setCurrentScreenByName("level", window);
 					}
 					
 				});
 			}
 		});
+	}
+
+	public void draw(PApplet window) {
+		background.draw(window);
+		
+		for(int i = 0; i < 5; i++) {
+			select[i].draw(window);
+		}
+		for(int i =0; i < 3; i++) {
+			selection[i].draw(window);
+		}
+		if(first&&second&&third)
+			button.draw(window);
+		
+		if (window.mousePressed) {
+			cursor.draw(window);
+		} else {
+			cursor.clearTrail();
+		}
+		
 }
 	
 
@@ -105,7 +194,6 @@ public class BattleScreen implements Screen {
 		cursor = null;
 		button.removeListener();
 		button = null;
-		pause = null;
 	
 	}
 

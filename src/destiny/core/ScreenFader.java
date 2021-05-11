@@ -45,9 +45,8 @@ public class ScreenFader extends Fader {
 	 * 
 	 */
 	public void fadeToWhite() {
-		
-		this.fadeWhite(true);
 		this.setTargetTint(255);
+		this.fadeWhite(true);
 		
 	}
 	

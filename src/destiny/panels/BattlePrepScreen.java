@@ -32,7 +32,7 @@ public class BattlePrepScreen implements Screen {
 	private PButton[] select;
 	private PButton[] selection;
 	private int page;
-	private ScreenFader fader = new ScreenFader();
+//	private ScreenFader fader = new ScreenFader();
 
 	
 	@Override
@@ -48,7 +48,7 @@ public class BattlePrepScreen implements Screen {
 		page = 1;
 		revs = new int[] {-1,-2,-3};
 		try {
-			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - 500, 200, 400, 200),
+			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH-450, Constants.SCREEN_HEIGHT - 250, 400, 200),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
 			back = new PButton(new Rectangle(50, Constants.SCREEN_HEIGHT - 250, 200, 200),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
@@ -129,35 +129,19 @@ public class BattlePrepScreen implements Screen {
 			}
 			
 		}
-	}
-
-	public void draw(PApplet window) {
-		background.draw(window);
-		
-		prev.draw(window);
-		for(int i = 20*(page-1); i < 20*page; i++) {
-			select[i].draw(window);
-		}
-		for(int i =0; i < 3; i++) {
-			selection[i].draw(window);
-		}
-		if(first&&second&&third)
-			play.draw(window);
-		
-		if (window.mousePressed) {
-			cursor.draw(window);
-		} else {
-			cursor.clearTrail();
-		}
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
-				fader.fadeToWhite();
+//				fader.fadeToWhite();
+				background.setFadeSpeed(40);
+				background.setTint(255);
+				background.setTargetTint(0);
+				background.fadeWhite(true);
 				background.addListener(new Runnable() {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("main", window);
+						ScreenManager.setCurrentScreenByName("battle", window);
 					}
 					
 				});
@@ -166,7 +150,11 @@ public class BattlePrepScreen implements Screen {
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
-				fader.fadeToWhite();
+//				fader.fadeToWhite();
+				background.setFadeSpeed(40);
+				background.setTint(255);
+				background.setTargetTint(0);
+				background.fadeWhite(true);
 				background.addListener(new Runnable() {
 
 					@Override
@@ -177,6 +165,26 @@ public class BattlePrepScreen implements Screen {
 				});
 			}
 		});
+	}
+
+	public void draw(PApplet window) {
+		background.draw(window);
+		
+		for(int i = 20*(page-1); i < 20*page; i++) {
+			select[i].draw(window);
+		}
+		for(int i =0; i < 3; i++) {
+			selection[i].draw(window);
+		}
+		if(first&&second&&third)
+			button.draw(window);
+		
+		if (window.mousePressed) {
+			cursor.draw(window);
+		} else {
+			cursor.clearTrail();
+		}
+		
 }
 	
 
@@ -186,7 +194,6 @@ public class BattlePrepScreen implements Screen {
 		cursor = null;
 		button.removeListener();
 		button = null;
-		prev = null;
 	
 	}
 

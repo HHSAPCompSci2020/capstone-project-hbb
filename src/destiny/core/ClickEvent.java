@@ -9,15 +9,18 @@ package destiny.core;
 interface ClickEvent {
 	
 	/**
-	 * detection of whether there was a click of a mouse button
-	 * @param e The event
-	 * @return if there was a click of a mouse button
+	 * Called on the event of a click anywhere on the screen. Information about the click will be passed as an Event
+	 * 
+	 * @param e Information about the click that took place
+	 * @return Whether or not the object was actually being clicked on or if it was a click that took place outside the clickable
 	 */
 	public boolean click(Event e);
+	
 	/**
-	 * detection of whether there was a release of a mouse button
-	 * @param e The event
-	 * @return if there was a release of a mouse button
+	 * Called on the event of a mouse being released anywhere on the screen. Information about the release will be passed as an Event
+	 * 
+	 * @param e Information about the click that took place
+	 * @return Whether or not the cursor was over the object on release and was clicking on the object to begin with
 	 */
 	public boolean release(Event e);
 

@@ -11,7 +11,6 @@ import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
-import destiny.core.ScreenFader;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -30,12 +29,11 @@ public class LevelSelectScreen implements Screen {
 	private FadeImage prev;
 	private PButton[] levelButtons;
 	private int page;
-	private ScreenFader fader;
 
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/levelSelectScreen/room.jpg");
+		background = new FadeImage("res/levelSelectScreen/room.jpg", 255, 255, 0, 0, 0);
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		page = 1;
@@ -48,20 +46,17 @@ public class LevelSelectScreen implements Screen {
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-		background.setFadeSpeed(50);
-		prev.resize(150, 150);
+		prev.resize(Constants.scaleIntToWidth(150), Constants.scaleIntToHeight(150));
 		prev.setCoords(50, Constants.SCREEN_HEIGHT-200);
 		levelButtons = new PButton[Constants.TOTAL_LEVELS];		
-//		fader = new ScreenFader(0,255,10);
 		for(int i = 0; i < Constants.TOTAL_LEVELS; i++) {
 			PButton b;
 			int id = i;
 			try {
-				b = new PButton(new Rectangle(250+((i%20%5)*300), 100+((i%20/5)*200), 200, 200),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(Constants.scaleIntToWidth(250+((i%20%5)*300)), Constants.scaleIntToHeight(100+((i%20/5)*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-//						fader.fadeToWhite();
 						background.setFadeSpeed(40);
 						background.setTint(255);
 						background.setTargetTint(0);
@@ -85,7 +80,6 @@ public class LevelSelectScreen implements Screen {
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
-//				fader.fadeToWhite();
 				background.setFadeSpeed(40);
 				background.setTint(255);
 				background.setTargetTint(0);
@@ -100,7 +94,6 @@ public class LevelSelectScreen implements Screen {
 				});
 			}
 		});
-//		fader.fadeIn();		
 	}
 
 	public void draw(PApplet window) {
@@ -120,7 +113,8 @@ public class LevelSelectScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		for(int i = 20*(page-1); i < 20*page; i++) {
+		for(int i = 0; i < levelButtons.length; i++) {
+			levelButtons[i].removeListener();
 			levelButtons[i] = null;
 		}
 		background = null;

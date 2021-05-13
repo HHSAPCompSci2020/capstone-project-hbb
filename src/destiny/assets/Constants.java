@@ -46,4 +46,16 @@ public class Constants {
 		
 	}
 	
+	public static int scaleIntToWidth(double num) {
+		
+		return (int)(num/1920*SCREEN_WIDTH);
+		
+	}
+	
+	public static int scaleIntToHeight(double num) {
+		
+		return (int)(num/1015*SCREEN_HEIGHT);
+		
+	}
+	
 }

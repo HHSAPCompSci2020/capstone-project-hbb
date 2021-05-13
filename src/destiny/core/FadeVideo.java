@@ -47,8 +47,6 @@ public class FadeVideo extends Fader {
 	@Override
 	public void draw(PApplet window) {
 		
-		window.pushStyle();
-		
 		super.draw(window);
 		
 		if (w < 0)
@@ -68,8 +66,6 @@ public class FadeVideo extends Fader {
 			}
 			
 		}
-		
-		window.popStyle();
 		
 	}
 	

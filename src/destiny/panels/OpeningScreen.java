@@ -73,7 +73,6 @@ public class OpeningScreen implements Screen {
 							@Override
 							public void run() {
 								
-								System.out.println("Yes");
 								ScreenManager.setCurrentScreenByName("home", window);
 								
 							}

@@ -11,7 +11,6 @@ import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
-import destiny.core.ScreenFader;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;

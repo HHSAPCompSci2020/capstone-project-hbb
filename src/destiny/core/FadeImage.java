@@ -100,13 +100,9 @@ public class FadeImage extends Fader {
 	@Override
 	public void draw(PApplet window) {
 		
-		window.pushStyle();
-		
 		super.draw(window);
 		
 		window.image(myImage, x, y);
-		
-		window.popStyle();
 		
 	}
 	

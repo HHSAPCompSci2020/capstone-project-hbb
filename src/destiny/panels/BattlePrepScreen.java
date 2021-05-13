@@ -11,7 +11,6 @@ import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
-import destiny.core.ScreenFader;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -32,7 +31,6 @@ public class BattlePrepScreen implements Screen {
 	private PButton[] select;
 	private PButton[] selection;
 	private int page;
-//	private ScreenFader fader = new ScreenFader();
 
 	
 	@Override
@@ -48,9 +46,9 @@ public class BattlePrepScreen implements Screen {
 		page = 1;
 		revs = new int[] {0,0,0};
 		try {
-			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH-450, Constants.SCREEN_HEIGHT - 250, 400, 200),
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
-			back = new PButton(new Rectangle(50, Constants.SCREEN_HEIGHT - 250, 200, 200),
+			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -67,7 +65,7 @@ public class BattlePrepScreen implements Screen {
 			PButton b;
 			int id = i+1;
 			try {
-				b = new PButton(new Rectangle(800+(i%20%5*200), 100+(i%20/5*200), 200, 200), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(Constants.scaleIntToWidth(800+(i%20%5*200)), Constants.scaleIntToHeight(100+(i%20/5*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
@@ -101,7 +99,7 @@ public class BattlePrepScreen implements Screen {
 		for(int i = 0; i < 3; i++) {
 			PButton b;
 			try {
-				b = new PButton(new Rectangle(100, 100+(200*i), 200, 200),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(Constants.scaleIntToWidth(100), Constants.scaleIntToHeight(100+(200*i)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				int sel = i;
 				b.addListener(new Runnable() {
 					@Override
@@ -132,7 +130,6 @@ public class BattlePrepScreen implements Screen {
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
-//				fader.fadeToWhite();
 				background.setFadeSpeed(40);
 				background.setTint(255);
 				background.setTargetTint(0);
@@ -150,7 +147,6 @@ public class BattlePrepScreen implements Screen {
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
-//				fader.fadeToWhite();
 				background.setFadeSpeed(40);
 				background.setTint(255);
 				background.setTargetTint(0);
@@ -190,11 +186,23 @@ public class BattlePrepScreen implements Screen {
 
 	@Override
 	public void dispose() {
+		for (int i = 0; i < select.length; i ++) {
+			
+			select[i].removeListener();
+			select[i] = null;
+			
+		}
+		for (int i = 0; i < selection.length; i ++) {
+			
+			selection[i].removeListener();
+			selection[i] = null;
+			
+		}
+		
 		background = null;
 		cursor = null;
 		button.removeListener();
 		button = null;
-	
 	}
 
 }

@@ -27,11 +27,9 @@ public class BattleScreen implements Screen {
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back;
-	private boolean first, second, third, selectFirst, selectSecond, selectThird;
-	private int[] revs;
-	private PButton[] select;
-	private PButton[] selection;
-	private int page;
+	private int revSelect, enemySelect;
+	private int[] revs, enemy;
+	private PButton[] select, selection, enemySelection;
 //	private ScreenFader fader = new ScreenFader();
 
 	
@@ -39,14 +37,10 @@ public class BattleScreen implements Screen {
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		first = false;
-		second = false;
-		third = false;
-		selectFirst = true;
-		selectSecond = false;
-		selectThird = false;
-		page = 1;
-		revs = new int[] {-1,-2,-3};
+		revSelect = 0;
+		enemySelect = 0;
+		revs = new int[] {0,0,0};
+		enemy = new int[] {0,0,0};
 		try {
 			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH-450, Constants.SCREEN_HEIGHT - 250, 400, 200),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
@@ -61,32 +55,18 @@ public class BattleScreen implements Screen {
 		
 		select = new PButton[5];
 		selection = new PButton[3]; 
+		enemySelection = new PButton[3]; 
+
 
 
 		for(int i = 0; i < 5; i++) {
 			PButton b;
 			int id = i+1;
 			try {
-				b = new PButton(new Rectangle(100+(i*300), Constants.SCREEN_HEIGHT-300, 300, 250), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(100+(i*350), Constants.SCREEN_HEIGHT-300, 300, 250), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-						if(selectFirst) {
-							revs[0] = id;
-							selectFirst = false;
-							selectSecond = true;
-							first = true;
-						} else if(selectSecond) {
-							revs[1] = id;
-							selectSecond = false;
-							selectThird = true;
-							second = true;
-						}
-						else if(selectThird) {
-							revs[2] = id;
-							selectThird = false;
-							third = true;
-						}
 						System.out.println(""+revs[0]+revs[1]+revs[2]);
 					}
 				});
@@ -106,20 +86,7 @@ public class BattleScreen implements Screen {
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-						if(sel == 0) {
-							selectFirst = true;
-							selectSecond = false;
-							selectThird = false;
-						} else if(sel == 1) {
-							selectFirst = false;
-							selectSecond = true;
-							selectThird = false;
-						}
-						else if(sel == 2	) {
-							selectFirst = false;
-							selectSecond = false;
-							selectThird = true;
-						}
+						revSelect = 3 - sel;
 					}
 				});
 				selection[i] = b;
@@ -127,7 +94,20 @@ public class BattleScreen implements Screen {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			try {
+				b = new PButton(new Rectangle(Constants.SCREEN_WIDTH-300-(i*300), 200, 200, 500),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				int sel = i;
+				b.addListener(new Runnable() {
+					@Override
+					public void run() {
+						enemySelect = sel + 1;
+					}
+				});
+				enemySelection[i] = b;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		button.addListener(new Runnable() {
 			@Override
@@ -176,9 +156,10 @@ public class BattleScreen implements Screen {
 		for(int i =0; i < 3; i++) {
 			selection[i].draw(window);
 		}
-		if(first&&second&&third)
-			button.draw(window);
 		
+		for(int i =0; i < 3; i++) {
+			enemySelection[i].draw(window);
+		}
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {

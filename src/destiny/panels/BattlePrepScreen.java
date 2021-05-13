@@ -46,7 +46,7 @@ public class BattlePrepScreen implements Screen {
 		selectSecond = false;
 		selectThird = false;
 		page = 1;
-		revs = new int[] {-1,-2,-3};
+		revs = new int[] {0,0,0};
 		try {
 			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH-450, Constants.SCREEN_HEIGHT - 250, 400, 200),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);

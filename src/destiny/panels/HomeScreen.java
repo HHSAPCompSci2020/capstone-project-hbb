@@ -32,7 +32,7 @@ public class HomeScreen implements Screen {
 		background = new FadeImage("res/homeScreen/room.jpg");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {
-			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200),new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

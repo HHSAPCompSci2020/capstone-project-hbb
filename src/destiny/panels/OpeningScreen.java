@@ -3,14 +3,9 @@ package destiny.panels;
 import destiny.core.*;
 
 import java.awt.Rectangle;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import destiny.assets.*;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.video.Movie;
 
 /**
@@ -36,8 +31,8 @@ public class OpeningScreen implements Screen {
 		cursor = RippleCursor.createLowPerformanceCursor();
 		button = new PButton(new Rectangle(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), false);
 		touchScreen = new FadeGif("res/generalAssets/ClickToStart.gif", 0, 255, 0.01f);
-		touchScreen.scaleByWidth(500);
-		touchScreen.setCoords(Constants.SCREEN_WIDTH/2 - 250, Constants.SCREEN_HEIGHT - 100 - touchScreen.getHeight()/2);
+		touchScreen.scaleByWidth(Constants.scaleIntToWidth(500));
+		touchScreen.setCoords(Constants.SCREEN_WIDTH/2 - Constants.scaleIntToWidth(250), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(100) - touchScreen.getHeight()/2);
 		corp.volume(0);
 		corp.play();
 		background.setCoords(0, 0);

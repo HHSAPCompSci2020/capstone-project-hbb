@@ -29,7 +29,6 @@ public class BattleScreen implements Screen {
 	private int revSelect, enemySelect;
 	private int[] revs, enemy;
 	private PButton[] select, selection, enemySelection;
-//	private ScreenFader fader = new ScreenFader();
 
 	
 	@Override
@@ -41,9 +40,9 @@ public class BattleScreen implements Screen {
 		revs = new int[] {0,0,0};
 		enemy = new int[] {0,0,0};
 		try {
-			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH-450, Constants.SCREEN_HEIGHT - 250, 400, 200),
+			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
-			back = new PButton(new Rectangle(50, Constants.SCREEN_HEIGHT - 250, 200, 200),
+			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -62,7 +61,7 @@ public class BattleScreen implements Screen {
 			PButton b;
 			int id = i+1;
 			try {
-				b = new PButton(new Rectangle(100+(i*350), Constants.SCREEN_HEIGHT-300, 300, 250), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(Constants.scaleIntToWidth(100+(i*350)), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(300), Constants.scaleIntToWidth(300), Constants.scaleIntToWidth(250)), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
@@ -80,7 +79,7 @@ public class BattleScreen implements Screen {
 		for(int i = 0; i < 3; i++) {
 			PButton b;
 			try {
-				b = new PButton(new Rectangle(100+(i*300), 200, 200, 500),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				int sel = i;
 				b.addListener(new Runnable() {
 					@Override
@@ -94,7 +93,7 @@ public class BattleScreen implements Screen {
 				e.printStackTrace();
 			}
 			try {
-				b = new PButton(new Rectangle(Constants.SCREEN_WIDTH-300-(i*300), 200, 200, 500),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300-(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				int sel = i;
 				b.addListener(new Runnable() {
 					@Override
@@ -111,7 +110,6 @@ public class BattleScreen implements Screen {
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
-//				fader.fadeToWhite();
 				background.setFadeSpeed(40);
 				background.setTint(255);
 				background.setTargetTint(0);
@@ -129,7 +127,6 @@ public class BattleScreen implements Screen {
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
-//				fader.fadeToWhite();
 				background.setFadeSpeed(40);
 				background.setTint(255);
 				background.setTargetTint(0);

@@ -33,12 +33,12 @@ public class LevelSelectScreen implements Screen {
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/levelSelectScreen/room.jpg", 255, 255, 0, 0, 0);
+		background = new FadeImage("res/levelSelectScreen/room.jpg");
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		page = 1;
 		try {
-			back = new PButton(new Rectangle(50, Constants.SCREEN_HEIGHT - 250, 200, 200),
+			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -46,14 +46,14 @@ public class LevelSelectScreen implements Screen {
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-		prev.resize(Constants.scaleIntToWidth(150), Constants.scaleIntToHeight(150));
-		prev.setCoords(50, Constants.SCREEN_HEIGHT-200);
+		prev.resize(Constants.scaleIntToWidth(150), Constants.scaleIntToWidth(150));
+		prev.setCoords(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT-Constants.scaleIntToHeight(200));
 		levelButtons = new PButton[Constants.TOTAL_LEVELS];		
 		for(int i = 0; i < Constants.TOTAL_LEVELS; i++) {
 			PButton b;
 			int id = i;
 			try {
-				b = new PButton(new Rectangle(Constants.scaleIntToWidth(250+((i%20%5)*300)), Constants.scaleIntToHeight(100+((i%20/5)*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(Constants.scaleIntToWidth(250+((i%20%5)*300)), Constants.scaleIntToHeight(100+((i%20/5)*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {

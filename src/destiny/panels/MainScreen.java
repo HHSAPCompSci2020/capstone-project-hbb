@@ -33,12 +33,12 @@ public class MainScreen implements Screen {
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - 500, 200, 400, 200), false);
-		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT - 200, 200, Constants.SCREEN_HEIGHT), false);
+		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)), false);
+		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.SCREEN_HEIGHT), false);
 		try {
-			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - 500, 200, 400, 200),
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
-			back = new PButton(new Rectangle(50, Constants.SCREEN_HEIGHT - 250, 200, 200),
+			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -48,7 +48,7 @@ public class LevelSelectScreen implements Screen {
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-		background.setFadeSpeed(100);
+		background.setFadeSpeed(50);
 		prev.resize(150, 150);
 		prev.setCoords(50, Constants.SCREEN_HEIGHT-200);
 		levelButtons = new PButton[Constants.TOTAL_LEVELS];		
@@ -85,7 +85,11 @@ public class LevelSelectScreen implements Screen {
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
-				fader.fadeToWhite();
+//				fader.fadeToWhite();
+				background.setFadeSpeed(40);
+				background.setTint(255);
+				background.setTargetTint(0);
+				background.fadeWhite(true);
 				background.addListener(new Runnable() {
 
 					@Override

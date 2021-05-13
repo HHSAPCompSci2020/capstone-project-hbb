@@ -46,6 +46,32 @@ public class Constants {
 		
 	}
 	
+	public static int getIntForAction(String action) {
+		
+		switch(action) {
+		
+		case "attack":
+			return 0;
+		case "flinch":
+			return 1;
+		case "move":
+			return 2;
+		case "static":
+			return 3;
+		default:
+			return -1;
+			
+		}
+		
+	}
+	
+	
+	public static String getCharacterPath(int id, String action) {
+		
+		return "res/characters/"+id+"/asset"+id+"/-"+action+".gif";
+		
+	}
+	
 	public static int scaleIntToWidth(double num) {
 		
 		return (int)(num/1920*SCREEN_WIDTH);

@@ -18,11 +18,13 @@ import processing.core.PImage;
 public class PButton implements ClickEvent {
 
 	private PImage texture;
+	private PGif gifTexture;
 	private Shape collider;
 	private Runnable exec;
 	private boolean visible;
 	private boolean listenOnClick;
-	private boolean isClicked = false;
+	private boolean isClicked;
+	private boolean isGif;
 	
 	/**
 	 * 
@@ -114,8 +116,12 @@ public class PButton implements ClickEvent {
 	public void draw(PApplet window) {
 		
 		if (visible) {
-			Rectangle bounds= collider.getBounds();
-			window.image(texture, bounds.x, bounds.y, bounds.width, bounds.height);
+			if (!isGif) {
+				Rectangle bounds= collider.getBounds();
+				window.image(texture, bounds.x, bounds.y, bounds.width, bounds.height);
+			} else {
+				gifTexture.draw(window);
+			}
 		}
 		
 	}
@@ -155,6 +161,18 @@ public class PButton implements ClickEvent {
 		
 		this.texture = texture;
 		visible = true;
+		isGif = false;
+		
+	}
+	
+	public void setGifTexture(PGif texture) {
+		
+		gifTexture = texture;
+		visible = true;
+		Rectangle bounds= collider.getBounds();
+		texture.setCoords(bounds.x, bounds.y);
+		texture.resize(bounds.width, bounds.height);
+		isGif = true;
 		
 	}
 	
@@ -167,6 +185,8 @@ public class PButton implements ClickEvent {
 		
 		texture = null;
 		visible = false;
+		gifTexture = null;
+		isGif = false;
 		
 	}
 	

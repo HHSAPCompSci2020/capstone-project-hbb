@@ -11,7 +11,7 @@ import static com.mongodb.client.model.Updates.*;
 
 public class MongoHandler {
 	
-	private static MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://destinyUser:UazaArzUD6uu5rIC@destinyserver0.pcxs3.mongodb.net/destinyRollDatabase?retryWrites=true&w=majority"));
+	private static MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://destinyUser:UazaArzUD6uu5rIC@destinyserver0-shard-00-00.pcxs3.mongodb.net:27017,destinyserver0-shard-00-01.pcxs3.mongodb.net:27017,destinyserver0-shard-00-02.pcxs3.mongodb.net:27017/destinyRollDatabase?ssl=true&replicaSet=atlas-fdt3yf-shard-0&authSource=admin&w=majority"));
 	private static MongoDatabase db = mongoClient.getDatabase("destinyRollDatabase");
 	private static MongoCollection<Document> col = db.getCollection("userData");
 	

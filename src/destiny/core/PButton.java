@@ -125,10 +125,14 @@ public class PButton implements ClickEvent {
 			}
 			if(highlight) {
 				window.pushStyle();
-				window.stroke(255);
+				window.stroke(0);
 				window.strokeWeight(0.5f);
 				Rectangle bounds= collider.getBounds();
-				window.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+				window.line(bounds.x, bounds.y, bounds.x + bounds.width, bounds.y);
+				window.line(bounds.x, bounds.y, bounds.x, bounds.y + bounds.height);
+				window.line(bounds.x + bounds.width, bounds.y, bounds.x + bounds.width, bounds.y + bounds.height);
+				window.line(bounds.x + bounds.width, bounds.y + bounds.height, bounds.x, bounds.y + bounds.height);
+				window.popStyle();
 			}
 		}
 	}

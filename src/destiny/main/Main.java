@@ -1,7 +1,6 @@
 package destiny.main;
-import java.awt.Dimension;
-import java.io.File;
 
+import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import destiny.assets.Constants;
@@ -20,16 +19,21 @@ import processing.core.PApplet;
 public class Main {
 
 	public static void main(String[] args) {
-		System.setProperty("java.library.path", "win32-x86-64");
-		System.setProperty("jna.library.path", "win32-x86-64");
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			System.setProperty("java.library.path", "lib/win32-x86-64");
+			System.setProperty("jna.library.path", "lib/win32-x86-64");
+		} else {
+			System.setProperty("java.library.path", "lib/macosx");
+			System.setProperty("jna.library.path", "lib/macosx");
+		}
 		System.out.println(System.getProperty("java.library.path"));
 		System.out.println(System.getProperty("jna.library.path"));
 
 		Window drawing = new Window();
-		PApplet.runSketch(new String[]{""}, drawing);
+		PApplet.runSketch(new String[] { "" }, drawing);
 		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
 		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
-		JFrame window = (JFrame)canvas.getFrame();
+		JFrame window = (JFrame) canvas.getFrame();
 
 		window.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		window.setLocation(0, 0);
@@ -42,5 +46,5 @@ public class Main {
 		canvas.requestFocus();
 
 	}
-	
+
 }

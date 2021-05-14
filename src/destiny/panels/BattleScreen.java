@@ -66,7 +66,7 @@ public class BattleScreen implements Screen {
 
 
 		for(int i = 0; i < 5; i++) {
-			PButton b;
+			final PButton b;
 			int id = i+1;
 			try {
 				b = new PButton(new Rectangle(Constants.scaleIntToWidth(100+(i*350)), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(300), Constants.scaleIntToWidth(300), Constants.scaleIntToWidth(250)), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
@@ -85,7 +85,7 @@ public class BattleScreen implements Screen {
 
 		}
 		for(int i = 0; i < 3; i++) {
-			PButton b;
+			final PButton b;
 			try {
 				b = new PButton(new Rectangle(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				revs[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
@@ -94,6 +94,10 @@ public class BattleScreen implements Screen {
 					@Override
 					public void run() {
 						revSelect = 3 - sel;
+						for(PButton rev: selection) {
+							rev.setHightlight(false);
+						}
+						b.setHightlight(true);
 					}
 				});
 				selection[i] = b;
@@ -101,17 +105,21 @@ public class BattleScreen implements Screen {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			final PButton b2;
 			try {
-				b = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b2 = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				enemies[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
 				int sel = i;
-				b.addListener(new Runnable() {
+				b2.addListener(new Runnable() {
 					@Override
 					public void run() {
+						for(PButton enemy: enemySelection) {
+							enemy.setHightlight(false);
+						}
 						enemySelect = sel + 1;
 					}
 				});
-				enemySelection[i] = b;
+				enemySelection[i] = b2;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

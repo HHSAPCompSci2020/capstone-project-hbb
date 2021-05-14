@@ -68,7 +68,7 @@ public class Constants {
 	
 	public static String getCharacterPath(int id, String action) {
 		
-		return "res/characters/"+id+"/asset"+id+"/-"+action+".gif";
+		return "res/characters/"+id+"/asset"+id+"-"+action+".gif";
 		
 	}
 	

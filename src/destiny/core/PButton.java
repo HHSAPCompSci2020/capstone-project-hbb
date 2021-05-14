@@ -23,6 +23,7 @@ public class PButton implements ClickEvent {
 	private boolean visible;
 	private boolean listenOnClick;
 	private boolean isClicked = false;
+	private boolean highlight = false;
 	
 	/**
 	 * 
@@ -116,8 +117,9 @@ public class PButton implements ClickEvent {
 		if (visible) {
 			Rectangle bounds= collider.getBounds();
 			window.image(texture, bounds.x, bounds.y, bounds.width, bounds.height);
+			if(highlight) {
+			}
 		}
-		
 	}
 	
 	/**
@@ -182,4 +184,7 @@ public class PButton implements ClickEvent {
 		
 	}
 
+	public void toggleHighlight() {
+		highlight = !highlight;
+	}
 }

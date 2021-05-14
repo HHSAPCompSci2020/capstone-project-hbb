@@ -8,26 +8,27 @@ import processing.core.PApplet;
 
 public class Character {
 	
-	private int health, attack, defense, mp, guage;
-	private PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
-	private PGif[] sprites = {spriteAttack, spriteFlinch, spriteMove, spriteStatic};
-		
-	public Character(int id) {
-		
-		Document statDoc = MongoHandler.getStatDoc(id);
-		
-		health = statDoc.getInteger("health");
-		attack = statDoc.getInteger("attack");
-		defense = statDoc.getInteger("defense");
-		mp = statDoc.getInteger("mp");
-		guage = statDoc.getInteger("guage");
-		spriteStatic = new PGif(0, 0, Constants.getCharacterPath(id, "static"));
-		spriteAttack = new PGif(0, 0, Constants.getCharacterPath(id, "attack"));
-		spriteFlinch = new PGif(0, 0, Constants.getCharacterPath(id, "flinch"));
-		spriteMove = new PGif(0, 0, Constants.getCharacterPath(id, "move"));
-		sprite = spriteStatic;
-		
-	}
+    private int health, attack, defense, mp, guage;
+    private PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
+    private PGif[] sprites;
+        
+    public Character(int id) {
+        
+        Document statDoc = MongoHandler.getStatDoc(id);
+        
+        health = statDoc.getInteger("health");
+        attack = statDoc.getInteger("attack");
+        defense = statDoc.getInteger("defense");
+        mp = statDoc.getInteger("mp");
+        guage = statDoc.getInteger("guage");
+        spriteStatic = new PGif(0, 0, Constants.getCharacterPath(id, "static"));
+        spriteAttack = new PGif(0, 0, Constants.getCharacterPath(id, "attack"));
+        spriteFlinch = new PGif(0, 0, Constants.getCharacterPath(id, "flinch"));
+        spriteMove = new PGif(0, 0, Constants.getCharacterPath(id, "move"));
+        sprite = spriteStatic;
+        sprites = new PGif[]{spriteAttack, spriteFlinch, spriteMove, spriteStatic};
+        
+    }
 	
 	public void draw(PApplet window) {
 		

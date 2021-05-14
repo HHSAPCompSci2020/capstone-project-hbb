@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
+import destiny.assets.Character;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
@@ -27,18 +28,21 @@ public class BattleScreen implements Screen {
 	private RippleCursor cursor;
 	private PButton button, back;
 	private int revSelect, enemySelect;
-	private int[] revs, enemy;
+	private Character[] revs, enemies;
 	private PButton[] select, selection, enemySelection;
-
+	private boolean win = true, lose = false;;
+	private FadeImage victory, defeat;
 	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
+		victory = new FadeImage("res/battleScreen/victory.png");
+		defeat = new FadeImage("res/battleScreen/defeat.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		revSelect = 0;
 		enemySelect = 0;
-		revs = new int[] {0,0,0};
-		enemy = new int[] {0,0,0};
+		revs = new Character[] {new Character(1),new Character(1),new Character(1)};
+		enemies = new Character[] {new Character(1),new Character(1),new Character(1)};
 		try {
 			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
@@ -50,6 +54,10 @@ public class BattleScreen implements Screen {
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+		victory.setCoords(0, 0);
+		victory.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+		defeat.setCoords(0, 0);
+		defeat.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		
 		select = new PButton[5];
 		selection = new PButton[3]; 
@@ -80,6 +88,7 @@ public class BattleScreen implements Screen {
 			PButton b;
 			try {
 				b = new PButton(new Rectangle(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				revs[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
 				int sel = i;
 				b.addListener(new Runnable() {
 					@Override
@@ -93,7 +102,8 @@ public class BattleScreen implements Screen {
 				e.printStackTrace();
 			}
 			try {
-				b = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300-(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				enemies[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
 				int sel = i;
 				b.addListener(new Runnable() {
 					@Override
@@ -156,12 +166,27 @@ public class BattleScreen implements Screen {
 		for(int i =0; i < 3; i++) {
 			enemySelection[i].draw(window);
 		}
+		for(Character rev : revs) {
+			rev.draw(window);
+		}
+		for(Character enemy : enemies) {
+			enemy.draw(window);
+		}
+		if(win) {
+			victory.draw(window);
+			back.draw(window);
+			
+		}
+		if(lose) {
+			defeat.draw(window);
+			back.draw(window);
+			
+		}
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {
 			cursor.clearTrail();
 		}
-		
 }
 	
 

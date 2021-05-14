@@ -125,6 +125,7 @@ public class PButton implements ClickEvent {
 			}
 			if(highlight) {
 				window.pushStyle();
+				window.stroke(255);
 				window.strokeWeight(0.5f);
 				Rectangle bounds= collider.getBounds();
 				window.rect(bounds.x, bounds.y, bounds.width, bounds.height);

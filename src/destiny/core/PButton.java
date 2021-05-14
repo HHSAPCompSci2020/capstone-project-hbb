@@ -124,6 +124,10 @@ public class PButton implements ClickEvent {
 				gifTexture.draw(window);
 			}
 			if(highlight) {
+				window.pushStyle();
+				window.strokeWeight(0.5f);
+				Rectangle bounds= collider.getBounds();
+				window.rect(bounds.x, bounds.y, bounds.width, bounds.height);
 			}
 		}
 	}
@@ -175,6 +179,12 @@ public class PButton implements ClickEvent {
 		texture.setCoords(bounds.x, bounds.y);
 		texture.resize(bounds.width, bounds.height);
 		isGif = true;
+		
+	}
+	
+	public void setHightlight(boolean highlight) {
+		
+		this.highlight = highlight;
 		
 	}
 	

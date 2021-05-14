@@ -126,7 +126,7 @@ public class PButton implements ClickEvent {
 			if(highlight) {
 				window.pushStyle();
 				window.stroke(0);
-				window.strokeWeight(0.5f);
+				window.strokeWeight(5f);
 				Rectangle bounds= collider.getBounds();
 				window.line(bounds.x, bounds.y, bounds.x + bounds.width, bounds.y);
 				window.line(bounds.x, bounds.y, bounds.x, bounds.y + bounds.height);
@@ -238,5 +238,9 @@ public class PButton implements ClickEvent {
 	 */
 	public void toggleHighlight() {
 		highlight = !highlight;
+	}
+	
+	public boolean isHighlighted() {
+		return highlight;
 	}
 }

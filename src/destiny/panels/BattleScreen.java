@@ -28,9 +28,10 @@ public class BattleScreen implements Screen {
 	private RippleCursor cursor;
 	private PButton button, back;
 	private int revSelect, enemySelect;
+	private int[] move, target;
 	private Character[] revs, enemies;
-	private PButton[] select, selection, enemySelection;
-	private boolean win = true, lose = false;;
+	private PButton[] select, enemySelection;
+	private boolean win = false, lose = false;;
 	private FadeImage victory, defeat;
 	
 	@Override
@@ -41,6 +42,8 @@ public class BattleScreen implements Screen {
 		cursor = RippleCursor.createLowPerformanceCursor();
 		revSelect = 0;
 		enemySelect = 0;
+		move = new int[3];
+		target = new int[3];
 		revs = new Character[] {new Character(1),new Character(1),new Character(1)};
 		enemies = new Character[] {new Character(1),new Character(1),new Character(1)};
 		try {
@@ -60,20 +63,25 @@ public class BattleScreen implements Screen {
 		defeat.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		
 		select = new PButton[5];
-		selection = new PButton[3]; 
 		enemySelection = new PButton[3]; 
 
-
-
 		for(int i = 0; i < 5; i++) {
-			PButton b;
-			int id = i+1;
+			final PButton b;
+			int id = i;
 			try {
 				b = new PButton(new Rectangle(Constants.scaleIntToWidth(100+(i*350)), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(300), Constants.scaleIntToWidth(300), Constants.scaleIntToWidth(250)), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-						System.out.println(""+revs[0]+revs[1]+revs[2]);
+						move[revSelect] = id;
+						target[revSelect] = 0;
+						for(int i = 0; i < enemySelection.length; i++) {
+							if(enemySelection[i].isHighlighted()) {
+								target[revSelect]=i;
+								break;
+							}
+						}
+						revSelect++;
 					}
 				});
 				select[i] = b;
@@ -81,37 +89,25 @@ public class BattleScreen implements Screen {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-
 		}
 		for(int i = 0; i < 3; i++) {
-			PButton b;
+			revs[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
+			final PButton b2;
 			try {
-				b = new PButton(new Rectangle(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
-				revs[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
+				b2 = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				enemies[i].setCoords(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200));
 				int sel = i;
-				b.addListener(new Runnable() {
+				b2.addListener(new Runnable() {
 					@Override
 					public void run() {
-						revSelect = 3 - sel;
-					}
-				});
-				selection[i] = b;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				b = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
-				enemies[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
-				int sel = i;
-				b.addListener(new Runnable() {
-					@Override
-					public void run() {
+						for(PButton enemy: enemySelection) {
+							enemy.setHightlight(false);
+						}
+						b2.setHightlight(true);
 						enemySelect = sel + 1;
 					}
 				});
-				enemySelection[i] = b;
+				enemySelection[i] = b2;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -160,10 +156,6 @@ public class BattleScreen implements Screen {
 			select[i].draw(window);
 		}
 		for(int i =0; i < 3; i++) {
-			selection[i].draw(window);
-		}
-		
-		for(int i =0; i < 3; i++) {
 			enemySelection[i].draw(window);
 		}
 		for(Character rev : revs) {
@@ -182,11 +174,16 @@ public class BattleScreen implements Screen {
 			back.draw(window);
 			
 		}
+		if(revSelect==3) {
+			win = true;
+			revSelect = 0;
+		}
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {
 			cursor.clearTrail();
 		}
+		
 }
 	
 

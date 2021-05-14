@@ -205,7 +205,7 @@ Players make a team composition and play against other player’s team compositi
 
 *   Assets
     *   Constants.java - A class to hold some values that are constant throughout runtime
-    *   ResourceLoader.java - A class to load all resources statically and hold them until used
+    *   Character.java - A class that represents a character and holds stats and image data about them
     *   RippleCursor.java - A class that handles all the functionality of a ripple that will follow the user's cursor around
 *   Core
     *   ClickEvent.java - An interface used to allow the EventHandler trigger anything that relies on a click event 
@@ -219,16 +219,20 @@ Players make a team composition and play against other player’s team compositi
     *   PButton.java - This class represents a button that can be added to a PApplet. It requires the EventHandler in order for its events to be triggered
     *   PGif.java - This class uses the OpenImaging GifDecoder to make a gif that is drawable to a PApplet
     *   Screen.java - This is the interface that must be implemented by all Screens that are added to the ScreenManager
-    *   ScreenManager.java - This class manages all the screens in the game and decides which one should be drawn and when
-    *   SoundPlayer.java - This class handles sound clips that need to be played during runtime. It can only handle .wav files because that is what the java libraries handle
+    *   ScreenManager.java - This class manages all the screens in the game and decides which one should be drawn and whenlibraries handle
 *   Net
     *   ClientPacket.java - This class holds all the data that the client sends to the server
-    *   MyListener.java - 
+    *   MyListener.java - A class that listens on the port and forwards data received
     *   PacketHandler.java - This class handles all incoming and outgoing packets between client and server
     *   ServerPacket.java - This class holds all data that the server sends to the client
+    *   MongoHandler.java - This class allows you to easily make mongo queries that are necessary for the code to run
 *   Panels
     *   HomeScreen.java - A class that represents the initial home screen that all users start on when loading into the game
     *   OpeningScreen.java - This class represents the opening/startup screen for the game
+    *   BattlePrepScreen.java - This class represents the prep screen for battle
+    *   BattleScreen.java - This class represents the actual battle screen
+    *   LevelSelectScreen.java - This class represents the screen that allows you to select the level you want to play
+    *   MainScreen.java - This class represents the main screen that users see when playing the game
     *   Window.java - This class represents the window that the game is displayed in. It extends from PApplet and forwards all necessary events to the EventHandler and ScreenManager
 *   Main
     *   Main.java - Main method to run the PApplet
@@ -242,8 +246,10 @@ Players make a team composition and play against other player’s team compositi
 *   List the group members and describe how each member contributed to the completion of the final program. This could be classes written, art assets created, leadership/organizational skills exercises, or other tasks. Initially, this is _how you plan on splitting the work_.
 *   Nathaniel Thomas:
     *   Server sided code and database management
+    *   Library classes and backend programming
 *   Jay Paek: 
     *   Client sided graphics and user interfaces
+    *   Project resources and code flow
 *   Give credit to all outside resources used. This includes downloaded images or sounds, external java libraries, parent/tutor/student coding help, etc.]
 *   Kryonet
 *   Processing

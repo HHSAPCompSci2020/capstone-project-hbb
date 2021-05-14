@@ -11,9 +11,9 @@ import static com.mongodb.client.model.Updates.*;
 
 public class MongoHandler {
 	
-	private static MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://destinyAdmin:<password>@destinyserver0.pcxs3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"));
+	private static MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://destinyUser:UazaArzUD6uu5rIC@destinyserver0.pcxs3.mongodb.net/destinyRollDatabase?retryWrites=true&w=majority"));
 	private static MongoDatabase db = mongoClient.getDatabase("destinyRollDatabase");
-	private static MongoCollection<Document> col = db.getCollection("");
+	private static MongoCollection<Document> col = db.getCollection("userData");
 	
 	private MongoHandler() {}
 	

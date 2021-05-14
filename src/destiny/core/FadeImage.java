@@ -94,7 +94,8 @@ public class FadeImage extends Fader {
 	 * 
 	 * Draws the fading image to the given PApplet
 	 * 
-	 * @post The PApplet will have a fading image drawn to it
+	 * @param window The PApplet the image should be drawn to
+	 * @post The PApplet will have a fading image drawn to it and will be tinted
 	 * 
 	 */
 	@Override

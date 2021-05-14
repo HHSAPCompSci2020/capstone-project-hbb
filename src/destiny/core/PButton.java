@@ -176,6 +176,12 @@ public class PButton implements ClickEvent {
 		
 	}
 	
+	/**
+	 * 
+	 * Sets the texture of the button to a gif
+	 * 
+	 * @param texture The gif that should be the button's texture
+	 */
 	public void setGifTexture(PGif texture) {
 		
 		gifTexture = texture;
@@ -187,6 +193,12 @@ public class PButton implements ClickEvent {
 		
 	}
 	
+	/**
+	 * 
+	 * Sets the highlight/border around the button
+	 * 
+	 * @param highlight Whether or not the highlight should be on
+	 */
 	public void setHightlight(boolean highlight) {
 		
 		this.highlight = highlight;
@@ -219,6 +231,11 @@ public class PButton implements ClickEvent {
 		
 	}
 
+	/**
+	 * 
+	 * Toggles the highlight to the opposite of what it currently is
+	 * 
+	 */
 	public void toggleHighlight() {
 		highlight = !highlight;
 	}

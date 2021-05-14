@@ -8,6 +8,14 @@ import destiny.panels.Window;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
+/**
+ * 
+ * The class that holds the main method of the program
+ * 
+ * @author Nathaniel
+ * @version 5/13/2021
+ *
+ */
 public class Main {
 
 	public static void main(String[] args) {

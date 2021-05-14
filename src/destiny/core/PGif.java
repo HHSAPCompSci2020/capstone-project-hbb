@@ -170,8 +170,8 @@ public class PGif {
 	 * 
 	 * Sets the coordinates of the gif
 	 * 
-	 * @param xCord The x coordinate of the top left of the gif
-	 * @param yCord The y coordinate of the top left of the gif
+	 * @param x The x coordinate of the top left of the gif
+	 * @param y The y coordinate of the top left of the gif
 	 */
 	public void setCoords(int x, int y) {
 		

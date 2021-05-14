@@ -17,6 +17,13 @@ public class MongoHandler {
 	
 	private MongoHandler() {}
 	
+	/**
+	 * 
+	 * Gets the bson document corresponding to the id number of the revolutionary
+	 * 
+	 * @param id The id number of the revolutionary
+	 * @return The bson Document that is queried from mongodb
+	 */
 	public static Document getStatDoc(int id) {
 		
 		return col.find(eq("_id", id)).first();

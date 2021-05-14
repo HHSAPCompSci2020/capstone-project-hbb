@@ -46,6 +46,13 @@ public class Constants {
 		
 	}
 	
+	/**
+	 * 
+	 * Returns the numerical value corresponding to each action
+	 * 
+	 * @param action The action you want the numerical value for
+	 * @return The numerical value for the given action
+	 */
 	public static int getIntForAction(String action) {
 		
 		switch(action) {
@@ -65,19 +72,40 @@ public class Constants {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * Returns the path to the gif file given the id number and action
+	 * 
+	 * @param id The id number of the revolutionary 
+	 * @param action The action of the gif you desire
+	 * @return The path to the gif file
+	 */
 	public static String getCharacterPath(int id, String action) {
 		
 		return "res/characters/"+id+"/asset"+id+"-"+action+".gif";
 		
 	}
 	
+	/**
+	 * 
+	 * Scales a number to the width of the screen
+	 * 
+	 * @param num The number being scaled
+	 * @return The scaled version of the number
+	 */
 	public static int scaleIntToWidth(double num) {
 		
 		return (int)(num/1920*SCREEN_WIDTH);
 		
 	}
 	
+	/**
+	 * 
+	 * Scales a number to the height of the screen
+	 * 
+	 * @param num The number being scaled
+	 * @return The scaled version of the number
+	 */
 	public static int scaleIntToHeight(double num) {
 		
 		return (int)(num/1015*SCREEN_HEIGHT);

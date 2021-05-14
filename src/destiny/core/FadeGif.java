@@ -147,17 +147,15 @@ public class FadeGif extends Fader {
 	/**
 	 * 
 	 * Draws the gif to the given screen with the applied fade
+	 * @param window The PApplet that the gif should be drawn to
+	 * @post The given PApplet will have a tint applied to it and the gif drawn to it
 	 * 
 	 */
 	public void draw(PApplet window) {
 		
-		window.pushStyle();
-		
 		super.draw(window);
 		
 		myGif.draw(window);
-		
-		window.popStyle();
 		
 	}
 	

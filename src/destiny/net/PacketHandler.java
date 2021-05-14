@@ -36,6 +36,12 @@ public class PacketHandler {
 
 	}
 	
+	/**
+	 * 
+	 * Sends a packet to the server 
+	 * 
+	 * @param packet The packet to be sent
+	 */
 	public static void sendPacket(ClientPacket packet) {
 		
 		client.sendTCP(packet);

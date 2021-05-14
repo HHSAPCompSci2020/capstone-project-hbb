@@ -17,7 +17,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 /**
- * BattlePrepScreen is where the user can select which revolutionaries they want to use for battle
+ * BattleScreen is where the user can battle with their revolutionaries
  * @author Jay Paek
  * @version 5/7/2021
  *

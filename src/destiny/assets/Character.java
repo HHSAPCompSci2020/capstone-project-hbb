@@ -6,12 +6,26 @@ import destiny.core.PGif;
 import destiny.net.MongoHandler;
 import processing.core.PApplet;
 
+/**
+ * 
+ * A class that represents a revolutionary. It holds their stats, image, and other info
+ * 
+ * @author Nathaniel
+ * @version 5/13/2021
+ *
+ */
 public class Character {
 	
     private int health, attack, defense, mp, guage;
     private PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
     private PGif[] sprites;
-        
+      
+    /**
+     * 
+     * Creates the revolutionary given their id number
+     * 
+     * @param id The id number of the revolutionary
+     */
     public Character(int id) {
         
         Document statDoc = MongoHandler.getStatDoc(id);
@@ -30,12 +44,25 @@ public class Character {
         
     }
 	
+    /**
+     * 
+     * Draws the revolutionary to the screen
+     * 
+     * @param window TApplet will have the revolutionary drawn to it
+     */
 	public void draw(PApplet window) {
 		
 		sprite.draw(window);
 		
 	}
 	
+	/**
+	 * 
+	 * Moves the revolutionary to the given coords
+	 * 
+	 * @param x The x coordinate of the top left
+	 * @param y The y coordinate of the top left
+	 */
 	public void setCoords(int x, int y) {
 		
 		for (int i = 0; i < sprites.length; i ++) {
@@ -45,7 +72,13 @@ public class Character {
 		}
 		
 	}
-	
+	 
+	/**
+	 * 
+	 * Changes the revolutionary's gif top a dif action
+	 * 
+	 * @param action The action that the gif should change to
+	 */
 	public void changeAction(String action) {
 		
 		sprite = sprites[Constants.getIntForAction(action)];

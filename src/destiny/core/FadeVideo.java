@@ -17,6 +17,13 @@ public class FadeVideo extends Fader {
 	private float targetVol, volChange;
 	private boolean isChanging;
 	
+	/**
+	 * 
+	 * Creates a fading video given a path to a video file
+	 * 
+	 * @param window The window that the movie should be drawn to
+	 * @param pathname The path to the video file
+	 */
 	public FadeVideo(PApplet window, String pathname) {
 		
 		super(0, 255, 0.5f);
@@ -24,6 +31,20 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Creates a fading video with the given parameters
+	 * 
+	 * @param window The window to be drawn to
+	 * @param pathname The path to the video
+	 * @param startTint The starting tint of the video
+	 * @param targetTint The tint that the video should fade to
+	 * @param fadeSpeed The amount the tint should change by each frame
+	 * @param xCord The x coordinate of the top left
+	 * @param yCord The y coordinate of the top left
+	 * @param width The width the video should be
+	 * @param height The height the video should be
+	 */
 	public FadeVideo(PApplet window, String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord, int width, int height) {
 		
 		super(startTint, targetTint, fadeSpeed);
@@ -35,6 +56,18 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Creates a fading video with the given parameters
+	 * 
+	 * @param window The window to be drawn to
+	 * @param pathname The path to the video
+	 * @param startTint The starting tint of the video
+	 * @param targetTint The tint that the video should fade to
+	 * @param fadeSpeed The amount the tint should change by each frame
+	 * @param xCord The x coordinate of the top left
+	 * @param yCord The y coordinate of the top left
+	 */
 	public FadeVideo(PApplet window, String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord) {
 		
 		super(startTint, targetTint, fadeSpeed);
@@ -45,6 +78,14 @@ public class FadeVideo extends Fader {
 	}
 	
 	@Override
+	/**
+	 * 
+	 * Draws the fading video to the screen
+	 * 
+	 * @param window The PApplet the video should be drawn to
+	 * @post The given PApplet will have the video drawn to it and will be tinted
+	 * 
+	 */
 	public void draw(PApplet window) {
 		
 		super.draw(window);

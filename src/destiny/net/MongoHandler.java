@@ -20,7 +20,7 @@ public class MongoHandler {
 	public static Document getStatDoc(int id) {
 		
 		return col.find(eq("_id", id)).first();
-		
+			
 	}
 
 }

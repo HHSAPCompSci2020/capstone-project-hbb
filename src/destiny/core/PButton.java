@@ -23,8 +23,9 @@ public class PButton implements ClickEvent {
 	private Runnable exec;
 	private boolean visible;
 	private boolean listenOnClick;
-	private boolean isClicked;
 	private boolean isGif;
+	private boolean isClicked = false;
+	private boolean highlight = false;
 	
 	/**
 	 * 
@@ -122,8 +123,9 @@ public class PButton implements ClickEvent {
 			} else {
 				gifTexture.draw(window);
 			}
+			if(highlight) {
+			}
 		}
-		
 	}
 	
 	/**
@@ -202,4 +204,7 @@ public class PButton implements ClickEvent {
 		
 	}
 
+	public void toggleHighlight() {
+		highlight = !highlight;
+	}
 }

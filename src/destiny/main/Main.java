@@ -149,8 +149,8 @@ public class Main {
 				JPanel panel2 = new JPanel();
 				JLabel label2 = new JLabel("Re-Enter your password:");
 				JPasswordField pass2 = new JPasswordField(10);
-				panel.add(label2);
-				panel.add(pass2);
+				panel2.add(label2);
+				panel2.add(pass2);
 				String[] options2 = new String[] { "OK" , "Cancel"};
 				chosen = JOptionPane.showOptionDialog(null, panel2, "Password", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
 						null, options2, options2[0]);
@@ -162,7 +162,7 @@ public class Main {
 				
 				if (!checkPass) {
 					
-					JOptionPane.showMessageDialog(null, "The passwords did not match :(. Try again");
+					JOptionPane.showMessageDialog(null, "The passwords did not match :( Try again");
 					
 				}
 

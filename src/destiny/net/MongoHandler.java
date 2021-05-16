@@ -13,7 +13,8 @@ public class MongoHandler {
 	
 	private static MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://destinyUser:UazaArzUD6uu5rIC@destinyserver0-shard-00-00.pcxs3.mongodb.net:27017,destinyserver0-shard-00-01.pcxs3.mongodb.net:27017,destinyserver0-shard-00-02.pcxs3.mongodb.net:27017/destinyRollDatabase?ssl=true&replicaSet=atlas-fdt3yf-shard-0&authSource=admin&w=majority"));
 	private static MongoDatabase db = mongoClient.getDatabase("destinyRollDatabase");
-	private static MongoCollection<Document> col = db.getCollection("userData");
+	private static MongoCollection<Document> characterCol = db.getCollection("characterData");
+	private static MongoCollection<Document> userCol = db.getCollection("userData");
 	
 	private MongoHandler() {}
 	
@@ -26,8 +27,26 @@ public class MongoHandler {
 	 */
 	public static Document getStatDoc(int id) {
 		
-		return col.find(eq("_id", id)).first();
+		return characterCol.find(eq("_id", id)).first();
 			
+	}
+	
+	public static Document getUserDoc(String userName) {
+		
+		return userCol.find(eq("_id", userName)).first();
+		
+	}
+	
+	public static boolean checkUserLogin(String userName, String pswd) {
+		
+		return userCol.find(eq("_id", userName)).first().getString("pswd").equals(pswd);
+		
+	}
+	
+	public static void addUser(String userName, String pswd) {
+		
+		userCol.insertOne(new Document("_id", userName).append("pswd", pswd));
+		
 	}
 
 }

@@ -13,7 +13,7 @@ import processing.core.PApplet;
  * The class that holds the main method of the program
  * 
  * @author Nathaniel
- * @version 5/13/2021
+ * @version 5/13/2021moonp
  *
  */
 public class Main {

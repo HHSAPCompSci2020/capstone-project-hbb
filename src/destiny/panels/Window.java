@@ -25,6 +25,7 @@ public class Window extends PApplet {
 		ScreenManager.addScreen("home", new HomeScreen());
 		ScreenManager.addScreen("main", new MainScreen());
 		ScreenManager.addScreen("gacha", new GachaScreen());
+		ScreenManager.addScreen("gachaResult", new GachaResultsScreen());
 		ScreenManager.addScreen("level", new LevelSelectScreen());
 		ScreenManager.addScreen("prep", new BattlePrepScreen());
 		ScreenManager.addScreen("battle", new BattleScreen());

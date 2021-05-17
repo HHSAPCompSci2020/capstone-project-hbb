@@ -33,10 +33,8 @@ public class GachaScreen implements Screen {
 	public void setup(PApplet window) {
 		background = new FadeImage("res/gachaScreen/sparkle.jpg");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH/2 - Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)), false);
-		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.SCREEN_HEIGHT), false);
 		try {
-			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH/2 - Constants.scaleIntToWidth(500), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
 			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
@@ -46,17 +44,6 @@ public class GachaScreen implements Screen {
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-	}
-
-	public void draw(PApplet window) {
-		background.draw(window);
-		button.draw(window);
-		back.draw(window);
-		if (window.mousePressed) {
-			cursor.draw(window);
-		} else {
-			cursor.clearTrail();
-		}
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
@@ -68,7 +55,7 @@ public class GachaScreen implements Screen {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("level", window);
+						ScreenManager.setCurrentScreenByName("gachaResult", window);
 					}
 
 				});
@@ -91,6 +78,17 @@ public class GachaScreen implements Screen {
 				});
 			}
 		});
+	}
+
+	public void draw(PApplet window) {
+		background.draw(window);
+		button.draw(window);
+		back.draw(window);
+		if (window.mousePressed) {
+			cursor.draw(window);
+		} else {
+			cursor.clearTrail();
+		}
 	}
 
 	@Override

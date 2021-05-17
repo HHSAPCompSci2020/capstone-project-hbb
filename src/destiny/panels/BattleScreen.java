@@ -30,7 +30,7 @@ public class BattleScreen implements Screen {
 	private int revSelect, enemySelect;
 	private int[] move, target;
 	private Character[] revs, enemies;
-	private PButton[] select, enemySelection;
+	private PButton[] select;
 	private boolean win = false, lose = false;;
 	private FadeImage victory, defeat;
 	
@@ -63,7 +63,6 @@ public class BattleScreen implements Screen {
 		defeat.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		
 		select = new PButton[5];
-		enemySelection = new PButton[3]; 
 
 		for(int i = 0; i < 5; i++) {
 			final PButton b;
@@ -75,39 +74,10 @@ public class BattleScreen implements Screen {
 					public void run() {
 						move[revSelect] = id;
 						target[revSelect] = 0;
-						for(int i = 0; i < enemySelection.length; i++) {
-							if(enemySelection[i].isHighlighted()) {
-								target[revSelect]=i;
-								break;
-							}
-						}
 						revSelect++;
 					}
 				});
 				select[i] = b;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		for(int i = 0; i < 3; i++) {
-			revs[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
-			final PButton b2;
-			try {
-				b2 = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(500)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
-				enemies[i].setCoords(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200));
-				int sel = i;
-				b2.addListener(new Runnable() {
-					@Override
-					public void run() {
-						for(PButton enemy: enemySelection) {
-							enemy.setHightlight(false);
-						}
-						b2.setHightlight(true);
-						enemySelect = sel + 1;
-					}
-				});
-				enemySelection[i] = b2;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -154,9 +124,6 @@ public class BattleScreen implements Screen {
 		
 		for(int i = 0; i < 5; i++) {
 			select[i].draw(window);
-		}
-		for(int i =0; i < 3; i++) {
-			enemySelection[i].draw(window);
 		}
 		for(Character rev : revs) {
 			rev.draw(window);

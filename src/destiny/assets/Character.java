@@ -129,7 +129,6 @@ public class Character {
 				
 				if (trigger != null) {
 					trigger.run();
-					System.out.println("Here");
 					trigger = null;
 				}
 				

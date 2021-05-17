@@ -16,7 +16,7 @@ import processing.core.PApplet;
  */
 public class Character {
 	
-    private int health, attack, defense, mp, guage;
+    private int health, attack, defense, mp, gauge;
     private PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
     private PGif[] sprites;
       
@@ -34,7 +34,7 @@ public class Character {
         attack = statDoc.getInteger("attack");
         defense = statDoc.getInteger("defense");
         mp = statDoc.getInteger("mp");
-        guage = statDoc.getInteger("guage");
+        gauge = statDoc.getInteger("gauge");
         spriteStatic = new PGif(0, 0, Constants.getCharacterPath(id, "static"));
         spriteAttack = new PGif(0, 0, Constants.getCharacterPath(id, "attack"));
         spriteFlinch = new PGif(0, 0, Constants.getCharacterPath(id, "flinch"));
@@ -142,17 +142,17 @@ public class Character {
 	}
 
 	/**
-	 * @return The guage
+	 * @return The gauge
 	 */
-	public int getGuage() {
-		return guage;
+	public int getGauge() {
+		return gauge;
 	}
 
 	/**
-	 * @param guage The guage to set
+	 * @param guage The gauge to set
 	 */
-	public void setGuage(int guage) {
-		this.guage = guage;
+	public void setGauge(int gauge) {
+		this.gauge = gauge;
 	}
 	
 }

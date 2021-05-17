@@ -106,12 +106,6 @@ public class Character {
 		
 	}
 	
-	public boolean isDead() {
-		
-		return health <= 0;
-		
-	}
-	
 	public void playActionOnce(String action) {
 		
 		final PGif temp = sprite;
@@ -223,4 +217,10 @@ public class Character {
 		this.gauge = gauge;
 	}
 	
+	/**
+	 * @return if the hp < 0 or not
+	 */
+	public boolean isDead() {
+		return health <= 0;
+	}
 }

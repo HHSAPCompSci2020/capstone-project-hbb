@@ -99,6 +99,7 @@ public class Character {
 			public void run() {
 				
 				sprite.startLooping();
+				sprite.restart();
 				sprite = temp;
 				
 			}
@@ -120,6 +121,7 @@ public class Character {
 			public void run() {
 				
 				sprite.startLooping();
+				sprite.restart();
 				sprite = temp;
 				
 			}
@@ -141,6 +143,7 @@ public class Character {
 			public void run() {
 				
 				sprite.startLooping();
+				sprite.restart();
 				sprite = temp;
 				code.run();
 				

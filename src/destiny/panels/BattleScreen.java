@@ -29,7 +29,8 @@ public class BattleScreen implements Screen {
 	private PButton button, back;
 	private int revSelect;
 	private int[] move;
-	private int target, enemyTarget, battle;
+	private int target, enemyTarget;
+	private boolean battle;
 	private Character[] revs, enemies;
 	private PButton[] select;
 	private boolean win = false, lose = false;;
@@ -42,14 +43,12 @@ public class BattleScreen implements Screen {
 		defeat = new FadeImage("res/battleScreen/defeat.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		revSelect = 0;
+		battle = false;;
 		move = new int[3];
 		target = 2;
 		enemyTarget = 2;
 		revs = new Character[] {new Character(1),new Character(1),new Character(1)};
 		enemies = new Character[] {new Character(1),new Character(1),new Character(1)};
-		for(Character enemy: enemies) {
-			enemy.setHealth(1);
-		}
 		try {
 			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
@@ -92,15 +91,12 @@ public class BattleScreen implements Screen {
 		}
 		
 	}
-
+	public void act(Character s, Character target, int move, double mult) {
+//		if(move == 2)
+			target.takeDamage(s.getAttack(), mult);
+	}
 	public void draw(PApplet window) {
 		background.draw(window);
-		if(target == -1) {
-			win = true;
-		}
-		if(enemyTarget == -1) {
-			lose = true;
-		}
 		for(int i = 0; i < 5; i++) {
 			select[i].draw(window);
 		}
@@ -110,94 +106,58 @@ public class BattleScreen implements Screen {
 		}
 		for(Character enemy : enemies) {
 			if(!enemy.isDead())
-			enemy.draw(window);
-		}
-		switch(battle) {
-		case 1:
+				enemy.draw(window);
+		} 
+		if(battle) {
 			if(!revs[2].isDead()) {
-				battle = 0;
 				revs[2].playActionOnce("attack",new Runnable() {
 					@Override
 					public void run() {
-						enemies[target].takeDamage(revs[2].getAttack(), 1);
-						battle = 2;					
+						act(revs[2],enemies[target],move[2], 1.0);
 					}
 				});
-			}else {
-				battle = 2;
 			}
-			break;
-		case 2:
 			if(!enemies[2].isDead()) {
-				battle = 0;
 				enemies[2].playActionOnce("attack",new Runnable() {
 					@Override
 					public void run() {
-						revs[enemyTarget].takeDamage(enemies[2].getAttack(), 1);
-						battle=3;					
+						act(enemies[2],revs[enemyTarget],2, 1.0);
 					}
 				});
 			}
-			else {
-				battle = 3;
-			}
-			break;
-		case 3:
 			if(!revs[1].isDead()) {
-				battle = 0;
 				revs[1].playActionOnce("attack",new Runnable() {
 					@Override
 					public void run() {
-						enemies[target].takeDamage(revs[1].getAttack(), 1);
-						battle=4;					
+						act(revs[1],enemies[target],move[1], 1.0);
 					}
 				});
 			}
-			else {
-				battle = 4;
-			}
-			break;
-		case 4:
 			if(!enemies[1].isDead()) {
-				battle = 0;
 				enemies[1].playActionOnce("attack",new Runnable() {
 					@Override
 					public void run() {
-						revs[enemyTarget].takeDamage(enemies[1].getAttack(), 1);
-						battle=5;					
+						act(enemies[1],revs[enemyTarget],2, 1.0);
 					}
 				});
 			}
-			else {
-				battle = 5;
-			}
-			break;
-		case 5:
 			if(!revs[0].isDead()) {
-				battle = 0;
 				revs[0].playActionOnce("attack",new Runnable() {
 					@Override
 					public void run() {
-						enemies[target].takeDamage(revs[0].getAttack(), 1);		
-						battle = 6;
+						act(revs[0],enemies[target],move[0], 1.0);
 					}
 				});
 			}
-			else {
-				battle = 6;
-			}
-			break;
-		case 6:
 			if(!enemies[0].isDead()) {
-				battle = 0;
 				enemies[0].playActionOnce("attack",new Runnable() {
 					@Override
 					public void run() {
-						revs[enemyTarget].takeDamage(enemies[0].getAttack(), 1);		
+						act(enemies[0],revs[enemyTarget],2, 1.0);
+						
 					}
 				});
 			}
-			break;
 		}
 		if(target == -1) {
 			win = true;
@@ -253,7 +213,7 @@ public class BattleScreen implements Screen {
 			});
 		}
 		if(revSelect==3) {
-			battle = 1;
+			battle = true;
 			revSelect = 0;
 		}
 		if (window.mousePressed) {

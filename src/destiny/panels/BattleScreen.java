@@ -83,6 +83,10 @@ public class BattleScreen implements Screen {
 				e.printStackTrace();
 			}
 		}
+		for(int i = 0; i < 3; i++) {
+			revs[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
+			enemies[i].setCoords(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200));
+		}
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
@@ -123,37 +127,43 @@ public class BattleScreen implements Screen {
 		switch(battle) {
 		case 1:
 			if(!revs[2].isDead()) {
-				revs[2].changeAction("attack");
+				revs[2].playActionOnce("attack");
+				enemies[target].takeDamage(revs[2].getAttack(), 1.0);
 			}
 			battle++;
 			break;
 		case 2:
 			if(!enemies[2].isDead()) {
-				enemies[2].changeAction("attack");
+				enemies[2].playActionOnce("attack");
+				revs[enemyTarget].takeDamage(revs[2].getAttack(), 1.0);
 			}
 			battle++;
 			break;
 		case 3:
 			if(!revs[1].isDead()) {
-				revs[1].changeAction("attack");
+				revs[1].playActionOnce("attack");
+				enemies[target].takeDamage(revs[1].getAttack(), 1.0);
 			}
 			battle++;
 			break;
 		case 4:
 			if(!enemies[1].isDead()) {
-				enemies[1].changeAction("attack");
+				enemies[1].playActionOnce("attack");
+				revs[enemyTarget].takeDamage(revs[1].getAttack(), 1.0);
 			}
 			battle++;
 			break;
 		case 5:
 			if(!revs[0].isDead()) {
-				revs[0].changeAction("attack");
+				revs[0].playActionOnce("attack");
+				enemies[target].takeDamage(revs[0].getAttack(), 1.0);
 			}
 			battle++;
 			break;
 		case 6:
 			if(!enemies[0].isDead()) {
-				enemies[0].changeAction("attack");
+				enemies[0].playActionOnce("attack");
+				revs[enemyTarget].takeDamage(revs[0].getAttack(), 1.0);
 			}
 			battle++;
 			break;

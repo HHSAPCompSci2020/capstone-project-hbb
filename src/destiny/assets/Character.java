@@ -186,4 +186,10 @@ public class Character {
 		this.gauge = gauge;
 	}
 	
+	/**
+	 * @return if the hp < 0 or not
+	 */
+	public boolean isDead() {
+		return health < 0;
+	}
 }

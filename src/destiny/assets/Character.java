@@ -89,6 +89,21 @@ public class Character {
 		
 		health -= (int)(multi*attack/defense);
 		
+		final PGif temp = sprite;
+		
+		sprite = spriteFlinch;
+		sprite.playOnce();
+		sprite.addListener(new Runnable() {
+
+			@Override
+			public void run() {
+				
+				sprite = temp;
+				
+			}
+			
+		});
+		
 	}
 	
 	public boolean isDead() {
@@ -101,6 +116,9 @@ public class Character {
 		
 		final PGif temp = sprite;
 		
+		sprite = sprites[Constants.getIntForAction(action)];
+		sprite.playOnce();
+		
 		sprite.addListener(new Runnable() {
 
 			@Override
@@ -111,8 +129,27 @@ public class Character {
 			}
 			
 		});
+		
+	}
+	
+	public void playActionOnce(String action, Runnable code) {
+		
+		final PGif temp = sprite;
+		
 		sprite = sprites[Constants.getIntForAction(action)];
 		sprite.playOnce();
+		
+		sprite.addListener(new Runnable() {
+
+			@Override
+			public void run() {
+				
+				sprite = temp;
+				code.run();
+				
+			}
+			
+		});
 		
 	}
 

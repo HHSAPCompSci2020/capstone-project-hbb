@@ -9,6 +9,8 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.*;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class MongoHandler {
 	
 	private static MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://destinyUser:UazaArzUD6uu5rIC@destinyserver0-shard-00-00.pcxs3.mongodb.net:27017,destinyserver0-shard-00-01.pcxs3.mongodb.net:27017,destinyserver0-shard-00-02.pcxs3.mongodb.net:27017/destinyRollDatabase?ssl=true&replicaSet=atlas-fdt3yf-shard-0&authSource=admin&w=majority"));
@@ -49,6 +51,33 @@ public class MongoHandler {
 		
 	}
 	
-	
+	public static Document rollRandomCharacter() {
+		
+		double val = ThreadLocalRandom.current().nextDouble(0, 100);
+		
+		double[][] nums = {{12.5, 12.5, 12.5, 12.5}, {7, 7, 7, 7}, {4, 4, 4}, {2, 2, 2, 2}, {1, 1, 1}, {0.5, 0.5}};
+		double sum = 0;
+		int count = 0;
+		
+		for (double[] i  : nums) {
+			
+			for (double d : i) {
+				
+				sum += d;
+				count++;
+				
+				if (val < sum) {
+					
+					return characterCol.find(eq("_id", count)).first();
+					
+				}
+				
+			}
+			
+		}
+		
+		return null;
+		
+	}
 
 }

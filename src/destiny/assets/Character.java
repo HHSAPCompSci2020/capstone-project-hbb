@@ -89,23 +89,23 @@ public class Character {
 		
 		health -= (int)(multi*attack/defense);
 		
-		final PGif temp = sprite;
-		
-		sprite = spriteFlinch;
-		sprite.playOnce();
-		sprite.addListener(new Runnable() {
-
-			@Override
-			public void run() {
-				
-				sprite.startLooping();
-				sprite.restart();
-				sprite.removeListener();
-				sprite = temp;
-				
-			}
-			
-		});
+//		final PGif temp = sprite;
+//		
+//		sprite = spriteFlinch;
+//		sprite.playOnce();
+//		sprite.addListener(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				
+//				sprite.startLooping();
+//				sprite.restart();
+//				sprite.removeListener();
+//				sprite = temp;
+//				
+//			}
+//			
+//		});
 		
 	}
 	

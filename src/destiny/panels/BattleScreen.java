@@ -29,7 +29,8 @@ public class BattleScreen implements Screen {
 	private PButton button, back;
 	private int revSelect;
 	private int[] move;
-	private int target, enemyTarget, battle;
+	private int target, enemyTarget;
+	private boolean battle;
 	private Character[] revs, enemies;
 	private PButton[] select;
 	private boolean win = false, lose = false;;
@@ -42,6 +43,7 @@ public class BattleScreen implements Screen {
 		defeat = new FadeImage("res/battleScreen/defeat.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		revSelect = 0;
+		battle = false;;
 		move = new int[3];
 		target = 2;
 		enemyTarget = 2;
@@ -87,91 +89,85 @@ public class BattleScreen implements Screen {
 			revs[i].setCoords(Constants.scaleIntToWidth(100+(i*300)), Constants.scaleIntToHeight(200));
 			enemies[i].setCoords(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300+(i*300)), Constants.scaleIntToHeight(200));
 		}
-		button.addListener(new Runnable() {
-			@Override
-			public void run() {
-				background.setFadeSpeed(40);
-				background.setTint(255);
-				background.setTargetTint(0);
-				background.fadeWhite(true);
-				background.addListener(new Runnable() {
-
-					@Override
-					public void run() {
-						ScreenManager.setCurrentScreenByName("battle", window);
-					}
-					
-				});
-			}
-		});
 		
 	}
-
+	public void act(Character s, Character target, int move, double mult) {
+//		if(move == 2)
+			target.takeDamage(s.getAttack(), mult);
+	}
 	public void draw(PApplet window) {
 		background.draw(window);
-		if(target == -1) {
-			win = true;
-		}
-		if(enemyTarget == -1) {
-			lose = true;
-		}
 		for(int i = 0; i < 5; i++) {
 			select[i].draw(window);
 		}
 		for(Character rev : revs) {
-			rev.draw(window);
+			if(!rev.isDead())
+				rev.draw(window);	
 		}
 		for(Character enemy : enemies) {
-			enemy.draw(window);
-		}
-		switch(battle) {
-		case 1:
+			if(!enemy.isDead())
+				enemy.draw(window);
+		} 
+		if(battle) {
 			if(!revs[2].isDead()) {
-				revs[2].playActionOnce("attack");
-				enemies[target].takeDamage(revs[2].getAttack(), 1.0);
+				revs[2].playActionOnce("attack",new Runnable() {
+					@Override
+					public void run() {
+						act(revs[2],enemies[target],move[2], 1.0);
+					}
+				});
 			}
-			battle++;
-			break;
-		case 2:
 			if(!enemies[2].isDead()) {
-				enemies[2].playActionOnce("attack");
-				revs[enemyTarget].takeDamage(revs[2].getAttack(), 1.0);
+				enemies[2].playActionOnce("attack",new Runnable() {
+					@Override
+					public void run() {
+						act(enemies[2],revs[enemyTarget],2, 1.0);
+					}
+				});
 			}
-			battle++;
-			break;
-		case 3:
 			if(!revs[1].isDead()) {
-				revs[1].playActionOnce("attack");
-				enemies[target].takeDamage(revs[1].getAttack(), 1.0);
+				revs[1].playActionOnce("attack",new Runnable() {
+					@Override
+					public void run() {
+						act(revs[1],enemies[target],move[1], 1.0);
+					}
+				});
 			}
-			battle++;
-			break;
-		case 4:
 			if(!enemies[1].isDead()) {
-				enemies[1].playActionOnce("attack");
-				revs[enemyTarget].takeDamage(revs[1].getAttack(), 1.0);
+				enemies[1].playActionOnce("attack",new Runnable() {
+					@Override
+					public void run() {
+						act(enemies[1],revs[enemyTarget],2, 1.0);
+					}
+				});
 			}
-			battle++;
-			break;
-		case 5:
 			if(!revs[0].isDead()) {
-				revs[0].playActionOnce("attack");
-				enemies[target].takeDamage(revs[0].getAttack(), 1.0);
+				revs[0].playActionOnce("attack",new Runnable() {
+					@Override
+					public void run() {
+						act(revs[0],enemies[target],move[0], 1.0);
+					}
+				});
 			}
-			battle++;
-			break;
-		case 6:
 			if(!enemies[0].isDead()) {
-				enemies[0].playActionOnce("attack");
-				revs[enemyTarget].takeDamage(revs[0].getAttack(), 1.0);
+				enemies[0].playActionOnce("attack",new Runnable() {
+					@Override
+					public void run() {
+						act(enemies[0],revs[enemyTarget],2, 1.0);
+						
+					}
+				});
 			}
-			battle++;
-			break;
 		}
-		if(enemies[target].isDead()) {
+		if(target == -1) {
+			win = true;
+		}
+		else if(enemies[target].isDead()) {
 			target--;
 		}
-		if(revs[enemyTarget].isDead()) {
+		if(enemyTarget == -1) {
+			lose = true;
+		} else if(revs[enemyTarget].isDead()) {
 			enemyTarget--;
 		}
 		if(win) {
@@ -217,7 +213,7 @@ public class BattleScreen implements Screen {
 			});
 		}
 		if(revSelect==3) {
-			battle = 1;
+			battle = true;
 			revSelect = 0;
 		}
 		if (window.mousePressed) {
@@ -235,7 +231,8 @@ public class BattleScreen implements Screen {
 		cursor = null;
 		button.removeListener();
 		button = null;
-	
+		win = false;
+		lose = false;
 	}
 
 }

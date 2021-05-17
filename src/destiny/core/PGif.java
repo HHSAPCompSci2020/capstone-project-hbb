@@ -334,6 +334,7 @@ public class PGif {
 	public void restart() {
 		
 		frameCount = 0;
+		lastTimeStamp = System.nanoTime();
 		
 	}
 	

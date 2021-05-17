@@ -19,6 +19,7 @@ public class Character {
     private int health, attack, defense, mp, gauge;
     private PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
     private PGif[] sprites;
+    private Runnable trigger;
       
     /**
      * 
@@ -89,23 +90,23 @@ public class Character {
 		
 		health -= (int)(multi*attack/defense);
 		
-//		final PGif temp = sprite;
-//		
-//		sprite = spriteFlinch;
-//		sprite.playOnce();
-//		sprite.addListener(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				
-//				sprite.startLooping();
-//				sprite.restart();
-//				sprite.removeListener();
-//				sprite = temp;
-//				
-//			}
-//			
-//		});
+		final PGif temp = sprite;
+		
+		sprite = spriteFlinch;
+		sprite.playOnce();
+		sprite.addListener(new Runnable() {
+
+			@Override
+			public void run() {
+				
+				sprite.startLooping();
+				sprite.restart();
+				sprite.removeListener();
+				sprite = temp;
+				
+			}
+			
+		});
 		
 	}
 	
@@ -125,6 +126,12 @@ public class Character {
 				sprite.restart();
 				sprite.removeListener();
 				sprite = temp;
+				
+				if (trigger != null) {
+					trigger.run();
+					System.out.println("Here");
+					trigger = null;
+				}
 				
 			}
 			
@@ -150,9 +157,26 @@ public class Character {
 				sprite = temp;
 				code.run();
 				
+				if (trigger != null) {
+					trigger.run();
+					trigger = null;
+				}
+				
 			}
 			
 		});
+		
+	}
+	
+	public void addTrigger(Runnable code) {
+		
+		trigger = code;
+		
+	}
+	
+	public void removeTrigger() {
+		
+		trigger = null;
 		
 	}
 

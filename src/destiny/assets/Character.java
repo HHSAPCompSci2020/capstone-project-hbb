@@ -84,6 +84,18 @@ public class Character {
 		sprite = sprites[Constants.getIntForAction(action)];
 		
 	}
+	
+	public void takeDamage(int attack, double multi) {
+		
+		health -= (int)(multi*attack/defense);
+		
+	}
+	
+	public boolean isDead() {
+		
+		return health <= 0;
+		
+	}
 
 	/**
 	 * @return The health

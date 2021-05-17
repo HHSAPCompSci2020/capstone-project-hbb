@@ -96,6 +96,25 @@ public class Character {
 		return health <= 0;
 		
 	}
+	
+	public void playActionOnce(String action) {
+		
+		final PGif temp = sprite;
+		
+		sprite.addListener(new Runnable() {
+
+			@Override
+			public void run() {
+				
+				sprite = temp;
+				
+			}
+			
+		});
+		sprite = sprites[Constants.getIntForAction(action)];
+		sprite.playOnce();
+		
+	}
 
 	/**
 	 * @return The health

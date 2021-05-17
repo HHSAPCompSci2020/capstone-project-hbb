@@ -98,6 +98,7 @@ public class Character {
 			@Override
 			public void run() {
 				
+				sprite.startLooping();
 				sprite = temp;
 				
 			}
@@ -118,6 +119,7 @@ public class Character {
 			@Override
 			public void run() {
 				
+				sprite.startLooping();
 				sprite = temp;
 				
 			}
@@ -138,6 +140,7 @@ public class Character {
 			@Override
 			public void run() {
 				
+				sprite.startLooping();
 				sprite = temp;
 				code.run();
 				

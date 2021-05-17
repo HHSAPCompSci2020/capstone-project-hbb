@@ -41,7 +41,7 @@ public class Main {
 		}
 		System.out.println(System.getProperty("java.library.path"));
 		System.out.println(System.getProperty("jna.library.path"));
-
+		
 		Scanner sc = null;
 		try {
 			sc = new Scanner(new File("res/userData/login.txt"));

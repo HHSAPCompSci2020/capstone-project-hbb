@@ -9,6 +9,7 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.*;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MongoHandler {
@@ -47,7 +48,12 @@ public class MongoHandler {
 	
 	public static void addUser(String userName, String pswd) {
 		
-		userCol.insertOne(new Document("_id", userName).append("pswd", pswd));
+		ArrayList<Integer> chars = new ArrayList<>();
+		chars.add(1);
+		chars.add(2);
+		chars.add(3);
+		
+		userCol.insertOne(new Document("_id", userName).append("pswd", pswd).append("characters", chars));
 		
 	}
 	

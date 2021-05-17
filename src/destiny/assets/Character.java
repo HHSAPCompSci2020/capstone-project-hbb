@@ -100,6 +100,7 @@ public class Character {
 				
 				sprite.startLooping();
 				sprite.restart();
+				sprite.removeListener();
 				sprite = temp;
 				
 			}
@@ -122,6 +123,7 @@ public class Character {
 				
 				sprite.startLooping();
 				sprite.restart();
+				sprite.removeListener();
 				sprite = temp;
 				
 			}
@@ -144,6 +146,7 @@ public class Character {
 				
 				sprite.startLooping();
 				sprite.restart();
+				sprite.removeListener();
 				sprite = temp;
 				code.run();
 				

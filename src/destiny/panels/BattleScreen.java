@@ -31,7 +31,6 @@ public class BattleScreen implements Screen {
 	private int revSelect;
 	private int[] move;
 	private int target, enemyTarget;
-	private boolean battle;
 	private Character[] revs, enemies;
 	private PButton[] select;
 	private boolean win = false, lose = false;;
@@ -44,7 +43,6 @@ public class BattleScreen implements Screen {
 		defeat = new FadeImage("res/battleScreen/defeat.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		revSelect = 0;
-		battle = false;
 		;
 		move = new int[3];
 		target = 2;
@@ -72,6 +70,8 @@ public class BattleScreen implements Screen {
 		victory.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		defeat.setCoords(0, 0);
 		defeat.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+		defeat.setFadeSpeed(50);
+		victory.setFadeSpeed(50);
 
 		select = new PButton[5];
 
@@ -154,7 +154,6 @@ public class BattleScreen implements Screen {
 		}
 		if (lose) {
 			defeat.draw(window);
-			back.draw(window);
 			back.addListener(new Runnable() {
 				@Override
 				public void run() {
@@ -172,8 +171,12 @@ public class BattleScreen implements Screen {
 					});
 				}
 			});
+			back.draw(window);
 		}
-		if (revSelect == 3) {
+		if (revSelect == enemyTarget+1) {
+			for(PButton button : select) {
+				button.removeListener();
+			}
 			for (int i = enemyTarget; i >= 0; i--) {
 				
 				Character rev = revs[i];
@@ -187,6 +190,19 @@ public class BattleScreen implements Screen {
 						System.out.println(target);
 						if (next >= 0)
 							revs[next].playActionOnce("attack");
+						if(next+1==0) {
+							for(int i = 0; i < 5 ; i++) {
+								button = select[i];
+								int id = i;
+								button.addListener(new Runnable() {
+									@Override
+									public void run() {
+										move[revSelect] = id;
+										revSelect++;
+									}
+								});
+							}
+						}
 					}
 					
 				});
@@ -202,7 +218,7 @@ public class BattleScreen implements Screen {
 
 					@Override
 					public void run() {
-						act(enemies[next+1],revs[enemyTarget],2, 1);
+						act(enemies[next+1],revs[enemyTarget],2, 1000);
 						System.out.println(target);
 
 						if (next >= 0)
@@ -218,13 +234,15 @@ public class BattleScreen implements Screen {
 			
 			revSelect = 0;
 			enemies[target].playActionOnce("attack");
+		}else {
+			
 		}
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {
 			cursor.clearTrail();
 		}
-
+		
 	}
 	public void act(Character s, Character target, int move, double mult) {
 		switch(move) {
@@ -251,6 +269,8 @@ public class BattleScreen implements Screen {
 		button = null;
 		win = false;
 		lose = false;
+		defeat = null;
+		victory = null;
 	}
 
 }

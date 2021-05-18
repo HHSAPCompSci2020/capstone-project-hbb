@@ -21,7 +21,7 @@ public class Window extends PApplet {
 		// Then add screens that you will use later with ScreenManager.addScreen(screenName, screen);
 		// You can switch to these screens on events that you want to monitor using -
 		// ScreenManager.setCurrentScreenByName(screenName);
-		ScreenManager.setScreen("opening", new BattleScreen(), this);
+		ScreenManager.setScreen("opening", new OpeningScreen(), this);
 		ScreenManager.addScreen("home", new HomeScreen());
 		ScreenManager.addScreen("main", new MainScreen());
 		ScreenManager.addScreen("gacha", new GachaScreen());

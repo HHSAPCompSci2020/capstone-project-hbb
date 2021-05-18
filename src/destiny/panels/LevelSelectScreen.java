@@ -52,8 +52,10 @@ public class LevelSelectScreen implements Screen {
 		for(int i = 0; i < Constants.TOTAL_LEVELS; i++) {
 			PButton b;
 			int id = i;
+			int temp = i + 1;
+			System.out.println("String by the way: res/leveSelectScreen/numbers/"+temp+".png");
 			try {
-				b = new PButton(new Rectangle(Constants.scaleIntToWidth(250+((i%20%5)*300)), Constants.scaleIntToHeight(100+((i%20/5)*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(new Rectangle(Constants.scaleIntToWidth(250+((i%20%5)*300)), Constants.scaleIntToHeight(100+((i%20/5)*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(170)),new PImage(ImageIO.read(new File("res/levelSelectScreen/numbers/"+temp+".png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {

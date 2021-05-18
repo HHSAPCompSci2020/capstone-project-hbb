@@ -239,7 +239,28 @@ public class PGif {
 		return height;
 		
 	}
-	
+	/**
+	 * 
+	 * Gets the x coordinate of the gif 
+	 * 
+	 * @return The x coordinate of the gif
+	 */
+	public int getX() {
+		
+		return x;
+		
+	}
+	/**
+	 * 
+	 * Gets the y coordinate of the gif 
+	 * 
+	 * @return The y coordinate of the gif
+	 */
+	public int getY() {
+		
+		return y;
+		
+	}
 	/**
 	 * 
 	 * Calculates whether or not the gif is done playing

@@ -17,6 +17,7 @@ import processing.core.PApplet;
 public class Character {
 	
     private int health, attack, defense, mp, gauge;
+    private final int totalHealth, totalMp;
     private PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
     private PGif[] sprites;
     private Runnable trigger;
@@ -32,9 +33,11 @@ public class Character {
         Document statDoc = MongoHandler.getStatDoc(id);
         
         health = statDoc.getInteger("health");
+        totalHealth = health;
         attack = statDoc.getInteger("attack");
         defense = statDoc.getInteger("defense");
         mp = statDoc.getInteger("mp");
+        totalMp = mp;
         gauge = statDoc.getInteger("gauge");
         spriteStatic = new PGif(0, 0, Constants.getCharacterPath(id, "static"));
         spriteAttack = new PGif(0, 0, Constants.getCharacterPath(id, "attack"));
@@ -54,7 +57,17 @@ public class Character {
 	public void draw(PApplet window) {
 		
 		sprite.draw(window);
-		
+		window.pushStyle();
+		window.stroke(0);
+		window.fill(255, 0, 0);
+		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight(), spriteStatic.getWidth(), 25);
+		window.fill(0, 255, 0);
+		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight(),  (int)((double)health/totalHealth*spriteStatic.getWidth()), 25);
+		window.fill(0, 0, 0);
+		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight()+25, spriteStatic.getWidth(), 25);
+		window.fill(0, 0, 255);
+		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight()+25,  (int)((double)mp/totalMp*spriteStatic.getWidth()), 25);
+		window.popStyle();
 	}
 	
 	/**

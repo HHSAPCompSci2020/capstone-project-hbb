@@ -47,7 +47,10 @@ public class BattleScreen implements Screen {
 		move = new int[3];
 		target = 2;
 		enemyTarget = 2;
-		revs = new Character[] { new Character(1), new Character(1), new Character(1) };
+		revs = new Character[3];
+		for(int i = 0; i < 3 ; i++) {
+			revs[i] = new Character(BattlePrepScreen.revsSelect[i]);
+		}
 		enemies = new Character[] { new Character(1), new Character(1), new Character(1) };
 		try {
 			button = new PButton(

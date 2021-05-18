@@ -27,18 +27,20 @@ public class MainScreen implements Screen {
 
 	private FadeImage background;
 	private RippleCursor cursor;
-	private PButton button, back, gacha;
+	private PButton button, back, gacha, gallery;
 
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {
-			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(100), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
 			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
-			gacha = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(500), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
+			gacha = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(400), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
+					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+			gallery = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(700), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -92,6 +94,23 @@ public class MainScreen implements Screen {
 					@Override
 					public void run() {
 						ScreenManager.setCurrentScreenByName("gacha", window);
+					}
+
+				});
+			}
+		});
+		gallery.addListener(new Runnable() {
+			@Override
+			public void run() {
+				background.setFadeSpeed(40);
+				background.setTint(255);
+				background.setTargetTint(0);
+				background.fadeWhite(true);
+				background.addListener(new Runnable() {
+
+					@Override
+					public void run() {
+						ScreenManager.setCurrentScreenByName("gallery", window);
 					}
 
 				});

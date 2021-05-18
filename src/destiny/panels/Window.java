@@ -29,6 +29,7 @@ public class Window extends PApplet {
 		ScreenManager.addScreen("level", new LevelSelectScreen());
 		ScreenManager.addScreen("prep", new BattlePrepScreen());
 		ScreenManager.addScreen("battle", new BattleScreen());
+		ScreenManager.addScreen("gallery", new GalleryScreen());
 		
 		
 	}

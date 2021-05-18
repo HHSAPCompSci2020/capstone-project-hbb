@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
 import destiny.assets.Constants;
+import destiny.assets.Player;
 import destiny.net.MongoHandler;
 import destiny.panels.Window;
 import processing.awt.PSurfaceAWT;
@@ -80,6 +81,8 @@ public class Main {
 			System.exit(0);
 
 		}
+		
+		Player.loadFromDocument(MongoHandler.getUserDoc(userName));
 
 		Window drawing = new Window();
 		PApplet.runSketch(new String[] { "" }, drawing);

@@ -10,6 +10,7 @@ import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MongoHandler {
@@ -53,7 +54,7 @@ public class MongoHandler {
 		chars.add(2);
 		chars.add(3);
 		
-		userCol.insertOne(new Document("_id", userName).append("pswd", pswd).append("characters", chars));
+		userCol.insertOne(new Document("_id", userName).append("pswd", pswd).append("characters", chars).append("last_update", new Date(0)).append("currency", 0).append("stamina", 100));
 		
 	}
 	
@@ -85,5 +86,22 @@ public class MongoHandler {
 		return null;
 		
 	}
+	
+	public static void updateStamina(int stamina, Date now, String userName) {
+		
+		userCol.updateOne(new Document("_id", userName), new Document("$set", new Document("stamina", stamina).append("last_udpate", now)));
+		
+	}
+	
+//	public static void resetUsers() {
+//		
+//		ArrayList<Integer> chars = new ArrayList<>();
+//		chars.add(1);
+//		chars.add(2);
+//		chars.add(3);
+//		
+//		userCol.updateMany(new Document(), new Document("$set", new Document("characters", chars).append("last_update", new Date(0)).append("currency", 0).append("stamina", 100)));
+//		
+//	}
 
 }

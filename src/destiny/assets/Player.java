@@ -25,7 +25,7 @@ public class Player {
 		public void actionPerformed(ActionEvent e) {
 			
 			stamina += 1;
-			MongoHandler.updateStamina(stamina, new Date(System.currentTimeMillis()), userName);
+			MongoHandler.updateStamina(userName, stamina, new Date(System.currentTimeMillis()));
 			
 		}
 		
@@ -55,7 +55,7 @@ public class Player {
 	
 	public static void decreaseStamina(int amt) {
 		stamina -= amt;
-		MongoHandler.updateStamina(stamina, new Date(System.currentTimeMillis()), userName);
+		MongoHandler.updateStamina(userName, stamina, new Date(System.currentTimeMillis()));
 	}
 
 	/**
@@ -63,6 +63,11 @@ public class Player {
 	 */
 	public static int getCurrency() {
 		return currency;
+	}
+	
+	public static void useCurrency(int amt) {
+		currency -= amt;
+		MongoHandler.updateCurrency(userName, currency);
 	}
 
 	/**

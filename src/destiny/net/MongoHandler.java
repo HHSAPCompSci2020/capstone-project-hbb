@@ -87,9 +87,15 @@ public class MongoHandler {
 		
 	}
 	
-	public static void updateStamina(int stamina, Date now, String userName) {
+	public static void updateStamina(String userName, int stamina, Date now) {
 		
-		userCol.updateOne(new Document("_id", userName), new Document("$set", new Document("stamina", stamina).append("last_udpate", now)));
+		userCol.updateOne(new Document("_id", userName), new Document("$set", new Document("stamina", stamina).append("last_update", now)));
+		
+	}
+	
+	public static void updateCurrency(String userName, int currency) {
+		
+		userCol.updateOne(new Document("_id", userName), new Document("$set", new Document("currency", currency)));
 		
 	}
 	

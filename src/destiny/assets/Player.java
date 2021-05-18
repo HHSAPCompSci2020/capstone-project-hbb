@@ -17,7 +17,7 @@ public class Player {
 	private static int currency;
 	private static ArrayList<Integer> characters;
 	private static double staminaPerMin = 1;
-	private static String userName, pass;
+	private static String userName;
 	
 	private static Timer staminaUpdate = new Timer(60000, new ActionListener() {
 
@@ -42,8 +42,29 @@ public class Player {
 		stamina += (new Date(System.currentTimeMillis()).getTime() - d.getDate("last_update").getTime())/(int)(1000/staminaPerMin);
 		currency = d.getInteger("currency");
 		userName = d.getString("_id");
-		pass = d.getString("pswd");
+		staminaUpdate.start();
 		
+	}
+
+	/**
+	 * @return The stamina
+	 */
+	public static int getStamina() {
+		return stamina;
+	}
+
+	/**
+	 * @return The currency
+	 */
+	public static int getCurrency() {
+		return currency;
+	}
+
+	/**
+	 * @return The characters
+	 */
+	public static ArrayList<Integer> getCharacters() {
+		return characters;
 	}
 	
 }

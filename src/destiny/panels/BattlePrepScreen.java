@@ -3,36 +3,42 @@ package destiny.panels;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
+import destiny.assets.Character;
+import destiny.assets.Player;
 import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
+import destiny.core.PGif;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 /**
- * BattlePrepScreen is where the user can select which revolutionaries they want to use for battle
+ * BattlePrepScreen is where the user can select which revolutionaries they want
+ * to use for battle
+ * 
  * @author Jay Paek
  * @version 5/7/2021
  *
  */
 public class BattlePrepScreen implements Screen {
-	
+
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back;
 	private boolean first, second, third, selectFirst, selectSecond, selectThird;
-	private int[] revs;
+	public static int[] revsSelect;
 	private PButton[] select;
 	private PButton[] selection;
-	private int page;
+	private Character[] revs;
+	private ArrayList<Integer> unlocked;
 
-	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
@@ -43,12 +49,19 @@ public class BattlePrepScreen implements Screen {
 		selectFirst = true;
 		selectSecond = false;
 		selectThird = false;
-		page = 1;
-		revs = new int[] {0,0,0};
+		unlocked = Player.getCharacters();
+		revsSelect = new int[] { 0, 0, 0 };
+		revs = new Character[3];
 		try {
-			button = new PButton(new Rectangle( Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
+			button = new PButton(
+					new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450),
+							Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400),
+							Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
-			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200)),
+			back = new PButton(
+					new Rectangle(Constants.scaleIntToWidth(50),
+							Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200),
+							Constants.scaleIntToHeight(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -56,64 +69,29 @@ public class BattlePrepScreen implements Screen {
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-		
+
 		select = new PButton[Constants.TOTAL_CHARACTERS];
-		selection = new PButton[3]; 
-
-
-		for(int i = 0; i < Constants.TOTAL_LEVELS; i++) {
-			PButton b;
-			int id = i+1;
-			try {
-				b = new PButton(new Rectangle(Constants.scaleIntToWidth(800+(i%20%5*200)), Constants.scaleIntToHeight(100+(i%20/5*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
-				b.addListener(new Runnable() {
-					@Override
-					public void run() {
-						if(selectFirst) {
-							revs[0] = id;
-							selectFirst = false;
-							selectSecond = true;
-							first = true;
-						} else if(selectSecond) {
-							revs[1] = id;
-							selectSecond = false;
-							selectThird = true;
-							second = true;
-						}
-						else if(selectThird) {
-							revs[2] = id;
-							selectThird = false;
-							third = true;
-						}
-						System.out.println(""+revs[0]+revs[1]+revs[2]);
-					}
-				});
-				select[i] = b;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-
-		}
-		for(int i = 0; i < 3; i++) {
+		selection = new PButton[3];
+		for (int i = 0; i < 3; i++) {
 			PButton b;
 			try {
-				b = new PButton(new Rectangle(Constants.scaleIntToWidth(100), Constants.scaleIntToHeight(100+(200*i)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b = new PButton(
+						new Rectangle(Constants.scaleIntToWidth(100), Constants.scaleIntToHeight(100 + (200 * i)),
+								Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
+						new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				int sel = i;
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-						if(sel == 0) {
+						if (sel == 0) {
 							selectFirst = true;
 							selectSecond = false;
 							selectThird = false;
-						} else if(sel == 1) {
+						} else if (sel == 1) {
 							selectFirst = false;
 							selectSecond = true;
 							selectThird = false;
-						}
-						else if(sel == 2	) {
+						} else if (sel == 2) {
 							selectFirst = false;
 							selectSecond = false;
 							selectThird = true;
@@ -125,8 +103,47 @@ public class BattlePrepScreen implements Screen {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
+		for (int i = 0; i < unlocked.size(); i++) {
+			PButton b;
+			int id = unlocked.get(i);
+			try {
+				b = new PButton(
+						new Rectangle(Constants.scaleIntToWidth(800 + (i % 20 % 5 * 200)),
+								Constants.scaleIntToHeight(100 + (i % 20 / 5 * 200)), Constants.scaleIntToWidth(200),
+								Constants.scaleIntToWidth(200)),
+						new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+				b.addListener(new Runnable() {
+					@Override
+					public void run() {
+						if (selectFirst) {
+							revsSelect[0] = id;
+							selection[0].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(120),Constants.getCharacterPath(id, "static")));
+							selectFirst = false;
+							selectSecond = true;
+							first = true;
+						} else if (selectSecond) {
+							revsSelect[1] = id;
+							selection[1].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(320),Constants.getCharacterPath(id, "static")));
+							selectSecond = false;
+							selectThird = true;
+							second = true;
+						} else if (selectThird) {
+							revsSelect[2] = id;
+							selection[2].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(520),Constants.getCharacterPath(id, "static")));
+							selectThird = false;
+							third = true;
+						}
+					}
+				});
+				select[i] = b;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
@@ -140,7 +157,7 @@ public class BattlePrepScreen implements Screen {
 					public void run() {
 						ScreenManager.setCurrentScreenByName("battle", window);
 					}
-					
+
 				});
 			}
 		});
@@ -157,7 +174,7 @@ public class BattlePrepScreen implements Screen {
 					public void run() {
 						ScreenManager.setCurrentScreenByName("level", window);
 					}
-					
+
 				});
 			}
 		});
@@ -165,40 +182,43 @@ public class BattlePrepScreen implements Screen {
 
 	public void draw(PApplet window) {
 		background.draw(window);
-		
-		for(int i = 20*(page-1); i < 20*page; i++) {
+		for(int i = 0; i < 3 ; i++) {
+			if(revs[i]!=null) {
+				revs[i].draw(window);
+			}
+		}
+		for (int i = 0; i < unlocked.size(); i++) {
 			select[i].draw(window);
 		}
-		for(int i =0; i < 3; i++) {
+		for (int i = 0; i < 3; i++) {
 			selection[i].draw(window);
 		}
-		if(first&&second&&third)
+		if (first && second && third)
 			button.draw(window);
-		
+
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {
 			cursor.clearTrail();
 		}
-		
-}
-	
+
+	}
 
 	@Override
 	public void dispose() {
-		for (int i = 0; i < select.length; i ++) {
-			
+		for (int i = 0; i < unlocked.size(); i++) {
+
 			select[i].removeListener();
 			select[i] = null;
-			
+
 		}
-		for (int i = 0; i < selection.length; i ++) {
-			
+		for (int i = 0; i < selection.length; i++) {
+
 			selection[i].removeListener();
 			selection[i] = null;
-			
+
 		}
-		
+
 		background = null;
 		cursor = null;
 		button.removeListener();

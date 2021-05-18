@@ -21,7 +21,7 @@ public class Character {
     private PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
     private PGif[] sprites;
     private Runnable trigger;
-      
+    private boolean isBlocking;  
     /**
      * 
      * Creates the revolutionary given their id number
@@ -39,6 +39,7 @@ public class Character {
         mp = statDoc.getInteger("mp");
         totalMp = mp;
         gauge = statDoc.getInteger("gauge");
+        isBlocking = false;
         spriteStatic = new PGif(0, 0, Constants.getCharacterPath(id, "static"));
         spriteAttack = new PGif(0, 0, Constants.getCharacterPath(id, "attack"));
         spriteFlinch = new PGif(0, 0, Constants.getCharacterPath(id, "flinch"));
@@ -62,11 +63,11 @@ public class Character {
 		window.fill(255, 0, 0);
 		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight(), spriteStatic.getWidth(), 25);
 		window.fill(0, 255, 0);
-		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight(),  (int)((double)health/totalHealth*spriteStatic.getWidth()), 25);
+		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight(),  (int)((double)health*spriteStatic.getWidth()/totalHealth), 25);
 		window.fill(0, 0, 0);
 		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight()+25, spriteStatic.getWidth(), 25);
 		window.fill(0, 0, 255);
-		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight()+25,  (int)((double)mp/totalMp*spriteStatic.getWidth()), 25);
+		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight()+25,  (int)((double)mp*spriteStatic.getWidth()/totalMp), 25);
 		window.popStyle();
 	}
 	
@@ -100,27 +101,36 @@ public class Character {
 	}
 	
 	public void takeDamage(int attack, double multi) {
-		
-		health -= (int)(multi*attack/defense);
-		
-		final PGif temp = sprite;
-		
-		sprite = spriteFlinch;
-		sprite.playOnce();
-		sprite.addListener(new Runnable() {
-
-			@Override
-			public void run() {
-				
-				sprite.startLooping();
-				sprite.restart();
-				sprite.removeListener();
-				sprite = temp;
-				
+		if(attack > 0) {
+			if(isBlocking) {
+				health -= (int)(multi*attack/defense)/2;
+			}
+			else{
+//				health -= 10;
+				health -= (int)(multi*attack/defense);
 			}
 			
-		});
-		
+			final PGif temp = sprite;
+			
+			sprite = spriteFlinch;
+			sprite.playOnce();
+			sprite.addListener(new Runnable() {
+	
+				@Override
+				public void run() {
+					
+					sprite.startLooping();
+					sprite.restart();
+					sprite.removeListener();
+					sprite = temp;
+					
+				}
+				
+			});
+		}
+		else {
+			health += attack;
+		}
 	}
 	
 	public void playActionOnce(String action) {
@@ -267,5 +277,12 @@ public class Character {
 	 */
 	public boolean isDead() {
 		return health <= 0;
+	}
+	
+	/**
+	 * @param blocking status
+	 */
+	public void setBlock(boolean isBlock) {
+		this.isBlocking = isBlock;
 	}
 }

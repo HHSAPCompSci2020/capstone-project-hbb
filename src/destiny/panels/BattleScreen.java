@@ -105,10 +105,7 @@ public class BattleScreen implements Screen {
 
 	}
 
-//	public void act(Character s, Character target, int move, double mult) {
-//		if(move == 2)
-//		target.takeDamage(s.getAttack(), mult);
-//	}
+
 
 	public void draw(PApplet window) {
 		background.draw(window);
@@ -177,50 +174,50 @@ public class BattleScreen implements Screen {
 			});
 		}
 		if (revSelect == 3) {
-
-			for (int i = target; i >= 0; i--) {
-
+			for (int i = enemyTarget; i >= 0; i--) {
+				
 				Character rev = revs[i];
 				final int next = i - 1;
-
+				rev.setBlock(move[i]==0);
 				rev.addTrigger(new Runnable() {
 
 					@Override
 					public void run() {
-
+						act(revs[next+1], enemies[target], move[next+1], 100);
+						System.out.println(target);
 						if (next >= 0)
 							revs[next].playActionOnce("attack");
-						else
-							enemies[enemyTarget].playActionOnce("attack");
-
-					}
-
-				});
-
-			}
-			
-			for (int i = enemyTarget; i >= 0; i--) {
-				
-				Character enemy = enemies[i];
-				final int next = i - 1;
-				
-				enemy.addTrigger(new Runnable() {
-
-					@Override
-					public void run() {
-						
-						if (next >= 0)
-							enemies[next].playActionOnce("attack");
-						
 					}
 					
 				});
 				
 			}
-
-			revSelect = 0;
 			
-			revs[target].playActionOnce("attack");
+			for (int i = target; i >= 0; i--) {
+
+				Character enemy = enemies[i];
+				final int next = i - 1;
+
+				enemy.addTrigger(new Runnable() {
+
+					@Override
+					public void run() {
+						act(enemies[next+1],revs[enemyTarget],2, 1);
+						System.out.println(target);
+
+						if (next >= 0)
+							enemies[next].playActionOnce("attack");
+						else
+							revs[enemyTarget].playActionOnce("attack");
+
+					}
+
+				});
+
+			}
+			
+			revSelect = 0;
+			enemies[target].playActionOnce("attack");
 		}
 		if (window.mousePressed) {
 			cursor.draw(window);
@@ -228,6 +225,22 @@ public class BattleScreen implements Screen {
 			cursor.clearTrail();
 		}
 
+	}
+	public void act(Character s, Character target, int move, double mult) {
+		switch(move) {
+		case 0: //block
+			break;
+		case 1: //charge
+			s.setMp(s.getMp()+1);
+			break;
+		case 2:	//basic attack	
+			target.takeDamage(s.getAttack(), mult);
+			break;
+		case 3: //special attack
+			break;
+		case 4: //ultimate attack
+			break;
+		}
 	}
 
 	@Override

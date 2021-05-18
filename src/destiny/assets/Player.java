@@ -52,6 +52,11 @@ public class Player {
 	public static int getStamina() {
 		return stamina;
 	}
+	
+	public static void decreaseStamina(int amt) {
+		stamina -= amt;
+		MongoHandler.updateStamina(stamina, new Date(System.currentTimeMillis()), userName);
+	}
 
 	/**
 	 * @return The currency

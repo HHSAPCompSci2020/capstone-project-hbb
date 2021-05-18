@@ -53,7 +53,7 @@ public class Character {
      * 
      * Draws the revolutionary to the screen
      * 
-     * @param window TApplet will have the revolutionary drawn to it
+     * @param window PApplet will have the revolutionary drawn to it
      */
 	public void draw(PApplet window) {
 		

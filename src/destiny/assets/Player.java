@@ -25,7 +25,10 @@ public class Player {
 		public void actionPerformed(ActionEvent e) {
 			
 			stamina += 1;
-			MongoHandler.updateStamina(userName, stamina, new Date(System.currentTimeMillis()));
+			if (stamina > 100)
+				stamina = 100;
+			else
+				MongoHandler.updateStamina(userName, stamina, new Date(System.currentTimeMillis()));
 			
 		}
 		
@@ -40,6 +43,8 @@ public class Player {
 		characters = d.get("characters", new ArrayList<Integer>().getClass());
 		stamina = d.getInteger("stamina");
 		stamina += (new Date(System.currentTimeMillis()).getTime() - d.getDate("last_update").getTime())/(int)(1000/staminaPerMin);
+		if (stamina > 100)
+			stamina = 100;
 		currency = d.getInteger("currency");
 		userName = d.getString("_id");
 		staminaUpdate.start();

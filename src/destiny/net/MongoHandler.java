@@ -7,6 +7,9 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
+import destiny.assets.Player;
+
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.*;
 import static com.mongodb.client.model.Projections.*;
@@ -90,10 +93,13 @@ public class MongoHandler {
 				@SuppressWarnings("unchecked")
 				ArrayList<Integer> characters = doc.get("characters", new ArrayList<Integer>().getClass());
 
-				if (characters.contains(doc.getInteger("_id")))
+				int id = doc.getInteger("_id");
+				
+				if (characters.contains(id))
 					return null;
 
-				registerNewCharacter(doc.getInteger("_id"), userName);
+				registerNewCharacter(id, userName);
+				Player.getCharacters().add(id);
 
 				return doc;
 

@@ -81,9 +81,9 @@ public class MongoHandler {
 
 		int count = 0;
 
-		for (Document i : nums) {
+		for (double i = nums.iterator().next().getDouble("drop"); nums.iterator().hasNext(); i = nums.iterator().next().getDouble("drop")) {
 
-			sum += i.getInteger("drop");
+			sum += i;
 			count++;
 
 			if (val < sum) {

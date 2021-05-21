@@ -39,7 +39,8 @@ public class BattleScreen implements Screen {
 	private boolean win = false, lose = false;;
 	private FadeImage victory, defeat;
 	private int level;
-
+	private PImage noMana;
+	private int notify;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
@@ -53,6 +54,11 @@ public class BattleScreen implements Screen {
 		enemyTarget = 2;
 		revs = new Character[3];
 		level = Player.getLevel();
+		try {
+			noMana = new PImage(ImageIO.read(new File("res/battleScreen/noMana.png")));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		for(int i = 0; i < 3 ; i++) {
 			revs[i] = new Character(BattlePrepScreen.revsSelect[i]);
 		}
@@ -80,7 +86,6 @@ public class BattleScreen implements Screen {
 		defeat.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		defeat.setFadeSpeed(50);
 		victory.setFadeSpeed(50);
-
 		select = new PButton[5];
 
 		for (int i = 0; i < 5; i++) {
@@ -95,8 +100,18 @@ public class BattleScreen implements Screen {
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-						move[revSelect] = id;
-						revSelect++;
+						if(id == 3) {
+							if(revs[revSelect].getMp()<110) {
+								notify = 300;
+							}
+							else {
+								move[revSelect] = id;
+								revSelect++;
+							}
+						}else {
+							move[revSelect] = id;
+							revSelect++;
+						}
 					}
 				});
 				select[i] = b;
@@ -116,6 +131,10 @@ public class BattleScreen implements Screen {
 
 	public void draw(PApplet window) {
 		background.draw(window);
+		if(notify > 0) {
+			window.image(noMana, Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200));
+			notify--;
+		}
 		for (int i = 0; i < 5; i++) {
 			select[i].draw(window);
 		}

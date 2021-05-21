@@ -123,6 +123,7 @@ public class MainScreen implements Screen {
 		button.draw(window);
 		back.draw(window);
 		gacha.draw(window);
+		gallery.draw(window);
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {

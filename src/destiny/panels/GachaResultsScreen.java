@@ -7,13 +7,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
+import destiny.assets.Player;
 import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
+import destiny.assets.Character;
 import destiny.core.PButton;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
+import destiny.net.MongoHandler;
 import processing.core.PApplet;
 import processing.core.PImage;
+import org.bson.Document;
+
 
 /**
  * MainScreen is the screen where the user can select which game modes to play
@@ -28,7 +33,7 @@ public class GachaResultsScreen implements Screen {
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton back;
-
+	private Character result;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
@@ -54,17 +59,20 @@ public class GachaResultsScreen implements Screen {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("home", window);
+						ScreenManager.setCurrentScreenByName("main", window);
 					}
 
 				});
 			}
 		});
+		result = new Character(MongoHandler.rollRandomCharacter(Player.getUserName()).getInteger("id"));
+		result.setCoords(Constants.scaleIntToWidth(800), Constants.scaleIntToHeight(400));
 	}
 
 	public void draw(PApplet window) {
 		background.draw(window);
 		back.draw(window);
+		result.draw(window);
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {

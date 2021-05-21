@@ -83,7 +83,7 @@ public class MongoHandler {
 
 		for (Document i : nums) {
 
-			sum += i.getInteger("drop");
+			sum += i.getDouble("drop");
 			count++;
 
 			if (val < sum) {
@@ -91,7 +91,7 @@ public class MongoHandler {
 				Document doc = characterCol.find(eq("_id", count)).first();
 
 				@SuppressWarnings("unchecked")
-				ArrayList<Integer> characters = doc.get("characters", new ArrayList<Integer>().getClass());
+				ArrayList<Integer> characters = getUserDoc(userName).get("characters", new ArrayList<Integer>().getClass());
 
 				int id = doc.getInteger("_id");
 				

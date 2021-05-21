@@ -95,6 +95,9 @@ public class GalleryScreen implements Screen {
 		for(int i = 20*(page-1); i < 20*page; i++) {
 			select[i].draw(window);
 		}
+		if(rev!=null) {
+			rev.draw(window);
+		}
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {

@@ -82,4 +82,10 @@ public class Player {
 		return characters;
 	}
 	
+	/**
+	 * @return the username
+	 */
+	public static String getUserName() {
+		return userName;
+	}
 }

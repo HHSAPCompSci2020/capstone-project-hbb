@@ -72,7 +72,7 @@ public class GachaScreen implements Screen {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("home", window);
+						ScreenManager.setCurrentScreenByName("main", window);
 					}
 
 				});

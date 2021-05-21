@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
+import destiny.assets.Enemy;
 import destiny.assets.RippleCursor;
 import destiny.assets.Character;
 import destiny.core.FadeImage;
@@ -29,9 +30,10 @@ public class BattleScreen implements Screen {
 	private RippleCursor cursor;
 	private PButton button, back;
 	private int revSelect;
-	private int[] move;
+	private int[]  move;
 	private int target, enemyTarget;
-	private Character[] revs, enemies;
+	private Character[] revs;
+	private Enemy[] enemies;
 	private PButton[] select;
 	private boolean win = false, lose = false;;
 	private FadeImage victory, defeat;
@@ -51,7 +53,7 @@ public class BattleScreen implements Screen {
 		for(int i = 0; i < 3 ; i++) {
 			revs[i] = new Character(BattlePrepScreen.revsSelect[i]);
 		}
-		enemies = new Character[] { new Character(1), new Character(1), new Character(1) };
+		enemies = new Enemy[] { new Enemy(1, true), new Enemy(1, true), new Enemy(1, true) };
 		try {
 			button = new PButton(
 					new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450),
@@ -258,8 +260,10 @@ public class BattleScreen implements Screen {
 			target.takeDamage(s.getAttack(), mult);
 			break;
 		case 3: //special attack
+			target.takeDamage(s.getAttack(), mult*2);
 			break;
 		case 4: //ultimate attack
+			target.takeDamage(s.getAttack(), mult*5);
 			break;
 		}
 	}

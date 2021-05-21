@@ -187,6 +187,7 @@ public class BattlePrepScreen implements Screen {
 				revs[i].draw(window);
 			}
 		}
+		back.draw(window);
 		for (int i = 0; i < unlocked.size(); i++) {
 			select[i].draw(window);
 		}

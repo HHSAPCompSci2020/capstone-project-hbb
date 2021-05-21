@@ -3,10 +3,12 @@ package destiny.panels;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
+import destiny.assets.Player;
 import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
@@ -28,16 +30,16 @@ public class GalleryScreen implements Screen {
 	private RippleCursor cursor;
 	private PButton back;
 	private PButton[] select;
-	private int page;
 	private Character rev;
-
+	private ArrayList<Integer> unlocked;
 	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		page = 1;
-		rev = new Character(1);
+		unlocked = Player.getCharacters();
+
+		rev = null;
 		try {
 			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
@@ -48,18 +50,19 @@ public class GalleryScreen implements Screen {
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		
-		select = new PButton[Constants.TOTAL_CHARACTERS];
+		select = new PButton[unlocked.size()];
 
 
-		for(int i = 0; i < Constants.NUM_OF_CHARACTERS; i++) {
+		for(int i = 0; i < unlocked.size(); i++) {
 			PButton b;
-			int id = i+1;
+			int id = i+1;	
 			try {
 				b = new PButton(new Rectangle(Constants.scaleIntToWidth(800+(i%20%5*200)), Constants.scaleIntToHeight(100+(i%20/5*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
 						rev = new Character(id);
+						rev.setCoords(50, 50);
 					}
 				});
 				select[i] = b;
@@ -81,7 +84,7 @@ public class GalleryScreen implements Screen {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("level", window);
+						ScreenManager.setCurrentScreenByName("main", window);
 					}
 					
 				});
@@ -91,8 +94,8 @@ public class GalleryScreen implements Screen {
 
 	public void draw(PApplet window) {
 		background.draw(window);
-		
-		for(int i = 20*(page-1); i < 20*page; i++) {
+		back.draw(window);
+		for(int i = 0; i < unlocked.size(); i++) {
 			select[i].draw(window);
 		}
 		if(rev!=null) {
@@ -109,13 +112,10 @@ public class GalleryScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		for (int i = 0; i < select.length; i ++) {
-			
-			select[i].removeListener();
-			select[i] = null;
-			
+		for (int i = 0; i < select.length; i ++) {		
+			select[i].removeListener();	
 		}
-		
+		select = null;	
 		background = null;
 		cursor = null;
 

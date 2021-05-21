@@ -18,6 +18,9 @@ public class Enemy extends Character {
 		
         sprite = spriteStatic;
         
+        if (!isJay)
+        	this.buff(1.5);
+        
         sprites = new PGif[]{spriteAttack, spriteFlinch, spriteMove, spriteStatic};
         
 	}

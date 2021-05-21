@@ -18,8 +18,8 @@ public class Character {
 	
     private int health, attack, defense, mp, gauge;
     private final int totalHealth, totalMp;
-    private PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
-    private PGif[] sprites;
+    protected PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
+    protected PGif[] sprites;
     private Runnable trigger;
     private boolean isBlocking;  
     /**

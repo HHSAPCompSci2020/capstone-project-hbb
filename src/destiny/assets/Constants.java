@@ -86,6 +86,12 @@ public class Constants {
 		
 	}
 	
+	public static String getEnemyPath(boolean isJay) {
+		
+		return "res/enemies/" + (isJay?"jay":"kumar") + ".gif";
+		
+	}
+	
 	/**
 	 * 
 	 * Scales a number to the width of the screen

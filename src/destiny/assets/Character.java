@@ -1,5 +1,7 @@
 package destiny.assets;
 
+import java.util.Arrays;
+
 import org.bson.Document;
 
 import destiny.core.PGif;
@@ -17,11 +19,13 @@ import processing.core.PApplet;
 public class Character {
 	
     private int health, attack, defense, mp, gauge;
-    private final int totalHealth, totalMp;
+    private int totalHealth, totalMp;
     protected PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
     protected PGif[] sprites;
     private Runnable trigger;
     private boolean isBlocking;  
+    private int[] stats = {health, attack, defense, mp, gauge, totalHealth, totalMp};
+    private int[] baseStats;
     /**
      * 
      * Creates the revolutionary given their id number
@@ -39,6 +43,9 @@ public class Character {
         mp = statDoc.getInteger("mp");
         totalMp = mp;
         gauge = statDoc.getInteger("gauge");
+        
+        baseStats = Arrays.copyOf(stats, stats.length);
+        
         isBlocking = false;
         spriteStatic = new PGif(0, 0, Constants.getCharacterPath(id, "static"));
         spriteAttack = new PGif(0, 0, Constants.getCharacterPath(id, "attack"));
@@ -199,6 +206,22 @@ public class Character {
 	public void removeTrigger() {
 		
 		trigger = null;
+		
+	}
+	
+	public void buff(double mult) {
+		
+		for (int i = 0; i < stats.length; i ++) {
+			
+			stats[i] = (int)(stats[i]*mult);
+			
+		}
+		
+	}
+	
+	public void removeBuffs() {
+		
+		stats = Arrays.copyOf(baseStats, baseStats.length);
 		
 	}
 

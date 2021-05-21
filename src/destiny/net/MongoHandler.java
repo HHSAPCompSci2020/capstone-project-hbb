@@ -62,7 +62,7 @@ public class MongoHandler {
 		chars.add(3);
 
 		userCol.insertOne(new Document("_id", userName).append("pswd", pswd).append("characters", chars)
-				.append("last_update", new Date(0)).append("currency", 0).append("stamina", 100));
+				.append("last_update", new Date(0)).append("currency", 0).append("stamina", 100).append("levels_unlocked", 1));
 
 	}
 
@@ -123,6 +123,12 @@ public class MongoHandler {
 		userCol.updateOne(new Document("_id", userName), new Document("$set", new Document("currency", currency)));
 
 	}
+	
+	public static void progressLevel(String userName) {
+		
+		userCol.updateOne(new Document("_id", userName), new Document("$inc", new Document("levels_unlocked", 1)));
+		
+	}
 
 //	public static void resetUsers() {
 //		
@@ -131,7 +137,7 @@ public class MongoHandler {
 //		chars.add(2);
 //		chars.add(3);
 //		
-//		userCol.updateMany(new Document(), new Document("$set", new Document("characters", chars).append("last_update", new Date(0)).append("currency", 0).append("stamina", 100)));
+//		userCol.updateMany(new Document(), new Document("$set", new Document("characters", chars).append("last_update", new Date(0)).append("currency", 0).append("stamina", 100).append("levels_unlocked", 1)));
 //		
 //	}
 

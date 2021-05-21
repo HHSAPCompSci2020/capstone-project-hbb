@@ -18,6 +18,7 @@ public class Player {
 	private static ArrayList<Integer> characters;
 	private static double staminaPerMin = 1;
 	private static String userName;
+	private static int levelsUnlocked;
 	
 	private static Timer staminaUpdate = new Timer(60000, new ActionListener() {
 
@@ -29,6 +30,8 @@ public class Player {
 				stamina = 100;
 			else
 				MongoHandler.updateStamina(userName, stamina, new Date(System.currentTimeMillis()));
+			
+			loadFromDocument(MongoHandler.getUserDoc(userName));
 			
 		}
 		
@@ -48,6 +51,7 @@ public class Player {
 		currency = d.getInteger("currency");
 		userName = d.getString("_id");
 		staminaUpdate.start();
+		levelsUnlocked = d.getInteger("levels_unlocked");
 		
 	}
 
@@ -61,6 +65,13 @@ public class Player {
 	public static void decreaseStamina(int amt) {
 		stamina -= amt;
 		MongoHandler.updateStamina(userName, stamina, new Date(System.currentTimeMillis()));
+	}
+
+	/**
+	 * @return The levelsUnlocked
+	 */
+	public static int getLevelsUnlocked() {
+		return levelsUnlocked;
 	}
 
 	/**
@@ -82,8 +93,17 @@ public class Player {
 		return characters;
 	}
 	
+	public static void passLevel() {
+		
+		if (levelsUnlocked < 20) {
+			levelsUnlocked++;
+			MongoHandler.progressLevel(userName);
+		}
+		
+	}
+	
 	/**
-	 * @return the username
+	 * @return The username
 	 */
 	public static String getUserName() {
 		return userName;

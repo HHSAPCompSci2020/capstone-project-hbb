@@ -131,10 +131,7 @@ public class BattleScreen implements Screen {
 
 	public void draw(PApplet window) {
 		background.draw(window);
-		if(notify > 0) {
-			window.image(noMana, Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200));
-			notify--;
-		}
+		
 		for (int i = 0; i < 5; i++) {
 			select[i].draw(window);
 		}
@@ -156,6 +153,10 @@ public class BattleScreen implements Screen {
 			lose = true;
 		} else if (revs[enemyTarget].isDead()) {
 			enemyTarget--;
+		}
+		if(notify > 0) {
+			window.image(noMana, Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200));
+			notify--;
 		}
 		if (win) {
 			victory.draw(window);

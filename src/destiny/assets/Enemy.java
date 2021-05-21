@@ -16,6 +16,8 @@ public class Enemy extends Character {
         spriteFlinch = new PGif(0, 0, Constants.getEnemyPath(isJay,"flinch"));
         spriteMove = new PGif(0, 0, Constants.getEnemyPath(isJay,"move"));
 		
+        sprite = spriteStatic;
+        
         sprites = new PGif[]{spriteAttack, spriteFlinch, spriteMove, spriteStatic};
         
 	}

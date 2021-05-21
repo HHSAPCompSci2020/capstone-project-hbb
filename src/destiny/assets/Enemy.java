@@ -11,10 +11,10 @@ public class Enemy extends Character {
 		super(id);
 		
 		this.isJay = isJay;
-        spriteStatic = new PGif(0, 0, Constants.getEnemyPath(isJay));
-        spriteAttack = new PGif(0, 0, Constants.getEnemyPath(isJay));
-        spriteFlinch = new PGif(0, 0, Constants.getEnemyPath(isJay));
-        spriteMove = new PGif(0, 0, Constants.getEnemyPath(isJay));
+                priteStatic = new PGif(0, 0, Constants.getEnemyPath(isJay,"static"));
+                spriteAttack = new PGif(0, 0, Constants.getEnemyPath(isJay,"attack"));
+                spriteFlinch = new PGif(0, 0, Constants.getEnemyPath(isJay,"flinch"));
+                spriteMove = new PGif(0, 0, Constants.getEnemyPath(isJay,"move"));
 		
 	}
 

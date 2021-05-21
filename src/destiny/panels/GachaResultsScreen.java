@@ -65,7 +65,7 @@ public class GachaResultsScreen implements Screen {
 				});
 			}
 		});
-		result = new Character(MongoHandler.rollRandomCharacter(Player.getUserName()).getInteger("id"));
+		result = new Character(MongoHandler.rollRandomCharacter(Player.getUserName()).getInteger("_id"));
 		result.setCoords(Constants.scaleIntToWidth(800), Constants.scaleIntToHeight(400));
 	}
 

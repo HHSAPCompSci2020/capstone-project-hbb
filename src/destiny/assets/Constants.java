@@ -86,9 +86,9 @@ public class Constants {
 		
 	}
 	
-	public static String getEnemyPath(boolean isJay) {
+	public static String getEnemyPath(boolean isJay, String action) {
 		
-		return "res/enemies/" + (isJay?"jay":"kumar") + ".gif";
+		return "res/enemies/" + (isJay?"jay":"kumar")+"-" +action+ ".gif";
 		
 	}
 	

@@ -19,7 +19,7 @@ public class Player {
 	private static double staminaPerMin = 1;
 	private static String userName;
 	private static int levelsUnlocked;
-	
+	private static int thisLevel;
 	private static Timer staminaUpdate = new Timer(60000, new ActionListener() {
 
 		@Override
@@ -60,6 +60,18 @@ public class Player {
 	 */
 	public static int getStamina() {
 		return stamina;
+	}
+	/**
+	 * @return The level
+	 */
+	public static int getLevel() {
+		return thisLevel;
+	}
+	/**
+	 * @param the level to set to
+	 */
+	public static void setLevel(int level) {
+		thisLevel = level;
 	}
 	
 	public static void decreaseStamina(int amt) {

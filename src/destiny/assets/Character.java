@@ -63,7 +63,6 @@ public class Character {
      * @param window PApplet will have the revolutionary drawn to it
      */
 	public void draw(PApplet window) {
-		
 		sprite.draw(window);
 		window.pushStyle();
 		window.stroke(0);

@@ -91,7 +91,7 @@ public class MongoHandler {
 				Document doc = characterCol.find(eq("_id", count)).first();
 
 				@SuppressWarnings("unchecked")
-				ArrayList<Integer> characters = doc.get("characters", new ArrayList<Integer>().getClass());
+				ArrayList<Integer> characters = (ArrayList<Integer>)doc.get("characters");
 
 				int id = doc.getInteger("_id");
 				

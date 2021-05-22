@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
 import destiny.assets.Enemy;
+import destiny.assets.Player;
 import destiny.assets.RippleCursor;
 import destiny.assets.Character;
 import destiny.core.FadeImage;
@@ -16,7 +17,7 @@ import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
-
+import destiny.net.MongoHandler;
 /**
  * BattleScreen is where the user can battle with their revolutionaries
  * 
@@ -37,23 +38,31 @@ public class BattleScreen implements Screen {
 	private PButton[] select;
 	private boolean win = false, lose = false;;
 	private FadeImage victory, defeat;
-
+	private int level;
+	private PImage noMana;
+	private int notify;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
+		background.setFadeSpeed(50);
 		victory = new FadeImage("res/battleScreen/victory.png");
 		defeat = new FadeImage("res/battleScreen/defeat.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		revSelect = 0;
-		;
 		move = new int[3];
 		target = 2;
 		enemyTarget = 2;
 		revs = new Character[3];
+		level = Player.getLevel();
+		try {
+			noMana = new PImage(ImageIO.read(new File("res/battleScreen/noMana.png")));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		for(int i = 0; i < 3 ; i++) {
 			revs[i] = new Character(BattlePrepScreen.revsSelect[i]);
 		}
-		enemies = new Enemy[] { new Enemy(1, true), new Enemy(1, true), new Enemy(1, true) };
+		enemies = new Enemy[] { new Enemy(level, true), new Enemy(level, true), new Enemy(level, true) };
 		try {
 			button = new PButton(
 					new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450),
@@ -77,7 +86,6 @@ public class BattleScreen implements Screen {
 		defeat.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		defeat.setFadeSpeed(50);
 		victory.setFadeSpeed(50);
-
 		select = new PButton[5];
 
 		for (int i = 0; i < 5; i++) {
@@ -92,8 +100,18 @@ public class BattleScreen implements Screen {
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-						move[revSelect] = id;
-						revSelect++;
+						if(id == 3) {
+							if(revs[revSelect].getMp()<110) {
+								notify = 300;
+							}
+							else {
+								move[revSelect] = id;
+								revSelect++;
+							}
+						}else {
+							move[revSelect] = id;
+							revSelect++;
+						}
 					}
 				});
 				select[i] = b;
@@ -107,13 +125,13 @@ public class BattleScreen implements Screen {
 			enemies[i].setCoords(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300 + (i * 300)),
 					Constants.scaleIntToHeight(200));
 		}
-
 	}
 
 
 
 	public void draw(PApplet window) {
 		background.draw(window);
+		
 		for (int i = 0; i < 5; i++) {
 			select[i].draw(window);
 		}
@@ -136,6 +154,10 @@ public class BattleScreen implements Screen {
 		} else if (revs[enemyTarget].isDead()) {
 			enemyTarget--;
 		}
+		if(notify > 0) {
+			window.image(noMana, Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200));
+			notify--;
+		}
 		if (win) {
 			victory.draw(window);
 			back.draw(window);
@@ -146,8 +168,10 @@ public class BattleScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
+					if(Player.getLevelsUnlocked()==level) {
+						Player.passLevel();
+					}
 					background.addListener(new Runnable() {
-
 						@Override
 						public void run() {
 							ScreenManager.setCurrentScreenByName("level", window);
@@ -191,10 +215,11 @@ public class BattleScreen implements Screen {
 
 					@Override
 					public void run() {
-						act(revs[next+1], enemies[target], move[next+1], 100);
+						act(revs[next+1], enemies[target], move[next+1], 1);
 						System.out.println(target);
-						if (next >= 0)
+						if (next >= 0) {
 							revs[next].playActionOnce("attack");
+						}
 						if(next+1==0) {
 							for(int i = 0; i < 5 ; i++) {
 								button = select[i];
@@ -223,14 +248,16 @@ public class BattleScreen implements Screen {
 
 					@Override
 					public void run() {
-						act(enemies[next+1],revs[enemyTarget],2, 1000);
+						act(enemies[next+1],revs[enemyTarget],2, 1);
 						System.out.println(target);
 
-						if (next >= 0)
+						if (next >= 0) {
 							enemies[next].playActionOnce("attack");
-						else
+						}
+						else {
 							revs[enemyTarget].playActionOnce("attack");
 
+						}
 					}
 
 				});
@@ -254,13 +281,14 @@ public class BattleScreen implements Screen {
 		case 0: //block
 			break;
 		case 1: //charge
-			s.setMp(s.getMp()+1);
+			s.setMp(s.getMp()+30);
 			break;
 		case 2:	//basic attack	
 			target.takeDamage(s.getAttack(), mult);
 			break;
 		case 3: //special attack
 			target.takeDamage(s.getAttack(), mult*2);
+			s.setMp(s.getMp()-40);
 			break;
 		case 4: //ultimate attack
 			target.takeDamage(s.getAttack(), mult*5);

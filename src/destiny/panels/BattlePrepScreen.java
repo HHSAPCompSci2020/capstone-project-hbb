@@ -42,6 +42,7 @@ public class BattlePrepScreen implements Screen {
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
+		background.setFadeSpeed(50);
 		cursor = RippleCursor.createLowPerformanceCursor();
 		first = false;
 		second = false;
@@ -143,7 +144,6 @@ public class BattlePrepScreen implements Screen {
 			}
 
 		}
-		
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {

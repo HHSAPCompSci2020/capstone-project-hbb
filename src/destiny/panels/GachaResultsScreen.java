@@ -37,6 +37,8 @@ public class GachaResultsScreen implements Screen {
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
+		background.setFadeSpeed(50);
+
 		cursor = RippleCursor.createLowPerformanceCursor();
 	
 		try {

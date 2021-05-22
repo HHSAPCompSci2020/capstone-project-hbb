@@ -1,4 +1,4 @@
-package destiny.panels;
+	package destiny.panels;
 
 import java.awt.Rectangle;
 import java.io.File;
@@ -36,6 +36,8 @@ public class GalleryScreen implements Screen {
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
+		background.setFadeSpeed(50);
+
 		cursor = RippleCursor.createLowPerformanceCursor();
 		unlocked = Player.getCharacters();
 
@@ -105,8 +107,7 @@ public class GalleryScreen implements Screen {
 			cursor.draw(window);
 		} else {
 			cursor.clearTrail();
-		}
-		
+		}	
 }
 	
 

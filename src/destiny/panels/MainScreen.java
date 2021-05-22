@@ -32,6 +32,7 @@ public class MainScreen implements Screen {
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
+		background.setFadeSpeed(50);
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {
 			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(100), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),

@@ -30,6 +30,7 @@ public class HomeScreen implements Screen {
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/homeScreen/room.jpg");
+		background.setFadeSpeed(50);
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {
 			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);

@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
+import destiny.assets.Player;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
@@ -28,15 +29,14 @@ public class LevelSelectScreen implements Screen {
 	private PButton  back;
 	private FadeImage prev;
 	private PButton[] levelButtons;
-	private int page;
 
 	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/levelSelectScreen/room.jpg");
+		background.setFadeSpeed(50);
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		page = 1;
 		try {
 			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
@@ -48,13 +48,12 @@ public class LevelSelectScreen implements Screen {
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		prev.resize(Constants.scaleIntToWidth(150), Constants.scaleIntToWidth(150));
 		prev.setCoords(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT-Constants.scaleIntToHeight(200));
-		levelButtons = new PButton[Constants.TOTAL_LEVELS];		
-		for(int i = 0; i < Constants.TOTAL_LEVELS; i++) {
+		levelButtons = new PButton[Player.getLevelsUnlocked()];		
+		for(int i = 0; i < Player.getLevelsUnlocked(); i++) {
 			PButton b;
 			int id = i;
 			int temp = i + 1;
-			System.out.println("String by the way: res/leveSelectScreen/numbers/"+temp+".png");
-			try {
+ 			try {
 				b = new PButton(new Rectangle(Constants.scaleIntToWidth(250+((i%20%5)*300)), Constants.scaleIntToHeight(100+((i%20/5)*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(170)),new PImage(ImageIO.read(new File("res/levelSelectScreen/numbers/"+temp+".png"))), false);
 				b.addListener(new Runnable() {
 					@Override
@@ -63,7 +62,7 @@ public class LevelSelectScreen implements Screen {
 						background.setTint(255);
 						background.setTargetTint(0);
 						background.fadeWhite(true);
-						System.out.println(id);
+						Player.setLevel(id+1);
 						background.addListener(new Runnable() {
 							@Override
 							public void run() {
@@ -101,7 +100,7 @@ public class LevelSelectScreen implements Screen {
 	public void draw(PApplet window) {
 		background.draw(window);
 		back.draw(window);
-		for(int i = 20*(page-1); i < 20*page; i++) {
+		for(int i = 0; i < levelButtons.length; i++) {
 			levelButtons[i].draw(window);
 		}
 		if (window.mousePressed) {

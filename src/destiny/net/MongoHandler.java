@@ -6,6 +6,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 import destiny.assets.Player;
@@ -62,7 +63,8 @@ public class MongoHandler {
 		chars.add(3);
 
 		userCol.insertOne(new Document("_id", userName).append("pswd", pswd).append("characters", chars)
-				.append("last_update", new Date(0)).append("currency", 0).append("stamina", 100).append("levels_unlocked", 1));
+				.append("last_update", new Date(0)).append("currency", 0).append("stamina", 100)
+				.append("levels_unlocked", 1));
 
 	}
 
@@ -81,28 +83,31 @@ public class MongoHandler {
 
 		int count = 0;
 
-		for (double i = nums.iterator().next().getDouble("drop"); nums.iterator().hasNext(); i = nums.iterator().next().getDouble("drop")) {
+		try (MongoCursor<Document> cursor = nums.iterator()) {
+			while (cursor.hasNext()) {
+				double i = cursor.next().getDouble("drop");
+				sum += i;
+				count++;
 
-			sum += i;
-			count++;
+				if (val < sum) {
 
-			if (val < sum) {
+					Document doc = characterCol.find(eq("_id", count)).first();
 
-				Document doc = characterCol.find(eq("_id", count)).first();
+					@SuppressWarnings("unchecked")
+					ArrayList<Integer> characters = getUserDoc(userName).get("characters",
+							new ArrayList<Integer>().getClass());
 
-				@SuppressWarnings("unchecked")
-				ArrayList<Integer> characters = getUserDoc(userName).get("characters", new ArrayList<Integer>().getClass());
-				
-				int id = doc.getInteger("_id");
-				
-				if (characters.contains(id))
-					return null;
+					int id = doc.getInteger("_id");
 
-				registerNewCharacter(id, userName);
-				Player.getCharacters().add(id);
+					if (characters.contains(id))
+						return null;
 
-				return doc;
+					registerNewCharacter(id, userName);
+					Player.getCharacters().add(id);
 
+					return doc;
+
+				}
 			}
 
 		}
@@ -123,10 +128,55 @@ public class MongoHandler {
 		userCol.updateOne(new Document("_id", userName), new Document("$set", new Document("currency", currency)));
 
 	}
-	
+
 	public static void progressLevel(String userName) {
-		
+
 		userCol.updateOne(new Document("_id", userName), new Document("$inc", new Document("levels_unlocked", 1)));
+
+	}
+
+//	public static void setupCharacterStats() {
+//
+//		FindIterable<Document> chars = characterCol.find().sort(new Document("drop", -1));
+//
+//		try (MongoCursor<Document> cursor = chars.iterator()) {
+//			while (cursor.hasNext()) {
+//				Document d = cursor.next();
+//				if (d.getString("rarity").equals("C")) {
+//					int num = 0;
+//					randomizeCharacterDoc(d, num);
+//				} else if (d.getString("rarity").equals("UC")) {
+//					int num = 1;
+//					randomizeCharacterDoc(d, num);
+//				} else if (d.getString("rarity").equals("R")) {
+//					int num = 2;
+//					randomizeCharacterDoc(d, num);
+//				} else if (d.getString("rarity").equals("SR")) {
+//					int num = 3;
+//					randomizeCharacterDoc(d, num);
+//				} else if (d.getString("rarity").equals("UR")) {
+//					int num = 4;
+//					randomizeCharacterDoc(d, num);
+//				} else if (d.getString("rarity").equals("L")) {
+//					int num = 5;
+//					randomizeCharacterDoc(d, num);
+//				}
+//
+//				characterCol.replaceOne(eq("_id", d.getInteger("_id")), d);
+//			}
+//		}
+//
+//	}
+	
+	private static void randomizeCharacterDoc(Document d, int rarity) {
+		
+		int baseH = 70, baseA = 10, baseD = 30, baseM = 90;
+		int dif = 20;
+		
+		d.put("health", ThreadLocalRandom.current().nextInt(baseH + dif * rarity, baseH + dif * (rarity + 1)));
+		d.put("attack", ThreadLocalRandom.current().nextInt(baseA + dif*rarity, baseA + dif * (rarity + 1)));
+		d.put("defense", ThreadLocalRandom.current().nextInt(baseD + dif*rarity, baseD + dif * (rarity + 1)));
+		d.put("mp", ThreadLocalRandom.current().nextInt(baseM + dif*rarity, baseM + dif * (rarity + 1)));
 		
 	}
 

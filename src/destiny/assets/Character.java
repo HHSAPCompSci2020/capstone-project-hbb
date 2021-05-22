@@ -219,6 +219,25 @@ public class Character {
 		
 	}
 	
+	public void addGauge(int amt) {
+		
+		gauge += amt;
+		if (gauge > 5)
+			gauge = 5;
+		
+	}
+	
+	public boolean useUltimate() {
+		
+		if (gauge < 5)
+			return false;
+		
+		gauge -= 5;
+		
+		return true;
+		
+	}
+	
 	public void removeBuffs() {
 		
 		stats = Arrays.copyOf(baseStats, baseStats.length);

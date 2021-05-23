@@ -23,7 +23,7 @@ public class Character {
     protected PGif sprite, spriteStatic, spriteAttack, spriteFlinch, spriteMove;
     protected PGif[] sprites;
     private Runnable trigger;
-    private boolean isBlocking;  
+    private boolean isBlocking, isHighlighted;  
     private int[] stats = {health, attack, defense, mp, gauge, totalHealth, totalMp};
     private int[] baseStats;
     /**
@@ -36,11 +36,12 @@ public class Character {
         
         Document statDoc = MongoHandler.getStatDoc(id);
         
-        totalHealth = health;
+        health = statDoc.getInteger("health");
         attack = statDoc.getInteger("attack");
         defense = statDoc.getInteger("defense");
         mp = statDoc.getInteger("mp");
         totalMp = mp;
+        totalHealth = health;
         gauge = statDoc.getInteger("gauge");
         
         baseStats = Arrays.copyOf(stats, stats.length);
@@ -64,6 +65,10 @@ public class Character {
 	public void draw(PApplet window) {
 		sprite.draw(window);
 		window.pushStyle();
+		if (isHighlighted) {
+			window.noFill();
+			window.rect(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+		}
 		window.stroke(0);
 		window.fill(255, 0, 0);
 		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight(), spriteStatic.getWidth(), 25);
@@ -214,6 +219,12 @@ public class Character {
 			stats[i] = (int)(stats[i]*mult);
 			
 		}
+		
+	}
+	
+	public void setHighlight(boolean light) {
+		
+		isHighlighted = light;
 		
 	}
 	

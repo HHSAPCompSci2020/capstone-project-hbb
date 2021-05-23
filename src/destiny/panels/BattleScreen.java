@@ -215,7 +215,7 @@ public class BattleScreen implements Screen {
 
 					@Override
 					public void run() {
-						act(revs[next+1], enemies[target], move[next+1], 1);
+						act(revs[next+1], enemies[target], move[next+1], 100);
 						System.out.println(target);
 						if (next >= 0) {
 							revs[next].playActionOnce("attack");

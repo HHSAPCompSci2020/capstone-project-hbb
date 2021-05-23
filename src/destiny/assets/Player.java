@@ -97,6 +97,11 @@ public class Player {
 		currency -= amt;
 		MongoHandler.updateCurrency(userName, currency);
 	}
+	
+	public static void addCurrency(int amt) {
+		currency += amt;
+		MongoHandler.updateCurrency(userName, currency);
+	}
 
 	/**
 	 * @return The characters

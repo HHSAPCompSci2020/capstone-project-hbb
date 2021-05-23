@@ -67,6 +67,7 @@ public class Character {
 		window.pushStyle();
 		if (isHighlighted) {
 			window.noFill();
+			window.stroke(255,0,0);
 			window.rect(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
 		}
 		window.stroke(0);
@@ -78,9 +79,15 @@ public class Character {
 		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight()+25, spriteStatic.getWidth(), 25);
 		window.fill(0, 0, 255);
 		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight()+25,  (int)((double)mp*spriteStatic.getWidth()/totalMp), 25);
-		window.popStyle();
-		window.fill(255,165,0);
 		
+		
+		for(int i = 0; i < gauge; i++) {
+			window.pushStyle();
+			window.fill(255,165,0);
+			window.ellipse(spriteStatic.getX()+Constants.scaleIntToWidth(i*spriteStatic.getWidth()/5), spriteStatic.getY()-spriteStatic.getWidth()/5, spriteStatic.getWidth()/5, spriteStatic.getWidth()/5);
+			window.popStyle();
+		}
+		window.popStyle();
 	}
 	
 	/**

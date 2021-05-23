@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
+import destiny.assets.Player;
 import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
@@ -28,7 +29,7 @@ public class GachaScreen implements Screen {
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back;
-
+	private int notify;                                                              
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/gachaScreen/sparkle.jpg");
@@ -51,6 +52,9 @@ public class GachaScreen implements Screen {
 				background.setTint(255);
 				background.setTargetTint(0);
 				background.fadeWhite(true);
+				if(Player.getCurrency()<50) {
+					
+				}
 				background.addListener(new Runnable() {
 
 					@Override
@@ -89,6 +93,10 @@ public class GachaScreen implements Screen {
 		} else {
 			cursor.clearTrail();
 		}
+		window.pushStyle();
+		window.textSize(70);
+		window.text(String.valueOf(Player.getCurrency()), 0, 0);
+		window.popStyle();
 	}
 
 	@Override

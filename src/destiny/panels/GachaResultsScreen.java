@@ -35,6 +35,7 @@ public class GachaResultsScreen implements Screen {
 	private PButton back;
 	private Character result;
 	private Document doc;
+	private boolean rekt;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
@@ -71,11 +72,11 @@ public class GachaResultsScreen implements Screen {
 		doc = MongoHandler.rollRandomCharacter(Player.getUserName());
 		if(doc != null) {
 			result = new Character( doc.getInteger("_id"));
+			
 			result.setCoords(Constants.scaleIntToWidth(800), Constants.scaleIntToHeight(400));
 
 		}else {
-			window.textSize(50);
-			window.text("get rekt", Constants.scaleIntToWidth(400), Constants.scaleIntToHeight(500));
+			rekt = true;
 		}
 	}
 
@@ -89,7 +90,14 @@ public class GachaResultsScreen implements Screen {
 		} else {
 			cursor.clearTrail();
 		}
-		
+		if(rekt) {
+			window.pushStyle();
+			window.textSize(50);
+			window.stroke(255,0,0);
+			window.fill(255,0,0);
+			window.text("get rekt", Constants.scaleIntToWidth(400), Constants.scaleIntToHeight(500));
+			window.popStyle();
+		}
 	}
 
 	@Override

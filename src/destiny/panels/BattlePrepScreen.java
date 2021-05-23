@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -37,7 +38,6 @@ public class BattlePrepScreen implements Screen {
 	private PButton[] select;
 	private PButton[] selection;
 	private Character[] revs;
-	private PGif[] sel;
 	private ArrayList<Integer> unlocked;
 
 	@Override
@@ -71,7 +71,6 @@ public class BattlePrepScreen implements Screen {
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-		sel = new PGif[unlocked.size()];
 
 		select = new PButton[Constants.TOTAL_CHARACTERS];
 		selection = new PButton[3];
@@ -86,6 +85,7 @@ public class BattlePrepScreen implements Screen {
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
+
 						if (sel == 0) {
 							selectFirst = true;
 							selectSecond = false;
@@ -117,31 +117,37 @@ public class BattlePrepScreen implements Screen {
 							Constants.scaleIntToWidth(200)), false);
 			c = new PGif(Constants.scaleIntToWidth(800+(i%20%5*200)), Constants.scaleIntToHeight(100+(i%20/5*200)), Constants.getCharacterPath(id, "static"));
 			c.resize(Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200));
+
+			b.setGifTexture(c);
+			
 			b.addListener(new Runnable() {
+
 				@Override
 				public void run() {
-					if (selectFirst) {
-						revsSelect[0] = id;
-						selection[0].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(120),Constants.getCharacterPath(id, "static")));
-						selectFirst = false;
-						selectSecond = true;
-						first = true;
-					} else if (selectSecond) {
-						revsSelect[1] = id;
-						selection[1].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(320),Constants.getCharacterPath(id, "static")));
-						selectSecond = false;
-						selectThird = true;
-						second = true;
-					} else if (selectThird) {
-						revsSelect[2] = id;
-						selection[2].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(520),Constants.getCharacterPath(id, "static")));
-						selectThird = false;
-						third = true;
+					if(revsSelect[0]!=id&&revsSelect[1]!=id&&revsSelect[2]!=id) {
+						if (selectFirst) {
+							revsSelect[0] = id;
+							selection[0].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(120),Constants.getCharacterPath(id, "static")));
+							selectFirst = false;
+							selectSecond = true;
+							first = true;
+						} else if (selectSecond) {
+							revsSelect[1] = id;
+							selection[1].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(320),Constants.getCharacterPath(id, "static")));
+							selectSecond = false;
+							selectThird = true;
+							second = true;
+						} else if (selectThird) {
+							revsSelect[2] = id;
+							selection[2].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(520),Constants.getCharacterPath(id, "static")));
+							selectThird = false;
+							third = true;
+						}
 					}
+					
 				}
 			});
 			select[i] = b;
-			sel[i] = c;
 
 		}
 		back.addListener(new Runnable() {
@@ -173,7 +179,16 @@ public class BattlePrepScreen implements Screen {
 		back.draw(window);
 		for (int i = 0; i < unlocked.size(); i++) {
 			select[i].draw(window);
-			sel[i].draw(window);
+		}
+		for(PButton p : selection) {
+			p.setHightlight(false);
+		}
+		if(selectFirst) {
+			selection[0].setHightlight(true);
+		}else if(selectSecond) {
+			selection[1].setHightlight(true);
+		}else if(selectThird) {
+			selection[2].setHightlight(true);
 		}
 		for (int i = 0; i < 3; i++) {
 			selection[i].draw(window);
@@ -187,8 +202,8 @@ public class BattlePrepScreen implements Screen {
 						background.setTint(255);
 						background.setTargetTint(0);
 						background.fadeWhite(true);
+						Player.decreaseStamina(10);
 						background.addListener(new Runnable() {
-
 							@Override
 							public void run() {
 								ScreenManager.setCurrentScreenByName("battle", window);

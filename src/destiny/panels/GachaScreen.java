@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import destiny.assets.Constants;
+import destiny.assets.Player;
 import destiny.assets.RippleCursor;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
@@ -28,7 +30,7 @@ public class GachaScreen implements Screen {
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back;
-
+	private int notify;                                                              
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/gachaScreen/sparkle.jpg");
@@ -47,18 +49,23 @@ public class GachaScreen implements Screen {
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
-				background.setFadeSpeed(40);
-				background.setTint(255);
-				background.setTargetTint(0);
-				background.fadeWhite(true);
-				background.addListener(new Runnable() {
-
-					@Override
-					public void run() {
-						ScreenManager.setCurrentScreenByName("gachaResult", window);
-					}
-
-				});
+				if(Player.getCurrency()<50) {
+					JOptionPane.showMessageDialog(null, "Not enough stamina :////");
+				}else {
+					background.setFadeSpeed(40);
+					background.setTint(255);
+					background.setTargetTint(0);
+					background.fadeWhite(true);
+					
+					background.addListener(new Runnable() {
+	
+						@Override
+						public void run() {
+							ScreenManager.setCurrentScreenByName("gachaResult", window);
+						}
+	
+					});
+				}
 			}
 		});
 		back.addListener(new Runnable() {
@@ -89,6 +96,11 @@ public class GachaScreen implements Screen {
 		} else {
 			cursor.clearTrail();
 		}
+		window.pushStyle();
+		window.textSize(Constants.scaleIntToHeight(40));
+		window.strokeWeight(5f);
+		window.text(String.valueOf("Gems: " +Player.getCurrency()),  Constants.scaleIntToWidth(50), Constants.scaleIntToHeight(50));
+		window.popStyle();
 	}
 
 	@Override

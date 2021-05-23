@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
@@ -58,18 +59,24 @@ public class LevelSelectScreen implements Screen {
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-						background.setFadeSpeed(40);
-						background.setTint(255);
-						background.setTargetTint(0);
-						background.fadeWhite(true);
-						Player.setLevel(id+1);
-						background.addListener(new Runnable() {
-							@Override
-							public void run() {
-								ScreenManager.setCurrentScreenByName("prep", window);
-							}
-							
-						});
+						if(Player.getStamina()>=10) {
+							System.out.println(Player.getStamina());
+							background.setFadeSpeed(40);
+							background.setTint(255);
+							background.setTargetTint(0);
+							background.fadeWhite(true);
+							Player.setLevel(id+1);
+							background.addListener(new Runnable() {
+								@Override
+								public void run() {
+									ScreenManager.setCurrentScreenByName("prep", window);
+								}
+								
+							});
+						}else {
+							JOptionPane.showMessageDialog(null, "Not enough stamina :////");
+
+						}
 					}
 				});
 				levelButtons[i] = b;
@@ -108,7 +115,13 @@ public class LevelSelectScreen implements Screen {
 		} else {
 			cursor.clearTrail();
 		}
-		
+		window.pushStyle();
+		window.textSize(Constants.scaleIntToHeight(40));
+		window.stroke(255,0,0);
+		window.fill(255,0,0);
+		window.strokeWeight(5f);
+		window.text(String.valueOf("Stamina: " +Player.getStamina()), Constants.scaleIntToWidth(50), Constants.scaleIntToHeight(50));
+		window.popStyle();
 	}
 	
 

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import destiny.assets.Constants;
 import destiny.assets.Enemy;
@@ -39,8 +40,6 @@ public class BattleScreen implements Screen {
 	private boolean win = false, lose = false;;
 	private FadeImage victory, defeat;
 	private int level;
-	private PImage noMana;
-	private int notify;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
@@ -54,11 +53,6 @@ public class BattleScreen implements Screen {
 		enemyTarget = 2;
 		revs = new Character[3];
 		level = Player.getLevel();
-		try {
-			noMana = new PImage(ImageIO.read(new File("res/battleScreen/noMana.png")));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		for(int i = 0; i < 3 ; i++) {
 			revs[i] = new Character(BattlePrepScreen.revsSelect[i]);
 		}
@@ -87,7 +81,7 @@ public class BattleScreen implements Screen {
 		defeat.setFadeSpeed(50);
 		victory.setFadeSpeed(50);
 		select = new PButton[5];
-
+		
 		for (int i = 0; i < 5; i++) {
 			final PButton b;
 			int id = i;
@@ -102,25 +96,26 @@ public class BattleScreen implements Screen {
 					public void run() {
 						if(id == 3) {
 							if(revs[revSelect].getMp()<40) {
-								notify = 200;
+								JOptionPane.showMessageDialog(null, "not enough mana");
 							}
 							else {
 								move[revSelect] = id;
 								revSelect++;
 							}
 						}else if(id == 4){
-							if(revs[revSelect].getGauge()<6) {
-								move[revSelect] = id;
-								revSelect++;
+							if(revs[revSelect].getGauge()<5) {
+								JOptionPane.showMessageDialog(null, "Gauge isn't filled");
 							}
 							else {
-								notify = 200;
+								move[revSelect] = id;
+								revSelect++;
 							}
 						}
 						else {
 							move[revSelect] = id;
 							revSelect++;
 						}
+
 					}
 				});
 				select[i] = b;
@@ -140,9 +135,14 @@ public class BattleScreen implements Screen {
 
 	public void draw(PApplet window) {
 		background.draw(window);
-		
+		for(Character rev : revs) {
+			rev.setHighlight(false);
+		}
 		for (int i = 0; i < 5; i++) {
 			select[i].draw(window);
+		}
+		if(revSelect <3) {
+			revs[revSelect].setHighlight(true);
 		}
 		for (Character rev : revs) {
 			if (!rev.isDead())
@@ -156,16 +156,12 @@ public class BattleScreen implements Screen {
 		if (target == -1) {
 			win = true;
 		} else if (enemies[target].isDead()) {
-			target--;
+			target--; 
 		}
 		if (enemyTarget == -1) {
 			lose = true;
 		} else if (revs[enemyTarget].isDead()) {
 			enemyTarget--;
-		}
-		if(notify > 0) {
-			window.image(noMana, Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200));
-			notify--;
 		}
 		if (win) {
 			victory.draw(window);
@@ -263,11 +259,15 @@ public class BattleScreen implements Screen {
 					@Override
 					public void run() {
 						if(enemyTarget >=0) {
-							act(enemies[next+1],revs[enemyTarget],2, 1);
+							if(enemies[next+1].getGauge()==5) {
+								act(enemies[next+1],revs[enemyTarget],4, 1);
+							}else {
+								
+								act(enemies[next+1],revs[enemyTarget],2, 1);
+							}
 							if (revs[enemyTarget].isDead()) {
 								enemyTarget--;
 							}
-							System.out.println(target);
 	
 							if (next >= 0) {
 								enemies[next].playActionOnce("attack");
@@ -300,14 +300,14 @@ public class BattleScreen implements Screen {
 			s.setMp(s.getMp()+30);
 			break;
 		case 2:	//basic attack	
-			System.out.println(target.getHealth());
 			target.takeDamage(s.getAttack(), mult);
-			System.out.println(target.getHealth());
+			s.addGauge(1);
+
 			break;
 		case 3: //special attack
 			target.takeDamage(s.getAttack(), mult*2);
 			s.setMp(s.getMp()-40);
-			s.addGauge(1);
+			s.addGauge(2);
 			break;
 		case 4: //ultimate attack
 			target.takeDamage(s.getAttack(), mult*5);

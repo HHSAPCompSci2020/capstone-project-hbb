@@ -29,11 +29,7 @@ public class StatsBox {
 	public void draw(PApplet window) {
 		
 		window.pushStyle();
-		
-		window.noFill();
-		window.textSize((width+height)/20);
-		
-		window.rect(x, y, width, height);
+				window.textSize((width+height)/20);
 		
 		for (int i = 0; i < stats.length; i ++)
 			window.text(names[i] + stats[i], x + 10, y + height/5*i);

@@ -44,11 +44,13 @@ public class Main {
 		System.out.println(System.getProperty("jna.library.path"));
 		
 		Scanner sc = null;
+		String userName = null;
 		try {
 			sc = new Scanner(new File("res/userData/login.txt"));
+			userName = sc.nextLine();
 		} catch (FileNotFoundException e) {
 
-			userLogin();
+			userName = userLogin();
 
 			try {
 				sc = new Scanner(new File("res/userData/login.txt"));
@@ -56,10 +58,10 @@ public class Main {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			sc.nextLine();
 
 		}
 
-		String userName = sc.nextLine();
 		String pswd = sc.nextLine();
 
 		if (!MongoHandler.checkUserLogin(userName, pswd)) {
@@ -102,8 +104,8 @@ public class Main {
 
 	}
 
-	private static void userLogin() {
-
+	private static String userLogin() {
+		String userName = null;;
 		int option = JOptionPane.showConfirmDialog(null,
 				"Would you like to create a new account or use an existing one? (YES - create new, NO - use existing)");
 
@@ -111,7 +113,7 @@ public class Main {
 
 			boolean checkName = false;
 
-			String userName = null;
+			userName = null;
 
 			while (!checkName) {
 
@@ -188,7 +190,7 @@ public class Main {
 		} else if (option == 1) {
 
 			boolean correctName = false;
-			String userName = null;
+			userName = null;
 			while (!correctName) {
 				userName = JOptionPane.showInputDialog("Enter a username:");
 				
@@ -236,6 +238,8 @@ public class Main {
 			System.exit(0);
 
 		}
+		
+		return userName;
 
 	}
 

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import destiny.assets.Constants;
 import destiny.assets.Player;
@@ -48,21 +49,23 @@ public class GachaScreen implements Screen {
 		button.addListener(new Runnable() {
 			@Override
 			public void run() {
-				background.setFadeSpeed(40);
-				background.setTint(255);
-				background.setTargetTint(0);
-				background.fadeWhite(true);
 				if(Player.getCurrency()<50) {
+					JOptionPane.showMessageDialog(null, "Not enough stamina :////");
+				}else {
+					background.setFadeSpeed(40);
+					background.setTint(255);
+					background.setTargetTint(0);
+					background.fadeWhite(true);
 					
+					background.addListener(new Runnable() {
+	
+						@Override
+						public void run() {
+							ScreenManager.setCurrentScreenByName("gachaResult", window);
+						}
+	
+					});
 				}
-				background.addListener(new Runnable() {
-
-					@Override
-					public void run() {
-						ScreenManager.setCurrentScreenByName("gachaResult", window);
-					}
-
-				});
 			}
 		});
 		back.addListener(new Runnable() {
@@ -94,8 +97,9 @@ public class GachaScreen implements Screen {
 			cursor.clearTrail();
 		}
 		window.pushStyle();
-		window.textSize(70);
-		window.text(String.valueOf(Player.getCurrency()), 0, 0);
+		window.textSize(Constants.scaleIntToHeight(40));
+		window.strokeWeight(5f);
+		window.text(String.valueOf("Gems: " +Player.getCurrency()),  Constants.scaleIntToWidth(50), Constants.scaleIntToHeight(50));
 		window.popStyle();
 	}
 

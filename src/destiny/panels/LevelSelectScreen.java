@@ -116,10 +116,11 @@ public class LevelSelectScreen implements Screen {
 			cursor.clearTrail();
 		}
 		window.pushStyle();
-		window.textSize(70);
+		window.textSize(Constants.scaleIntToHeight(40));
 		window.stroke(255,0,0);
 		window.fill(255,0,0);
-		window.text(String.valueOf(Player.getStamina()), 0, 0);
+		window.strokeWeight(5f);
+		window.text(String.valueOf("Stamina: " +Player.getStamina()), Constants.scaleIntToWidth(50), Constants.scaleIntToHeight(50));
 		window.popStyle();
 	}
 	

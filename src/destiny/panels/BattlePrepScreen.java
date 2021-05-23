@@ -56,9 +56,9 @@ public class BattlePrepScreen implements Screen {
 		revs = new Character[3];
 		try {
 			button = new PButton(
-					new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450),
-							Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400),
-							Constants.scaleIntToWidth(200)),
+					new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(250),
+							Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(125), Constants.scaleIntToWidth(200),
+							Constants.scaleIntToWidth(100)),
 					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
 			back = new PButton(
 					new Rectangle(Constants.scaleIntToWidth(50),

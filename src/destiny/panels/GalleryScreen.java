@@ -10,10 +10,13 @@ import javax.imageio.ImageIO;
 import destiny.assets.Constants;
 import destiny.assets.Player;
 import destiny.assets.RippleCursor;
+import destiny.assets.StatsBox;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
+import destiny.core.PGif;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
+import destiny.net.MongoHandler;
 import processing.core.PApplet;
 import processing.core.PImage;
 import destiny.assets.Character;
@@ -31,8 +34,9 @@ public class GalleryScreen implements Screen {
 	private PButton back;
 	private PButton[] select;
 	private Character rev;
+	private PGif[] revs;
 	private ArrayList<Integer> unlocked;
-	
+	private StatsBox stats;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
@@ -53,26 +57,25 @@ public class GalleryScreen implements Screen {
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		
 		select = new PButton[unlocked.size()];
-
-
+		revs = new PGif[unlocked.size()];
 		for(int i = 0; i < unlocked.size(); i++) {
 			PButton b;
-			int id = i+1;	
-			try {
-				b = new PButton(new Rectangle(Constants.scaleIntToWidth(800+(i%20%5*200)), Constants.scaleIntToHeight(100+(i%20/5*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)), new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
-				b.addListener(new Runnable() {
-					@Override
-					public void run() {
-						rev = new Character(id);
-						rev.setCoords(50, 50);
-					}
-				});
-				select[i] = b;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			PGif c;
+			int id = unlocked.get(i);
+			b = new PButton(new Rectangle(Constants.scaleIntToWidth(800+(i%20%5*200)), Constants.scaleIntToHeight(100+(i%20/5*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)), false);
+			c = new PGif(Constants.scaleIntToWidth(800+(i%20%5*200)), Constants.scaleIntToHeight(100+(i%20/5*200)), Constants.getCharacterPath(id, "static"));
+			c.resize(Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200));
+			b.addListener(new Runnable() {
+				@Override
+				public void run() {
+					rev = new Character(id);
+					rev.setCoords(50, 50);
+					stats = new StatsBox(MongoHandler.getStatDoc(id),Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200),Constants.scaleIntToWidth(200),Constants.scaleIntToWidth(600));
+
+				}
+			});
+			select[i] = b;
+			revs[i] = c;
 
 		}
 		back.addListener(new Runnable() {
@@ -99,6 +102,7 @@ public class GalleryScreen implements Screen {
 		back.draw(window);
 		for(int i = 0; i < unlocked.size(); i++) {
 			select[i].draw(window);
+			revs[i].draw(window);
 		}
 		if(rev!=null) {
 			rev.draw(window);
@@ -108,7 +112,10 @@ public class GalleryScreen implements Screen {
 		} else {
 			cursor.clearTrail();
 		}	
-}
+		if(stats!=null) {
+			stats.draw(window);
+		}
+	}
 	
 
 	@Override

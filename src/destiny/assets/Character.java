@@ -75,6 +75,8 @@ public class Character {
 		window.fill(0, 0, 255);
 		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight()+25,  (int)((double)mp*spriteStatic.getWidth()/totalMp), 25);
 		window.popStyle();
+		window.fill(255,165,0);
+		
 	}
 	
 	/**

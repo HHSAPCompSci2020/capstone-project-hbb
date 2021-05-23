@@ -37,6 +37,7 @@ public class BattlePrepScreen implements Screen {
 	private PButton[] select;
 	private PButton[] selection;
 	private Character[] revs;
+	private PGif[] sel;
 	private ArrayList<Integer> unlocked;
 
 	@Override
@@ -70,6 +71,7 @@ public class BattlePrepScreen implements Screen {
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+		sel = new PGif[unlocked.size()];
 
 		select = new PButton[Constants.TOTAL_CHARACTERS];
 		selection = new PButton[3];
@@ -107,60 +109,41 @@ public class BattlePrepScreen implements Screen {
 		}
 		for (int i = 0; i < unlocked.size(); i++) {
 			PButton b;
+			PGif c;
 			int id = unlocked.get(i);
-			try {
-				b = new PButton(
-						new Rectangle(Constants.scaleIntToWidth(800 + (i % 20 % 5 * 200)),
-								Constants.scaleIntToHeight(100 + (i % 20 / 5 * 200)), Constants.scaleIntToWidth(200),
-								Constants.scaleIntToWidth(200)),
-						new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
-				b.addListener(new Runnable() {
-					@Override
-					public void run() {
-						if (selectFirst) {
-							revsSelect[0] = id;
-							selection[0].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(120),Constants.getCharacterPath(id, "static")));
-							selectFirst = false;
-							selectSecond = true;
-							first = true;
-						} else if (selectSecond) {
-							revsSelect[1] = id;
-							selection[1].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(320),Constants.getCharacterPath(id, "static")));
-							selectSecond = false;
-							selectThird = true;
-							second = true;
-						} else if (selectThird) {
-							revsSelect[2] = id;
-							selection[2].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(520),Constants.getCharacterPath(id, "static")));
-							selectThird = false;
-							third = true;
-						}
+			b = new PButton(
+					new Rectangle(Constants.scaleIntToWidth(800 + (i % 20 % 5 * 200)),
+							Constants.scaleIntToHeight(100 + (i % 20 / 5 * 200)), Constants.scaleIntToWidth(200),
+							Constants.scaleIntToWidth(200)), false);
+			c = new PGif(Constants.scaleIntToWidth(800+(i%20%5*200)), Constants.scaleIntToHeight(100+(i%20/5*200)), Constants.getCharacterPath(id, "static"));
+			c.resize(Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200));
+			b.addListener(new Runnable() {
+				@Override
+				public void run() {
+					if (selectFirst) {
+						revsSelect[0] = id;
+						selection[0].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(120),Constants.getCharacterPath(id, "static")));
+						selectFirst = false;
+						selectSecond = true;
+						first = true;
+					} else if (selectSecond) {
+						revsSelect[1] = id;
+						selection[1].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(320),Constants.getCharacterPath(id, "static")));
+						selectSecond = false;
+						selectThird = true;
+						second = true;
+					} else if (selectThird) {
+						revsSelect[2] = id;
+						selection[2].setGifTexture(new PGif(Constants.scaleIntToWidth(120),Constants.scaleIntToHeight(520),Constants.getCharacterPath(id, "static")));
+						selectThird = false;
+						third = true;
 					}
-				});
-				select[i] = b;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				}
+			});
+			select[i] = b;
+			sel[i] = c;
 
 		}
-		button.addListener(new Runnable() {
-			@Override
-			public void run() {
-				background.setFadeSpeed(40);
-				background.setTint(255);
-				background.setTargetTint(0);
-				background.fadeWhite(true);
-				background.addListener(new Runnable() {
-
-					@Override
-					public void run() {
-						ScreenManager.setCurrentScreenByName("battle", window);
-					}
-
-				});
-			}
-		});
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
@@ -190,12 +173,33 @@ public class BattlePrepScreen implements Screen {
 		back.draw(window);
 		for (int i = 0; i < unlocked.size(); i++) {
 			select[i].draw(window);
+			sel[i].draw(window);
 		}
 		for (int i = 0; i < 3; i++) {
 			selection[i].draw(window);
 		}
-		if (first && second && third)
-			button.draw(window);
+		if (first && second && third) {
+			if(revsSelect[1]!=revsSelect[2]&&revsSelect[2]!=revsSelect[0]&&revsSelect[1]!=revsSelect[0]) {
+				button.addListener(new Runnable() {
+					@Override
+					public void run() {
+						background.setFadeSpeed(40);
+						background.setTint(255);
+						background.setTargetTint(0);
+						background.fadeWhite(true);
+						background.addListener(new Runnable() {
+
+							@Override
+							public void run() {
+								ScreenManager.setCurrentScreenByName("battle", window);
+							}
+
+						});
+					}
+				});
+				button.draw(window);
+			}
+		}
 
 		if (window.mousePressed) {
 			cursor.draw(window);

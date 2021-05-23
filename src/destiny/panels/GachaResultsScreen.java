@@ -34,6 +34,7 @@ public class GachaResultsScreen implements Screen {
 	private RippleCursor cursor;
 	private PButton back;
 	private Character result;
+	private Document doc;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
@@ -67,14 +68,22 @@ public class GachaResultsScreen implements Screen {
 				});
 			}
 		});
-		result = new Character(MongoHandler.rollRandomCharacter(Player.getUserName()).getInteger("_id"));
-		result.setCoords(Constants.scaleIntToWidth(800), Constants.scaleIntToHeight(400));
+		doc = MongoHandler.rollRandomCharacter(Player.getUserName());
+		if(doc != null) {
+			result = new Character( doc.getInteger("_id"));
+			result.setCoords(Constants.scaleIntToWidth(800), Constants.scaleIntToHeight(400));
+
+		}else {
+			window.textSize(50);
+			window.text("get rekt", Constants.scaleIntToWidth(400), Constants.scaleIntToHeight(500));
+		}
 	}
 
 	public void draw(PApplet window) {
 		background.draw(window);
 		back.draw(window);
-		result.draw(window);
+		if(result!=null)
+			result.draw(window);
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {
@@ -86,6 +95,7 @@ public class GachaResultsScreen implements Screen {
 	@Override
 	public void dispose() {
 		background = null;
+		result = null;
 		cursor = null;	
 	}
 

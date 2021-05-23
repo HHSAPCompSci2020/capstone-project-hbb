@@ -101,14 +101,23 @@ public class BattleScreen implements Screen {
 					@Override
 					public void run() {
 						if(id == 3) {
-							if(revs[revSelect].getMp()<110) {
-								notify = 300;
+							if(revs[revSelect].getMp()<40) {
+								notify = 200;
 							}
 							else {
 								move[revSelect] = id;
 								revSelect++;
 							}
-						}else {
+						}else if(id == 4){
+							if(revs[revSelect].getGauge()<6) {
+								move[revSelect] = id;
+								revSelect++;
+							}
+							else {
+								notify = 200;
+							}
+						}
+						else {
 							move[revSelect] = id;
 							revSelect++;
 						}
@@ -121,9 +130,9 @@ public class BattleScreen implements Screen {
 			}
 		}
 		for (int i = 0; i < 3; i++) {
-			revs[i].setCoords(Constants.scaleIntToWidth(100 + (i * 300)), Constants.scaleIntToHeight(200));
+			revs[i].setCoords(Constants.scaleIntToWidth(100 + (i * 300)), Constants.scaleIntToHeight(400));
 			enemies[i].setCoords(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300 + (i * 300)),
-					Constants.scaleIntToHeight(200));
+					Constants.scaleIntToHeight(400));
 		}
 	}
 
@@ -215,27 +224,32 @@ public class BattleScreen implements Screen {
 
 					@Override
 					public void run() {
-						act(revs[next+1], enemies[target], move[next+1], 100);
-						System.out.println(target);
-						if (next >= 0) {
-							revs[next].playActionOnce("attack");
-						}
-						if(next+1==0) {
-							for(int i = 0; i < 5 ; i++) {
-								button = select[i];
-								int id = i;
-								button.addListener(new Runnable() {
-									@Override
-									public void run() {
-										move[revSelect] = id;
-										revSelect++;
-									}
-								});
+						if(target >=0) {
+							act(revs[next+1], enemies[target], move[next+1], 1);
+							if (enemies[target].isDead()) {
+								target--;
+							}
+							System.out.println(target);
+							if (next >= 0) {
+								revs[next].playActionOnce("attack");
+							}
+							if(next+1==0) {
+								for(int i = 0; i < 5 ; i++) {
+									button = select[i];
+									int id = i;
+									button.addListener(new Runnable() {
+										@Override
+										public void run() {
+											move[revSelect] = id;
+											revSelect++;
+										}
+									});
+								}
 							}
 						}
 					}
-					
 				});
+				
 				
 			}
 			
@@ -248,27 +262,28 @@ public class BattleScreen implements Screen {
 
 					@Override
 					public void run() {
-						act(enemies[next+1],revs[enemyTarget],2, 1);
-						System.out.println(target);
-
-						if (next >= 0) {
-							enemies[next].playActionOnce("attack");
-						}
-						else {
-							revs[enemyTarget].playActionOnce("attack");
-
-						}
+						if(enemyTarget >=0) {
+							act(enemies[next+1],revs[enemyTarget],2, 1);
+							if (revs[enemyTarget].isDead()) {
+								enemyTarget--;
+							}
+							System.out.println(target);
+	
+							if (next >= 0) {
+								enemies[next].playActionOnce("attack");
+							}
+							else {
+								revs[enemyTarget].playActionOnce("attack");
+	
+							}
 					}
-
+					}
 				});
 
 			}
 			
 			revSelect = 0;
-			if (target >= 0)
-				enemies[target].playActionOnce("attack");
-		}else {
-			
+			enemies[target].playActionOnce("attack");
 		}
 		if (window.mousePressed) {
 			cursor.draw(window);
@@ -285,7 +300,9 @@ public class BattleScreen implements Screen {
 			s.setMp(s.getMp()+30);
 			break;
 		case 2:	//basic attack	
+			System.out.println(target.getHealth());
 			target.takeDamage(s.getAttack(), mult);
+			System.out.println(target.getHealth());
 			break;
 		case 3: //special attack
 			target.takeDamage(s.getAttack(), mult*2);
@@ -294,6 +311,7 @@ public class BattleScreen implements Screen {
 			break;
 		case 4: //ultimate attack
 			target.takeDamage(s.getAttack(), mult*5);
+			s.useUltimate();
 			break;
 		}
 	}

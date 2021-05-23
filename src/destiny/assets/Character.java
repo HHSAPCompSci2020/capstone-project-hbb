@@ -79,6 +79,8 @@ public class Character {
 		window.fill(0, 0, 255);
 		window.rect(spriteStatic.getX(), spriteStatic.getY()+spriteStatic.getHeight()+25,  (int)((double)mp*spriteStatic.getWidth()/totalMp), 25);
 		window.popStyle();
+		window.fill(255,165,0);
+		
 	}
 	
 	/**
@@ -113,11 +115,11 @@ public class Character {
 	public void takeDamage(int attack, double multi) {
 		if(attack > 0) {
 			if(isBlocking) {
-				health -= (int)(multi*attack*(140/(100+defense)))/2;
+				health -= (int)(multi*attack*(140.0/(100+defense)))/2;
 			}
 			else{
 //				health -= 10;
-				health -= (int)(multi*attack*(100/(100+defense)));
+				health -= (int)(multi*attack*(140.0/(100+defense)));
 			}
 			
 			final PGif temp = sprite;
@@ -141,6 +143,7 @@ public class Character {
 		else {
 			health += attack;
 		}
+		isBlocking = false;
 	}
 	
 	public void playActionOnce(String action) {

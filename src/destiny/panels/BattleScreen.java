@@ -265,7 +265,8 @@ public class BattleScreen implements Screen {
 			}
 			
 			revSelect = 0;
-			enemies[target].playActionOnce("attack");
+			if (target >= 0)
+				enemies[target].playActionOnce("attack");
 		}else {
 			
 		}

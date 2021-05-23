@@ -23,6 +23,9 @@ public class Enemy extends Character {
         
         sprites = new PGif[]{spriteAttack, spriteFlinch, spriteMove, spriteStatic};
         
+        for (PGif i : sprites)
+        	i.flipHorizontal();
+        
 	}
 
 	public boolean isJay() {

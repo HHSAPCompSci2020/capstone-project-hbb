@@ -36,6 +36,7 @@ public class Character {
         
         Document statDoc = MongoHandler.getStatDoc(id);
         
+        health = statDoc.getInteger("health");
         totalHealth = health;
         attack = statDoc.getInteger("attack");
         defense = statDoc.getInteger("defense");
@@ -108,11 +109,11 @@ public class Character {
 	public void takeDamage(int attack, double multi) {
 		if(attack > 0) {
 			if(isBlocking) {
-				health -= (int)(multi*attack*(140/(100+defense)))/2;
+				health -= (int)(multi*attack*(140.0/(100+defense)))/2;
 			}
 			else{
 //				health -= 10;
-				health -= (int)(multi*attack*(100/(100+defense)));
+				health -= (int)(multi*attack*(140.0/(100+defense)));
 			}
 			
 			final PGif temp = sprite;
@@ -136,6 +137,7 @@ public class Character {
 		else {
 			health += attack;
 		}
+		isBlocking = false;
 	}
 	
 	public void playActionOnce(String action) {

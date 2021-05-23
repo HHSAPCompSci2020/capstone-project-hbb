@@ -102,13 +102,22 @@ public class BattleScreen implements Screen {
 					public void run() {
 						if(id == 3) {
 							if(revs[revSelect].getMp()<110) {
-								notify = 300;
+								notify = 200;
 							}
 							else {
 								move[revSelect] = id;
 								revSelect++;
 							}
-						}else {
+						}else if(id == 4){
+							if(revs[revSelect].useUltimate()) {
+								move[revSelect] = id;
+								revSelect++;
+							}
+							else {
+								notify = 200;
+							}
+						}
+						else {
 							move[revSelect] = id;
 							revSelect++;
 						}
@@ -267,8 +276,6 @@ public class BattleScreen implements Screen {
 			revSelect = 0;
 			if (target >= 0)
 				enemies[target].playActionOnce("attack");
-		}else {
-			
 		}
 		if (window.mousePressed) {
 			cursor.draw(window);
@@ -285,7 +292,9 @@ public class BattleScreen implements Screen {
 			s.setMp(s.getMp()+30);
 			break;
 		case 2:	//basic attack	
+			System.out.println(target.getHealth());
 			target.takeDamage(s.getAttack(), mult);
+			System.out.println(target.getHealth());
 			break;
 		case 3: //special attack
 			target.takeDamage(s.getAttack(), mult*2);

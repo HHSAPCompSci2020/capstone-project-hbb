@@ -35,6 +35,7 @@ public class PGif {
 	private boolean overrideDelay = false;
 	private Runnable exec;
 	private boolean listenerFired = false;
+	private boolean horizontalFlip = false;
 	
 	/**
 	 * 
@@ -113,7 +114,14 @@ public class PGif {
 	 */
 	public void draw(PApplet window) {
 		
-		window.image(imageFrames[frameCount], (float)(x), (float)(y));
+		window.pushMatrix();
+		
+		window.translate(x + width/2, y + height/2);
+		if (horizontalFlip)
+			window.scale(-1, 1);
+		window.image(imageFrames[frameCount], -width/2, -height/2);
+		
+		window.popMatrix();
 		
 		advanceFrame();
 		
@@ -213,6 +221,12 @@ public class PGif {
 		
 		x += xShift;
 		y += yShift;
+		
+	}
+	
+	public void flipHorizontal() {
+		
+		horizontalFlip = !horizontalFlip;
 		
 	}
 	

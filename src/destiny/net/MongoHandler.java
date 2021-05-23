@@ -168,17 +168,17 @@ public class MongoHandler {
 //
 //	}
 	
-	private static void randomizeCharacterDoc(Document d, int rarity) {
-		
-		int baseH = 70, baseA = 10, baseD = 30, baseM = 90;
-		int dif = 20;
-		
-		d.put("health", ThreadLocalRandom.current().nextInt(baseH + dif * rarity, baseH + dif * (rarity + 1)));
-		d.put("attack", ThreadLocalRandom.current().nextInt(baseA + dif*rarity, baseA + dif * (rarity + 1)));
-		d.put("defense", ThreadLocalRandom.current().nextInt(baseD + dif*rarity, baseD + dif * (rarity + 1)));
-		d.put("mp", ThreadLocalRandom.current().nextInt(baseM + dif*rarity, baseM + dif * (rarity + 1)));
-		
-	}
+//	private static void randomizeCharacterDoc(Document d, int rarity) {
+//		
+//		int baseH = 70, baseA = 10, baseD = 30, baseM = 90;
+//		int dif = 20;
+//		
+//		d.put("health", ThreadLocalRandom.current().nextInt(baseH + dif * rarity, baseH + dif * (rarity + 1)));
+//		d.put("attack", ThreadLocalRandom.current().nextInt(baseA + dif*rarity, baseA + dif * (rarity + 1)));
+//		d.put("defense", ThreadLocalRandom.current().nextInt(baseD + dif*rarity, baseD + dif * (rarity + 1)));
+//		d.put("mp", ThreadLocalRandom.current().nextInt(baseM + dif*rarity, baseM + dif * (rarity + 1)));
+//		
+//	}
 
 //	public static void resetUsers() {
 //		

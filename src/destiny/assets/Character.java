@@ -36,7 +36,6 @@ public class Character {
         
         Document statDoc = MongoHandler.getStatDoc(id);
         
-        health = statDoc.getInteger("health");
         totalHealth = health;
         attack = statDoc.getInteger("attack");
         defense = statDoc.getInteger("defense");

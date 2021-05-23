@@ -68,6 +68,7 @@ public class Character {
 		if (isHighlighted) {
 			window.noFill();
 			window.stroke(255,0,0);
+			window.strokeWeight(5f);
 			window.rect(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
 		}
 		window.stroke(0);

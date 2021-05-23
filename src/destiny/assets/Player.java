@@ -45,7 +45,7 @@ public class Player {
 		
 		characters = d.get("characters", new ArrayList<Integer>().getClass());
 		stamina = d.getInteger("stamina");
-		stamina += (new Date(System.currentTimeMillis()).getTime() - d.getDate("last_update").getTime())/(int)(1000/staminaPerMin);
+		stamina += (new Date(System.currentTimeMillis()).getTime() - d.getDate("last_update").getTime())/(int)(60000/staminaPerMin);
 		if (stamina > 100)
 			stamina = 100;
 		currency = d.getInteger("currency");

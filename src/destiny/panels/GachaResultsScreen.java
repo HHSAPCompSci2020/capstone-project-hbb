@@ -21,8 +21,9 @@ import org.bson.Document;
 
 
 /**
- * MainScreen is the screen where the user can select which game modes to play
- * or determine which aspect of the game they want to explore
+ * 
+ * GachaResultsScreen is the panel that handles drawing everything that shows once you draw a character.
+ * It is also in charge of handling all events that can take place on this screen
  * 
  * @author Jay Paek
  * @version 5/7/2021

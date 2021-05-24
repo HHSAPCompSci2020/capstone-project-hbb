@@ -101,7 +101,7 @@ public class BattleScreen implements Screen {
 		stars = new FadeImage[3];
 		for(int i = 0; i < 3; i++) {
 			stars[i] = new FadeImage("res/battleScreen/star.png");
-			stars[i].setCoords(Constants.scaleIntToWidth(400+300*i), Constants.scaleIntToHeight(300));
+			stars[i].setCoords(Constants.scaleIntToWidth(400+300*i), Constants.scaleIntToHeight(500));
 			stars[i].setFadeSpeed(50);
 		}
 		background.setCoords(0, 0);
@@ -228,11 +228,11 @@ public class BattleScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
-					if(turn < 4) {
+					if(turn < 3) {
 						Player.addCurrency(14);
-					}else if (turn < 7) {
+					}else if (turn < 6) {
 						Player.addCurrency(10);
-					}else if (turn < 10) {
+					}else{
 						Player.addCurrency(7);
 					}
 					if(Player.getLevelsUnlocked()==level) {
@@ -248,14 +248,14 @@ public class BattleScreen implements Screen {
 					});
 				}
 			});
-			if(turn < 4) {
+			if(turn < 3) {
 				stars[0].draw(window);
 				stars[1].draw(window);
 				stars[2].draw(window);
-			}else if (turn < 7) {
+			}else if (turn < 6) {
 				stars[0].draw(window);
 				stars[1].draw(window);
-			}else if (turn < 10) {
+			}else{
 				stars[0].draw(window);			}
 		}
 		if (lose) {

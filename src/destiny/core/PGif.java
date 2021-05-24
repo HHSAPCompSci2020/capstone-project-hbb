@@ -407,6 +407,20 @@ public class PGif {
 	
 	/**
 	 * 
+	 * Scales the gif perfectly given a new desired height
+	 * 
+	 * @param height Desired new height
+	 */
+	public void scaleByHeight(int height) {
+		
+		double scale = (double)height/this.height;
+		
+		this.scale(scale);
+		
+	}
+	
+	/**
+	 * 
 	 * Returns the gif to playing with its default delays between frames
 	 * 
 	 */

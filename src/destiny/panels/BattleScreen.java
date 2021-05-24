@@ -45,7 +45,8 @@ public class BattleScreen implements Screen {
 	private int level;
 	private SoundPlayer sound;
 	private PButton setting;
-	
+	private int turn;
+	private FadeImage[] stars;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
@@ -58,6 +59,7 @@ public class BattleScreen implements Screen {
 		sound = new SoundPlayer(Constants.getSoundPath("bgm.wav"));
 		sound.loop();
 		target = 2;
+		turn = 0;
 		enemyTarget = 2;
 		revs = new Character[3];
 		level = Player.getLevel();
@@ -94,6 +96,11 @@ public class BattleScreen implements Screen {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		stars = new FadeImage[3];
+		for(int i = 0; i < 3; i++) {
+			stars[i] = new FadeImage("res/battleScreen/star.png");
+			stars[i].setCoords(Constants.scaleIntToWidth(400+300*i), Constants.scaleIntToHeight(300));
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
@@ -208,6 +215,7 @@ public class BattleScreen implements Screen {
 		} else if (revs[enemyTarget].isDead()) {
 			enemyTarget--;
 		}
+		
 		if (win) {
 			victory.draw(window);
 			back.draw(window);
@@ -232,6 +240,9 @@ public class BattleScreen implements Screen {
 					});
 				}
 			});
+			for(FadeImage f : stars) {
+				f.draw(window);
+			}
 		}
 		if (lose) {
 			defeat.draw(window);
@@ -258,6 +269,7 @@ public class BattleScreen implements Screen {
 			for(PButton button : select) {
 				button.disableListener();
 			}
+			turn++;
 			for (int i = enemyTarget; i >= 0; i--) {
 				
 				Character rev = revs[i];

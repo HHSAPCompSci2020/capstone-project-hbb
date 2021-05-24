@@ -113,7 +113,7 @@ public class BattleScreen implements Screen {
 						new Rectangle(Constants.scaleIntToWidth(100 + (i * 350)),
 								Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(300),
 								Constants.scaleIntToWidth(300), Constants.scaleIntToWidth(250)),
-						new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+						new PImage(ImageIO.read(new File("res/battleScreen/"+id+".png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
@@ -307,13 +307,14 @@ public class BattleScreen implements Screen {
 							if (revs[enemyTarget].isDead()) {
 								enemyTarget--;
 							}
-	
-							if (next >= 0) {
-								enemies[next].playActionOnce("attack");
-							}
-							else {
-								revs[enemyTarget].playActionOnce("attack");
-	
+							if(enemyTarget>=0) {
+								if (next >= 0) {
+									enemies[next].playActionOnce("attack");
+								}
+								else {
+									revs[enemyTarget].playActionOnce("attack");
+		
+								}
 							}
 					}
 					}

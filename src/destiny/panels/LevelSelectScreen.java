@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
 import destiny.assets.Player;
+import destiny.core.FadeGif;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
@@ -25,7 +26,7 @@ import processing.core.PImage;
  */
 public class LevelSelectScreen implements Screen {
 	
-	private FadeImage background;
+	private FadeGif background;
 	private RippleCursor cursor;
 	private PButton  back;
 	private FadeImage prev;
@@ -34,7 +35,7 @@ public class LevelSelectScreen implements Screen {
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/levelSelectScreen/room.jpg");
+		background = new FadeGif("res/levelSelectScreen/levels.gif");
 		background.setFadeSpeed(50);
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();

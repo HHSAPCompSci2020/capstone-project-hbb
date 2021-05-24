@@ -49,7 +49,7 @@ public class BattleScreen implements Screen {
 	private FadeImage[] stars;
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
+		background = new FadeImage("res/battleScreen/wallpaper.jpg");
 		background.setFadeSpeed(50);
 		victory = new FadeImage("res/battleScreen/victory.png");
 		defeat = new FadeImage("res/battleScreen/defeat.png");

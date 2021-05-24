@@ -36,8 +36,8 @@ public class GachaScreen implements Screen {
 		background = new FadeImage("res/gachaScreen/sparkle.jpg");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {
-			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH/2 - Constants.scaleIntToWidth(500), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
-					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH/2 - Constants.scaleIntToWidth(200), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
+					new PImage(ImageIO.read(new File("res/gachaScreen/roll.png"))), false);
 			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
 		} catch (IOException e) {

@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import destiny.assets.Constants;
 import destiny.assets.Player;
 import destiny.assets.RippleCursor;
+import destiny.core.FadeGif;
 import destiny.core.FadeImage;
 import destiny.assets.Character;
 import destiny.core.PButton;
@@ -30,7 +31,7 @@ import org.bson.Document;
  */
 public class GachaResultsScreen implements Screen {
 
-	private FadeImage background;
+	private FadeGif background;
 	private RippleCursor cursor;
 	private PButton back;
 	private Character result;
@@ -39,7 +40,7 @@ public class GachaResultsScreen implements Screen {
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/mainScreen/big.jpg");
+		background = new FadeGif("res/generalAssets/bg.gif");
 		background.setFadeSpeed(50);
 
 		cursor = RippleCursor.createLowPerformanceCursor();

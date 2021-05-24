@@ -11,6 +11,7 @@ import destiny.assets.Constants;
 import destiny.assets.Player;
 import destiny.assets.RippleCursor;
 import destiny.assets.StatsBox;
+import destiny.core.FadeGif;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.PGif;
@@ -29,7 +30,7 @@ import destiny.assets.Character;
  */
 public class GalleryScreen implements Screen {
 	
-	private FadeImage background;
+	private FadeGif background;
 	private RippleCursor cursor;
 	private PButton back;
 	private PButton[] select;
@@ -39,7 +40,7 @@ public class GalleryScreen implements Screen {
 	private StatsBox stats;
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
+		background = new FadeGif("res/battlePrepScreen/bg.gif");
 		background.setFadeSpeed(50);
 
 		cursor = RippleCursor.createLowPerformanceCursor();

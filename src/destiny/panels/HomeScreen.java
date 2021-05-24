@@ -30,7 +30,7 @@ public class HomeScreen implements Screen {
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeGif("res/generalAssets/bg.gif");
+		background = new FadeGif("res/levelSelectScreen/levels.gif");
 		background.setFadeSpeed(50);
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {

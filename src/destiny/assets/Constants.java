@@ -92,6 +92,12 @@ public class Constants {
 		
 	}
 	
+	public static String getSoundPath(String fileName) {
+		
+		return "res/generalAssets/" + fileName;
+		
+	}
+	
 	/**
 	 * 
 	 * Scales a number to the width of the screen

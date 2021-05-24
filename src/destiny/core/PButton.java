@@ -21,12 +21,15 @@ public class PButton implements ClickEvent {
 	private PGif gifTexture;
 	private Shape collider;
 	private Runnable exec;
+	private Runnable holdExec, holdReleaseExec;
+	private int heldTimer = 120;
 	private boolean visible;
 	private boolean listenOnClick;
 	private boolean isGif;
 	private boolean isClicked = false;
 	private boolean highlight = false;
 	private boolean isListening = true;
+	private boolean isHeld = false;
 	
 	/**
 	 * 
@@ -104,8 +107,12 @@ public class PButton implements ClickEvent {
 			return false;
 		
 		if (collider.contains(e.getMouseX(), e.getMouseY())) {
-			if (!listenOnClick && isClicked)
+			if (!listenOnClick && isClicked && !isHeld)
 				exec.run();
+			else if (isHeld) {
+				isHeld = false;
+				holdReleaseExec.run();
+			}
 			isClicked = false;
 			return true;
 		}
@@ -122,6 +129,22 @@ public class PButton implements ClickEvent {
 	 * @post The PApplet will have the button drawn to it if the button is visible
 	 */
 	public void draw(PApplet window) {
+		
+		if (isClicked && !listenOnClick && holdExec != null) {
+			
+			heldTimer--;
+			
+		}
+		
+		if (heldTimer <= 0) {
+			
+			heldTimer = 120;
+			isClicked = false;
+			isHeld = true;
+			if (holdExec != null)
+				holdExec.run();
+			
+		}
 		
 		if (visible) {
 			if (!isGif) {
@@ -273,6 +296,69 @@ public class PButton implements ClickEvent {
 	 */
 	public void enableListener() {
 		isListening = true;
+	}
+	
+	/**
+	 * 
+	 * Adds a listener to run on the button being held
+	 * 
+	 * @param code The code to run on being held
+	 */
+	public void addHoldListener(Runnable code) {
+		
+		holdExec = code;
+		EventHandler.addClickable(this);
+		
+	}
+	
+	/**
+	 * 
+	 * Adds a listener to run on the button hold being released
+	 * 
+	 * @param code
+	 */
+	public void addHoldReleaseListener(Runnable code) {
+		
+		holdReleaseExec = code;
+		EventHandler.addClickable(this);
+		
+	}
+	
+	/**
+	 * 
+	 * Removes the on hold listener
+	 * 
+	 */
+	public void removeHoldListener() {
+		
+		holdExec = null;
+		EventHandler.removeClickable(this);
+		
+	}
+	
+	/**
+	 * 
+	 * Removes the on hold release listener
+	 * 
+	 */
+	public void removeHoldReleaseListener() {
+		
+		holdReleaseExec = null;
+		EventHandler.removeClickable(this);
+		
+	}
+	
+	/**
+	 * 
+	 * Removes both the on hold and on hold release listeners
+	 * 
+	 */
+	public void removeHoldListeners() {
+		
+		holdExec = null;
+		holdReleaseExec = null;
+		EventHandler.removeClickable(this);
+		
 	}
 	
 }

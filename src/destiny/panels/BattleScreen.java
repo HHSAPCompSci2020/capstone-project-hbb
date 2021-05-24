@@ -94,16 +94,18 @@ public class BattleScreen implements Screen {
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
+						System.out.println(revs[revSelect].getMp());
 						if(id == 3) {
-							if(revs[revSelect].getMp()<40) {
-								JOptionPane.showMessageDialog(null, "not enough mana");
-							}
-							else {
+							if(revs[revSelect].getMp() >= 40) {
 								move[revSelect] = id;
 								revSelect++;
 							}
+							else {
+								JOptionPane.showMessageDialog(null, "not enough mana");
+
+							}
 						}else if(id == 4){
-							if(revs[revSelect].getGauge()<5) {
+							if(revs[revSelect].useUltimate()){
 								JOptionPane.showMessageDialog(null, "Gauge isn't filled");
 							}
 							else {
@@ -173,6 +175,7 @@ public class BattleScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
+					Player.addCurrency(7);
 					if(Player.getLevelsUnlocked()==level) {
 						Player.passLevel();
 					}
@@ -306,12 +309,11 @@ public class BattleScreen implements Screen {
 			break;
 		case 3: //special attack
 			target.takeDamage(s.getAttack(), mult*2);
-			s.setMp(s.getMp()-40);
 			s.addGauge(2);
+			s.useMana();
 			break;
 		case 4: //ultimate attack
 			target.takeDamage(s.getAttack(), mult*5);
-			s.useUltimate();
 			break;
 		}
 	}

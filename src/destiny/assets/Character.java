@@ -258,6 +258,17 @@ public class Character {
 		
 	}
 	
+	public boolean useMana() {
+		
+		if (mp < 40)
+			return false;
+		
+		mp -= 40;
+		
+		return true;
+		
+	}
+	
 	public void removeBuffs() {
 		
 		stats = Arrays.copyOf(baseStats, baseStats.length);

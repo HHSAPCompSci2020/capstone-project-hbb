@@ -2,10 +2,25 @@ package destiny.assets;
 
 import destiny.core.PGif;
 
+/**
+ * 
+ * A class that represents an Enemy
+ * 
+ * @author Nathaniel
+ * @version 5/23/21
+ *
+ */
 public class Enemy extends Character {
 
 	private boolean isJay;
 	
+	/**
+	 * 
+	 * Creates an enemy from the given parameters
+	 * 
+	 * @param id The id of the character that the enemy should take stats from
+	 * @param isJay Whether or not the enemy is Jay, if it is not it will be Kumar
+	 */
 	public Enemy(int id, boolean isJay) {
 		
 		super(id);
@@ -28,6 +43,12 @@ public class Enemy extends Character {
         
 	}
 
+	/**
+	 * 
+	 * Whether or not this enemy is Jay
+	 * 
+	 * @return If this enemy is Jay or not
+	 */
 	public boolean isJay() {
 		
 		return isJay;

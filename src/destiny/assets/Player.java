@@ -11,6 +11,14 @@ import org.bson.Document;
 
 import destiny.net.MongoHandler;
 
+/**
+ * 
+ * A class that represents this user. It keeps track of general resources and data of this player
+ * 
+ * @author Nathaniel
+ * @version 5/23/21
+ *
+ */
 public class Player {
 
 	private static int stamina;
@@ -40,6 +48,12 @@ public class Player {
 	
 	private Player() {};
 	
+	/**
+	 * 
+	 * Loads the player data from the given document
+	 * 
+	 * @param d The document to load player data from
+	 */
 	@SuppressWarnings("unchecked")
 	public static void loadFromDocument(Document d) {
 		
@@ -93,11 +107,22 @@ public class Player {
 		return currency;
 	}
 	
-	public static void useCurrency(int amt) {
+	/**
+	 * 
+	 * Uses the given amount of currency if possible, otherwise returns false and doesn't use anything
+	 * 
+	 * @param amt the amount of currency that should be used
+	 * @return Whether or not the currency usage was successful
+	 */
+	public static boolean useCurrency(int amt) {
+		if (currency < amt)
+			return false;
 		currency -= amt;
 		MongoHandler.updateCurrency(userName, currency);
+		return true;
 	}
 	
+	/
 	public static void addCurrency(int amt) {
 		currency += amt;
 		MongoHandler.updateCurrency(userName, currency);

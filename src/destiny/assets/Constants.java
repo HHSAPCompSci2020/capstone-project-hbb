@@ -86,12 +86,28 @@ public class Constants {
 		
 	}
 	
+	/**
+	 * 
+	 * Returns the full path to the enemy sprite
+	 * 
+	 * @param isJay Whether or not the enemy sprite is Jay
+	 * @param action The action of enemy you want
+	 * @return The full path to the enemy action gif
+	 */
 	public static String getEnemyPath(boolean isJay, String action) {
 		
 		return "res/enemies/" + (isJay?"jay":"kumar")+"-" +action+ ".gif";
 		
 	}
 	
+	/**
+	 * 
+	 * Returns the full path to the sound file
+	 * 
+	 * @pre The sound file is in the generalAssets folder
+	 * @param fileName The name of the sound file
+	 * @return The full path to the given sound file
+	 */
 	public static String getSoundPath(String fileName) {
 		
 		return "res/generalAssets/" + fileName;

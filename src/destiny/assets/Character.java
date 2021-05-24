@@ -120,6 +120,13 @@ public class Character {
 		
 	}
 	
+	/**
+	 * 
+	 * Takes damage based on enemy attack and multiplier
+	 * 
+	 * @param attack The attack of the enemy
+	 * @param multi The multiplier of the attack that the enemy is using
+	 */
 	public void takeDamage(int attack, double multi) {
 		if(attack > 0) {
 			if(isBlocking) {
@@ -154,6 +161,12 @@ public class Character {
 		isBlocking = false;
 	}
 	
+	/**
+	 * 
+	 * Plays the action gif once and then returns to the previous gif
+	 * 
+	 * @param action The action gif you want to have play once
+	 */
 	public void playActionOnce(String action) {
 		
 		final PGif temp = sprite;
@@ -182,6 +195,13 @@ public class Character {
 		
 	}
 	
+	/**
+	 * 
+	 * Plays the action gif once and then returns to the previous gif after running the listener
+	 * 
+	 * @param action The action gif you want to have play once 
+	 * @param code The code that you want to have run after the gif is done playing once
+	 */
 	public void playActionOnce(String action, Runnable code) {
 		
 		final PGif temp = sprite;
@@ -211,18 +231,35 @@ public class Character {
 		
 	}
 	
+	/**
+	 * 
+	 * Adds a trigger that will run after a gif is played once
+	 * 
+	 * @param code The code that should run after the play once
+	 */
 	public void addTrigger(Runnable code) {
 		
 		trigger = code;
 		
 	}
 	
+	/**
+	 * 
+	 * Removes the trigger that would run after a playOnce
+	 * 
+	 */
 	public void removeTrigger() {
 		
 		trigger = null;
 		
 	}
 	
+	/**
+	 * 
+	 * Buffs all the stats of this character by a multiplier
+	 * 
+	 * @param mult The multiplier to buff by
+	 */
 	public void buff(double mult) {
 		
 		for (int i = 0; i < stats.length; i ++) {
@@ -233,12 +270,24 @@ public class Character {
 		
 	}
 	
+	/**
+	 * 
+	 * Sets whether or not the character should be outlined
+	 * 
+	 * @param light
+	 */
 	public void setHighlight(boolean light) {
 		
 		isHighlighted = light;
 		
 	}
 	
+	/**
+	 * 
+	 * Adds an amount to the ultimate gauge. This can not go over 5, if it does it will be capped at 5
+	 * 
+	 * @param amt
+	 */
 	public void addGauge(int amt) {
 		
 		gauge += amt;
@@ -247,6 +296,12 @@ public class Character {
 		
 	}
 	
+	/**
+	 * 
+	 * Uses the ultimate if the character has enough gauge. Otherwise it will return false and not use any gauge
+	 * 
+	 * @return Whether or not the ultimate was used
+	 */
 	public boolean useUltimate() {
 		
 		if (gauge < 5)
@@ -258,17 +313,29 @@ public class Character {
 		
 	}
 	
-	public boolean useMana() {
+	/**
+	 * 
+	 * Uses the given mana amount if possible, otherwise it will not use any and return false
+	 * 
+	 * @param amt The amount of mana that should be used
+	 * @return Whether or not the use of mana was successful
+	 */
+	public boolean useMana(int amt) {
 		
-		if (mp < 40)
+		if (mp < amt)
 			return false;
 		
-		mp -= 40;
+		mp -= amt;
 		
 		return true;
 		
 	}
 	
+	/**
+	 * 
+	 * Removes all buffs from this character
+	 * 
+	 */
 	public void removeBuffs() {
 		
 		stats = Arrays.copyOf(baseStats, baseStats.length);

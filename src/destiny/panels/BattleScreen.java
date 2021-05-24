@@ -102,6 +102,7 @@ public class BattleScreen implements Screen {
 		for(int i = 0; i < 3; i++) {
 			stars[i] = new FadeImage("res/battleScreen/star.png");
 			stars[i].setCoords(Constants.scaleIntToWidth(400+300*i), Constants.scaleIntToHeight(300));
+			stars[i].setFadeSpeed(50);
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);

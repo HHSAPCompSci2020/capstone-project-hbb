@@ -57,6 +57,7 @@ public class BattleScreen implements Screen {
 		move = new int[3];
 		sound = new SoundPlayer(Constants.getSoundPath("bgm.wav"));
 		sound.loop();
+		sound.setVolume(70);
 		target = 2;
 		enemyTarget = 2;
 		revs = new Character[3];

@@ -331,6 +331,13 @@ public class Character {
 		
 	}
 	
+	public void scaleByWidth(int width) {
+		
+		for (PGif i : sprites)
+			i.scaleByWidth(width);
+		
+	}
+	
 	/**
 	 * 
 	 * Removes all buffs from this character

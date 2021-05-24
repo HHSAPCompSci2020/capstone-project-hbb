@@ -54,10 +54,9 @@ public class StatsBox {
 	public void draw(PApplet window) {
 		
 		window.pushStyle();
-				window.textSize((width+height)/20);
-		
+		window.textSize((width+height)/20);
 		for (int i = 0; i < stats.length; i ++)
-			window.text(names[i] + stats[i], x + 10, y + height/5*i);
+			window.text(names[i] + stats[i], x + 50, y + height/5*i);
 		
 		window.popStyle();
 		

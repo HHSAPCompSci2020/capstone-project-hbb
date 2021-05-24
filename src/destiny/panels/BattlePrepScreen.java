@@ -12,11 +12,13 @@ import destiny.assets.Constants;
 import destiny.assets.Character;
 import destiny.assets.Player;
 import destiny.assets.RippleCursor;
+import destiny.assets.StatsBox;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.PGif;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
+import destiny.net.MongoHandler;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -39,7 +41,8 @@ public class BattlePrepScreen implements Screen {
 	private PButton[] selection;
 	private Character[] revs;
 	private ArrayList<Integer> unlocked;
-
+	private boolean isHolding;
+	private StatsBox stats;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
@@ -53,6 +56,7 @@ public class BattlePrepScreen implements Screen {
 		selectThird = false;
 		unlocked = Player.getCharacters();
 		revsSelect = new int[] { 0, 0, 0 };
+		isHolding = false;
 		revs = new Character[3];
 		try {
 			button = new PButton(
@@ -71,7 +75,7 @@ public class BattlePrepScreen implements Screen {
 		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-
+		
 		select = new PButton[Constants.TOTAL_CHARACTERS];
 		selection = new PButton[3];
 		for (int i = 0; i < 3; i++) {
@@ -147,6 +151,24 @@ public class BattlePrepScreen implements Screen {
 					
 				}
 			});
+			b.addHoldListener(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					stats = new StatsBox(MongoHandler.getStatDoc(id),Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200),Constants.scaleIntToWidth(200),Constants.scaleIntToWidth(600));
+				}
+				
+			});
+			b.addHoldReleaseListener(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					stats = null;
+				}
+				
+			});
 			select[i] = b;
 
 		}
@@ -183,6 +205,9 @@ public class BattlePrepScreen implements Screen {
 		}
 		for(PButton p : selection) {
 			p.setHightlight(false);
+		}
+		if(stats != null) {
+			stats.draw(window);
 		}
 		if(selectFirst) {
 			selection[0].setHightlight(true);

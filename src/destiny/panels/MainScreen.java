@@ -12,6 +12,7 @@ import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
+import destiny.core.SoundPlayer;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -28,7 +29,6 @@ public class MainScreen implements Screen {
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back, gacha, gallery;
-
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
@@ -40,9 +40,9 @@ public class MainScreen implements Screen {
 			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
 			gacha = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(400), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
-					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+					new PImage(ImageIO.read(new File("res/mainScreen/gacha.png"))), false);
 			gallery = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(700), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),
-					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+					new PImage(ImageIO.read(new File("res/mainScreen/gallery.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,7 +2,9 @@ package destiny.panels;
 
 import java.awt.Rectangle;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -16,6 +18,7 @@ import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
+import destiny.core.SoundPlayer;
 import processing.core.PApplet;
 import processing.core.PImage;
 import destiny.net.MongoHandler;
@@ -40,6 +43,8 @@ public class BattleScreen implements Screen {
 	private boolean win = false, lose = false;;
 	private FadeImage victory, defeat;
 	private int level;
+	private SoundPlayer sound;
+	private PButton setting;
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
@@ -49,6 +54,8 @@ public class BattleScreen implements Screen {
 		cursor = RippleCursor.createLowPerformanceCursor();
 		revSelect = 0;
 		move = new int[3];
+		sound = new SoundPlayer(Constants.getSoundPath("bgm.wav"));
+		sound.loop();
 		target = 2;
 		enemyTarget = 2;
 		revs = new Character[3];
@@ -68,6 +75,11 @@ public class BattleScreen implements Screen {
 							Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200),
 							Constants.scaleIntToHeight(200)),
 					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
+			setting = new PButton(
+					new Rectangle(Constants.scaleIntToWidth(50),
+							Constants.scaleIntToHeight(50), Constants.scaleIntToWidth(100),
+							Constants.scaleIntToHeight(100)),
+					new PImage(ImageIO.read(new File("res/generalAssets/setting.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -131,6 +143,25 @@ public class BattleScreen implements Screen {
 			enemies[i].setCoords(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300 + (i * 300)),
 					Constants.scaleIntToHeight(400));
 		}
+		setting.addListener(new Runnable() {
+
+			@Override
+			public void run() {
+				int choice = JOptionPane.showConfirmDialog(null, "Do you like the music?");
+
+				if (choice == 0) {
+
+					sound.loop();
+
+				} else if (choice == 1) {
+
+					sound.stop();
+
+				}
+				
+			}
+			
+		});
 	}
 
 
@@ -154,7 +185,7 @@ public class BattleScreen implements Screen {
 			if (!enemy.isDead())
 				enemy.draw(window);
 		}
-
+		setting.draw(window);
 		if (target == -1) {
 			win = true;
 		} else if (enemies[target].isDead()) {
@@ -212,7 +243,7 @@ public class BattleScreen implements Screen {
 		}
 		if (revSelect == enemyTarget+1) {
 			for(PButton button : select) {
-				button.removeListener();
+				button.disableListener();
 			}
 			for (int i = enemyTarget; i >= 0; i--) {
 				
@@ -233,16 +264,8 @@ public class BattleScreen implements Screen {
 								revs[next].playActionOnce("attack");
 							}
 							if(next+1==0) {
-								for(int i = 0; i < 5 ; i++) {
-									button = select[i];
-									int id = i;
-									button.addListener(new Runnable() {
-										@Override
-										public void run() {
-											move[revSelect] = id;
-											revSelect++;
-										}
-									});
+								for(PButton button : select) {
+									button.enableListener();
 								}
 							}
 						}

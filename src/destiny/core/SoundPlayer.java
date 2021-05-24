@@ -42,7 +42,7 @@ public class SoundPlayer {
 		fileName = FileName;
 		
 		try {
-			myobj = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResource("Sounds/" + fileName));
+			myobj = AudioSystem.getAudioInputStream(new File(fileName).getAbsoluteFile());
 		} catch (UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

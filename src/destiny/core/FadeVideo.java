@@ -110,6 +110,13 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Sets the coordinates of this video
+	 * 
+	 * @param x The x coordinate of the top left of the video
+	 * @param y The y coordinate of the top left of the video
+	 */
 	public void setCoords(int x, int y) {
 		
 		this.x = x;
@@ -117,6 +124,13 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Resizes this video to the given dimensions
+	 * 
+	 * @param w The width of the video
+	 * @param h The height of the video
+	 */
 	public void resize(int w, int h) {
 		
 		this.w = w;
@@ -124,6 +138,12 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Changes the volume by the specified amount
+	 * 
+	 * @param scroll The amount of volume you want to change by
+	 */
 	public void scrollVolume(float scroll) {
 		
 		
@@ -132,12 +152,24 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * The volume you want to set the video to
+	 * 
+	 * @param vol The volume that should be set for the video
+	 */
 	public void setVolume(float vol) {
 		
 		video.volume(vol);
 		
 	}
 	
+	/**
+	 * 
+	 * Fades the volume of the video to the given volume
+	 * 
+	 * @param vol
+	 */
 	public void fadeVolumeTo(float vol) {
 		
 		isChanging = true;
@@ -146,30 +178,57 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * The second mark the video is on
+	 * 
+	 * @return The second mark of the video
+	 */
 	public float getSecondMark() {
 		
 		return video.time();
 		
 	}
 	
+	/**
+	 * 
+	 * Determines whether or not the video is currently playing
+	 * 
+	 * @return Whether or not the video is currently playing
+	 */
 	public boolean isPlaying() {
 		
 		return video.isPlaying();
 		
 	}
 	
+	/**
+	 * 
+	 * Loops the video
+	 * 
+	 */
 	public void loop() {
 		
 		video.loop();
 		
 	}
 	
+	/**
+	 * 
+	 * Mutes the video
+	 * 
+	 */
 	public void mute() {
 		
 		video.volume(0);
 		
 	}
 	
+	/**
+	 * 
+	 * Stops the video
+	 * 
+	 */
 	public void stop() {
 		
 		video.stop();

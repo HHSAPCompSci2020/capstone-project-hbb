@@ -14,6 +14,11 @@ import processing.video.Movie;
  */
 public class Window extends PApplet {
 
+	/**
+	 * 
+	 * Sets up the window
+	 * 
+	 */
 	public void setup() {
 		
 		// Instantiate your screens here and add them to the SceenManager
@@ -34,22 +39,48 @@ public class Window extends PApplet {
 		
 	}
 
+	/**
+	 * 
+	 * Draws the current screen to the window
+	 * 
+	 */
 	public void draw() {
 		ScreenManager.drawCurrentScreen(this);
 	}
 	
+	/**
+	 * 
+	 * Reads the next movie frame
+	 * 
+	 * @param m The movie that should have the next frame read
+	 */
 	public void movieEvent(Movie m) {
 		m.read();
 	}
 	
+	/**
+	 * 
+	 * Triggers all clickables
+	 * 
+	 */
 	public void mousePressed() {
 		EventHandler.notifyClickables(this);
 	}
 	
+	/**
+	 * 
+	 * Triggers all things that should be notified on mouse release
+	 * 
+	 */
 	public void mouseReleased() {
 		EventHandler.notifyRelease(this);
 	}
 	
+	/**
+	 * 
+	 * Triggers all draggables
+	 * 
+	 */
 	public void mouseDragged() {
 		EventHandler.notifyDraggables(this);
 	}

@@ -31,6 +31,12 @@ import processing.core.PApplet;
  */
 public class Main {
 
+	/**
+	 * 
+	 * Runs the program
+	 * 
+	 * @param args The arguments that the program should be run with
+	 */
 	public static void main(String[] args) {
 
 		if (System.getProperty("os.name").startsWith("Windows")) {

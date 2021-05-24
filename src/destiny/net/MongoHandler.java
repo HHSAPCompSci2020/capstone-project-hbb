@@ -41,18 +41,40 @@ public class MongoHandler {
 
 	}
 
+	/**
+	 * 
+	 * Gets the bson document corresponding to the username
+	 * 
+	 * @param userName The username of the user you want the document for
+	 * @return The user document
+	 */
 	public static Document getUserDoc(String userName) {
 
 		return userCol.find(eq("_id", userName)).first();
 
 	}
 
+	/**
+	 * 
+	 * Checks whether or not the username and password are valid
+	 * 
+	 * @param userName The username of the user you want to check
+	 * @param pswd The password of the user you want to check
+	 * @return Whether or not the user login was successful 
+	 */
 	public static boolean checkUserLogin(String userName, String pswd) {
 
 		return userCol.find(eq("_id", userName)).first().getString("pswd").equals(pswd);
 
 	}
 
+	/**
+	 * 
+	 * Adds a user to the database
+	 * 
+	 * @param userName The username of the user you want to register
+	 * @param pswd The password for the user you want to check
+	 */
 	public static void addUser(String userName, String pswd) {
 
 		ArrayList<Integer> chars = new ArrayList<>();
@@ -72,6 +94,13 @@ public class MongoHandler {
 
 	}
 
+	/**
+	 * 
+	 * Rolls a random character from the database and returns their document if you don't already have the character. Otherwise returns null
+	 * 
+	 * @param userName The username of the user you want to roll for
+	 * @return The document of the character rolled or null if the character has already been obtained
+	 */
 	public static Document rollRandomCharacter(String userName) {
 
 		double val = ThreadLocalRandom.current().nextDouble(0, 100);
@@ -113,6 +142,14 @@ public class MongoHandler {
 
 	}
 
+	/**
+	 * 
+	 * Updates the stamina of the given user to the given amount
+	 * 
+	 * @param userName The name of the user you want to update the stamina for
+	 * @param stamina The stamina you want to set for the user
+	 * @param now The current date
+	 */
 	public static void updateStamina(String userName, int stamina, Date now) {
 
 		userCol.updateOne(new Document("_id", userName),
@@ -120,12 +157,25 @@ public class MongoHandler {
 
 	}
 
+	/**
+	 * 
+	 * Updates the currency for the given user to the given amount
+	 * 
+	 * @param userName The username for the user you want to update the currency for
+	 * @param currency The currency you want to set for the user
+	 */
 	public static void updateCurrency(String userName, int currency) {
 
 		userCol.updateOne(new Document("_id", userName), new Document("$set", new Document("currency", currency)));
 
 	}
 
+	/**
+	 * 
+	 * Unlocks the next level for the given user
+	 * 
+	 * @param userName
+	 */
 	public static void progressLevel(String userName) {
 
 		userCol.updateOne(new Document("_id", userName), new Document("$inc", new Document("levels_unlocked", 1)));

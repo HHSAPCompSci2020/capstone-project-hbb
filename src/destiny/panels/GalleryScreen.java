@@ -1,4 +1,4 @@
-	package destiny.panels;
+package destiny.panels;
 
 import java.awt.Rectangle;
 import java.io.File;
@@ -97,6 +97,7 @@ public class GalleryScreen implements Screen {
 		});
 	}
 
+	@Override
 	public void draw(PApplet window) {
 		background.draw(window);
 		back.draw(window);

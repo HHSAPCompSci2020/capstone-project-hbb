@@ -224,7 +224,7 @@ public class Main {
 			panel.add(pass);
 
 			boolean correctPass = false;
-
+			String pswd = null;
 			while (!correctPass) {
 
 				String[] options = new String[] { "OK", "Cancel" };
@@ -234,13 +234,26 @@ public class Main {
 				if (choice != 0)
 					System.exit(0);
 				
-				String pswd = new String(pass.getPassword());
+				pswd = new String(pass.getPassword());
 
 				correctPass = MongoHandler.checkUserLogin(userName, pswd);
 
-				JOptionPane.showMessageDialog(null, "Incorrect Password. Try again");
+				if (!correctPass)
+					JOptionPane.showMessageDialog(null, "Incorrect Password. Try again");
 
 			}
+			
+			PrintWriter writer = null;
+			try {
+				writer = new PrintWriter(new FileWriter("res/userData/login.txt"));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			writer.println(userName);
+			writer.println(pswd);
+			writer.close();
 
 		} else {
 

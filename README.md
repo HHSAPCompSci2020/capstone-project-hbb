@@ -207,6 +207,10 @@ Players make a team composition and play against other player’s team compositi
     *   Constants.java - A class to hold some values that are constant throughout runtime
     *   Character.java - A class that represents a character and holds stats and image data about them
     *   RippleCursor.java - A class that handles all the functionality of a ripple that will follow the user's cursor around
+    *   Character.java - A class that represents a revolutionary. It holds their stats, image, and other info
+    *   Enemy.java - A class that represents an Enemy
+    *   Player.java - A class that represents this user. It keeps track of general resources and data of this player
+    *   StatsBox.java - A class that represents a statistics box for a character. It can be drawn to a PApplet
 *   Core
     *   ClickEvent.java - An interface used to allow the EventHandler trigger anything that relies on a click event 
     *   DragEvent.java - An interface used to allow the EventHandler trigger anything that relies on a drag event 
@@ -220,11 +224,12 @@ Players make a team composition and play against other player’s team compositi
     *   PGif.java - This class uses the OpenImaging GifDecoder to make a gif that is drawable to a PApplet
     *   Screen.java - This is the interface that must be implemented by all Screens that are added to the ScreenManager
     *   ScreenManager.java - This class manages all the screens in the game and decides which one should be drawn and whenlibraries handle
+    *   SoundPlayer.java - A class that plays wav files because that is all java supports
 *   Net
-    *   ClientPacket.java - This class holds all the data that the client sends to the server
-    *   MyListener.java - A class that listens on the port and forwards data received
-    *   PacketHandler.java - This class handles all incoming and outgoing packets between client and server
-    *   ServerPacket.java - This class holds all data that the server sends to the client
+    *   ### NOT USED ### ClientPacket.java - This class holds all the data that the client sends to the server ### NOT USED ###
+    *   ### NOT USED ### MyListener.java - A class that listens on the port and forwards data received ### NOT USED ###
+    *   ### NOT USED ### PacketHandler.java - This class handles all incoming and outgoing packets between client and server ### NOT USED ###
+    *   ### NOT USED ### ServerPacket.java - This class holds all data that the server sends to the client ### NOT USED ###
     *   MongoHandler.java - This class allows you to easily make mongo queries that are necessary for the code to run
 *   Panels
     *   HomeScreen.java - A class that represents the initial home screen that all users start on when loading into the game
@@ -234,6 +239,9 @@ Players make a team composition and play against other player’s team compositi
     *   LevelSelectScreen.java - This class represents the screen that allows you to select the level you want to play
     *   MainScreen.java - This class represents the main screen that users see when playing the game
     *   Window.java - This class represents the window that the game is displayed in. It extends from PApplet and forwards all necessary events to the EventHandler and ScreenManager
+    *   GachaScreen.java - Gacha Screen is a class that draws everything related to the banner and handles anything related to drawing characters
+    *   GachaResultsScreen.java - GachaResultsScreen is the panel that handles drawing everything that shows once you draw a character. It is also in charge of handling all events that can take place on this screen
+    *   GalleryScreen.java - GalleryScreen is the panel that draws and handles all events related to the character gallery
 *   Main
     *   Main.java - Main method to run the PApplet
 
@@ -254,3 +262,4 @@ Players make a team composition and play against other player’s team compositi
 *   Kryonet
 *   Processing
 *   [https://www.spriters-resource.com/](https://www.spriters-resource.com/)
+*   MongoDB

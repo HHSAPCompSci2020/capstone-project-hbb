@@ -348,7 +348,7 @@ public class BattleScreen implements Screen {
 		case 3: //special attack
 			target.takeDamage(s.getAttack(), mult*2);
 			s.addGauge(2);
-			s.useMana(40);
+			s.useMana(60);
 			break;
 		case 4: //ultimate attack
 			target.takeDamage(s.getAttack(), mult*5);

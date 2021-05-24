@@ -23,7 +23,8 @@ import processing.core.PImage;
 import destiny.assets.Character;
 
 /**
- * BattlePrepScreen is where the user can select which revolutionaries they want to use for battle
+ * GalleryScreen is the panel that draws and handles all events related to the character gallery
+ * 
  * @author Jay Paek
  * @version 5/7/2021
  *

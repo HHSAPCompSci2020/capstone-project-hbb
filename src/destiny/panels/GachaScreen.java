@@ -18,8 +18,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 /**
- * MainScreen is the screen where the user can select which game modes to play
- * or determine which aspect of the game they want to explore
+ * 
+ * Gacha Screen is a class that draws everything related to the banner and handles anything related to drawing characters
  * 
  * @author Jay Paek
  * @version 5/7/2021

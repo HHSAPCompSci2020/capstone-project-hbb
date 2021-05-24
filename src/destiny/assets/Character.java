@@ -331,10 +331,29 @@ public class Character {
 		
 	}
 	
+	/**
+	 * 
+	 * Scales the character based on the given width
+	 * 
+	 * @param width The width that should be scaled to meet
+	 */
 	public void scaleByWidth(int width) {
 		
 		for (PGif i : sprites)
 			i.scaleByWidth(width);
+		
+	}
+	
+	/**
+	 * 
+	 * Scales the character based on the given height
+	 * 
+	 * @param height The height that should be scaled to meet
+	 */
+	public void scaleByHeight(int height) {
+		
+		for (PGif i : sprites)
+			i.scaleByHeight(height);
 		
 	}
 	

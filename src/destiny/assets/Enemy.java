@@ -55,14 +55,15 @@ public class Enemy extends Character {
 	public void resetSprites() {
 		for (PGif i : sprites) {
         	if(name.equals("kumar")) {
-        		i.resize(Constants.scaleIntToWidth(450), Constants.scaleIntToWidth(500));
+        		i.scaleByWidth(Constants.scaleIntToWidth(400));
+        		i.setCoords(i.getX(), i.getY() + Constants.scaleIntToHeight(50));
         		this.buff(1.5);
         	}else if(name.equals("nathaniel")){
-        		i.resize(Constants.scaleIntToWidth(350), Constants.scaleIntToWidth(400));
-        		i.setCoords(Constants.scaleIntToWidth(i.getX()), Constants.scaleIntToHeight(200));
-        	}else {
         		i.resize(Constants.scaleIntToWidth(300), Constants.scaleIntToWidth(400));
-        		i.setCoords(Constants.scaleIntToWidth(i.getX()), Constants.scaleIntToHeight(200));
+        		i.setCoords(i.getX(), Constants.scaleIntToHeight(230));
+        	}else {
+        		i.scaleByHeight(Constants.scaleIntToWidth(400));
+        		i.setCoords(i.getX(), Constants.scaleIntToHeight(200));
         	}
         }
 	}

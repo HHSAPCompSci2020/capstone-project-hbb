@@ -40,6 +40,7 @@ public class BattleScreen implements Screen {
 	private boolean win = false, lose = false;;
 	private FadeImage victory, defeat;
 	private int level;
+	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
@@ -133,8 +134,7 @@ public class BattleScreen implements Screen {
 		}
 	}
 
-
-
+	@Override
 	public void draw(PApplet window) {
 		background.draw(window);
 		for(Character rev : revs) {
@@ -295,7 +295,8 @@ public class BattleScreen implements Screen {
 		}
 		
 	}
-	public void act(Character s, Character target, int move, double mult) {
+	
+	private void act(Character s, Character target, int move, double mult) {
 		switch(move) {
 		case 0: //block
 			break;

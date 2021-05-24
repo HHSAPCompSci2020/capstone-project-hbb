@@ -224,6 +224,11 @@ public class PGif {
 		
 	}
 	
+	/**
+	 * 
+	 * Flips the gif along the horizontal
+	 * 
+	 */
 	public void flipHorizontal() {
 		
 		horizontalFlip = !horizontalFlip;

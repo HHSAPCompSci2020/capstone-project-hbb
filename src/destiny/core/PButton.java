@@ -247,14 +247,30 @@ public class PButton implements ClickEvent {
 		highlight = !highlight;
 	}
 	
+	/**
+	 * 
+	 * Returns whether or not the button is highlighted
+	 * 
+	 * @return Whether or not the button is highlighted
+	 */
 	public boolean isHighlighted() {
 		return highlight;
 	}
 	
+	/**
+	 * 
+	 * Disables the button from listening
+	 * 
+	 */
 	public void disableListener() {
 		isListening = false;
 	}
 	
+	/**
+	 * 
+	 * Re-enables the button to perform its action on click
+	 * 
+	 */
 	public void enableListener() {
 		isListening = true;
 	}

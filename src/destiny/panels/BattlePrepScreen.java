@@ -169,6 +169,7 @@ public class BattlePrepScreen implements Screen {
 		});
 	}
 
+	@Override
 	public void draw(PApplet window) {
 		background.draw(window);
 		for(int i = 0; i < 3 ; i++) {

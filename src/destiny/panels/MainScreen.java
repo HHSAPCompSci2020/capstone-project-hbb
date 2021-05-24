@@ -119,6 +119,7 @@ public class MainScreen implements Screen {
 		});
 	}
 
+	@Override
 	public void draw(PApplet window) {
 		background.draw(window);
 		button.draw(window);

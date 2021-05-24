@@ -122,7 +122,12 @@ public class Player {
 		return true;
 	}
 	
-	/
+	/**
+	 * 
+	 * Adds the given amount of currency to the user
+	 * 
+	 * @param amt
+	 */
 	public static void addCurrency(int amt) {
 		currency += amt;
 		MongoHandler.updateCurrency(userName, currency);
@@ -135,6 +140,11 @@ public class Player {
 		return characters;
 	}
 	
+	/**
+	 * 
+	 * Unlocks the next level if there are any levels left to unlock
+	 * 
+	 */
 	public static void passLevel() {
 		
 		if (levelsUnlocked < 20) {

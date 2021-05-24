@@ -30,7 +30,7 @@ public class GachaScreen implements Screen {
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back;
-	private int notify;                                                              
+	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/gachaScreen/sparkle.jpg");
@@ -87,6 +87,7 @@ public class GachaScreen implements Screen {
 		});
 	}
 
+	@Override
 	public void draw(PApplet window) {
 		background.draw(window);
 		button.draw(window);

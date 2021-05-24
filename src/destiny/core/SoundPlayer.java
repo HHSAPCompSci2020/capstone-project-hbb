@@ -38,6 +38,12 @@ public class SoundPlayer {
 		
 	});
 	
+	/**
+	 * 
+	 * Creates a SoundPlayer from the given file
+	 * 
+	 * @param FileName The filename
+	 */
 	public SoundPlayer(String FileName) {	
 		fileName = FileName;
 		
@@ -70,6 +76,11 @@ public class SoundPlayer {
 		
 	}
 	
+	/**
+	 * 
+	 * Plays the sound
+	 * 
+	 */
 	public void play() {
 		if (!clip.isRunning()) {
 			new Thread(new Runnable() {
@@ -91,36 +102,79 @@ public class SoundPlayer {
 		}
 	}
 	
+	/**
+	 * 
+	 * Loops the sound
+	 * 
+	 */
 	public void loop() {
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
+	/**
+	 * 
+	 * Changes the volume by the given amount
+	 * 
+	 * @param f The amount of volume you want to change by
+	 */
 	public void changeVolume(float f) {
 		volume.setValue(f);
 	}
 	
+	/**
+	 * 
+	 * Sets the volume to the given number
+	 * 
+	 * @param f The volume that the sound should be played at
+	 */
 	public void setVolume(float f) {
 		volume.setValue(f + muteVolume);
 	}
 	
+	/**
+	 * 
+	 * Stops playing the sound
+	 * 
+	 */
 	public void stop() {
 		clip.stop();
 	}
 	
+	/**
+	 * 
+	 * Closes the clip
+	 * 
+	 */
 	public void close() {
 		clip.close();
 	}
 	
+	/**
+	 * 
+	 * Sets an initial delay for the sound to start playing
+	 * 
+	 * @param x
+	 */
 	public void setInitialDelay(int x) {
 		initDelay = x;
 	}
 	
+	/**
+	 * 
+	 * Restarts the sound playing
+	 * 
+	 */
 	public void restart() {
 		
 		restartSound.start();
 		
 	}
 	
+	/**
+	 * 
+	 * Force restarts the sound
+	 * 
+	 */
 	public void forceRestart() {
 		
 		clip.setMicrosecondPosition(0);

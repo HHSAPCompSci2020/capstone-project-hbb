@@ -36,6 +36,7 @@ public class GachaResultsScreen implements Screen {
 	private Character result;
 	private Document doc;
 	private boolean rekt;
+	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
@@ -80,6 +81,7 @@ public class GachaResultsScreen implements Screen {
 		}
 	}
 
+	@Override
 	public void draw(PApplet window) {
 		background.draw(window);
 		back.draw(window);

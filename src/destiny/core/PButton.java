@@ -26,6 +26,7 @@ public class PButton implements ClickEvent {
 	private boolean isGif;
 	private boolean isClicked = false;
 	private boolean highlight = false;
+	private boolean isListening = true;
 	
 	/**
 	 * 
@@ -83,6 +84,9 @@ public class PButton implements ClickEvent {
 	@Override
 	public boolean click(Event e) {
 		
+		if (!isListening)
+			return false;
+		
 		if (collider.contains(e.getMouseX(), e.getMouseY())) {
 			if (listenOnClick)
 				exec.run();
@@ -95,6 +99,9 @@ public class PButton implements ClickEvent {
 	
 	@Override
 	public boolean release(Event e) {
+		
+		if (!isListening)
+			return false;
 		
 		if (collider.contains(e.getMouseX(), e.getMouseY())) {
 			if (!listenOnClick && isClicked)
@@ -243,4 +250,13 @@ public class PButton implements ClickEvent {
 	public boolean isHighlighted() {
 		return highlight;
 	}
+	
+	public void disableListener() {
+		isListening = false;
+	}
+	
+	public void enableListener() {
+		isListening = true;
+	}
+	
 }

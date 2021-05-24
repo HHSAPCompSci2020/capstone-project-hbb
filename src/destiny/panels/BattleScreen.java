@@ -159,7 +159,7 @@ public class BattleScreen implements Screen {
 		}
 		for (int i = 0; i < 3; i++) {
 			revs[i].setCoords(Constants.scaleIntToWidth(100 + (i * 300)), Constants.scaleIntToHeight(400));
-			enemies[i].setCoords(Constants.scaleIntToWidth(Constants.SCREEN_WIDTH - 300 + (i * 300)),
+			enemies[i].setCoords(Constants.scaleIntToWidth(Constants.SCREEN_WIDTH-300 - (i * 300)),
 					Constants.scaleIntToHeight(100));
 			enemies[i].resetSprites();
 
@@ -227,7 +227,13 @@ public class BattleScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
-					Player.addCurrency(7);
+					if(turn < 4) {
+						Player.addCurrency(14);
+					}else if (turn < 7) {
+						Player.addCurrency(10);
+					}else if (turn < 10) {
+						Player.addCurrency(7);
+					}
 					if(Player.getLevelsUnlocked()==level) {
 						Player.passLevel();
 					}
@@ -241,9 +247,15 @@ public class BattleScreen implements Screen {
 					});
 				}
 			});
-			for(FadeImage f : stars) {
-				f.draw(window);
-			}
+			if(turn < 4) {
+				stars[0].draw(window);
+				stars[1].draw(window);
+				stars[2].draw(window);
+			}else if (turn < 7) {
+				stars[0].draw(window);
+				stars[1].draw(window);
+			}else if (turn < 10) {
+				stars[0].draw(window);			}
 		}
 		if (lose) {
 			defeat.draw(window);

@@ -63,7 +63,17 @@ public class BattleScreen implements Screen {
 		for(int i = 0; i < 3 ; i++) {
 			revs[i] = new Character(BattlePrepScreen.revsSelect[i]);
 		}
-		enemies = new Enemy[] { new Enemy(level, true), new Enemy(level, true), new Enemy(level, true) };
+		if(level%5==0) {
+			if(level > 10) {
+				enemies = new Enemy[] { new Enemy(level, "kumar"), new Enemy(level, "nathaniel"), new Enemy(level, "nathaniel") };
+			}else {
+				enemies = new Enemy[] { new Enemy(level, "kumar"), new Enemy(level, "jay"), new Enemy(level, "jay") };			}
+		}else {
+			if(level > 10) {
+				enemies = new Enemy[] { new Enemy(level,"nathaniel"), new Enemy(level, "nathaniel"), new Enemy(level,"nathaniel") };
+			}else {
+				enemies = new Enemy[] { new Enemy(level, "jay"), new Enemy(level, "jay"), new Enemy(level, "jay") };			}
+		}
 		try {
 			button = new PButton(
 					new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(450),
@@ -117,7 +127,7 @@ public class BattleScreen implements Screen {
 
 							}
 						}else if(id == 4){
-							if(revs[revSelect].useUltimate()){
+							if(revs[revSelect].getGauge()<5){
 								JOptionPane.showMessageDialog(null, "Gauge isn't filled");
 							}
 							else {
@@ -141,7 +151,9 @@ public class BattleScreen implements Screen {
 		for (int i = 0; i < 3; i++) {
 			revs[i].setCoords(Constants.scaleIntToWidth(100 + (i * 300)), Constants.scaleIntToHeight(400));
 			enemies[i].setCoords(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(300 + (i * 300)),
-					Constants.scaleIntToHeight(400));
+					Constants.scaleIntToHeight(100));
+			enemies[i].resetSprites();
+
 		}
 		setting.addListener(new Runnable() {
 
@@ -210,6 +222,7 @@ public class BattleScreen implements Screen {
 					if(Player.getLevelsUnlocked()==level) {
 						Player.passLevel();
 					}
+					sound.stop();
 					background.addListener(new Runnable() {
 						@Override
 						public void run() {
@@ -337,6 +350,7 @@ public class BattleScreen implements Screen {
 			break;
 		case 4: //ultimate attack
 			target.takeDamage(s.getAttack(), mult*5);
+			s.useUltimate();
 			break;
 		}
 	}

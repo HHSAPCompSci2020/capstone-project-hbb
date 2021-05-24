@@ -90,13 +90,13 @@ public class Constants {
 	 * 
 	 * Returns the full path to the enemy sprite
 	 * 
-	 * @param isJay Whether or not the enemy sprite is Jay
+	 * @param name of the enemy
 	 * @param action The action of enemy you want
 	 * @return The full path to the enemy action gif
 	 */
-	public static String getEnemyPath(boolean isJay, String action) {
+	public static String getEnemyPath(String enemy, String action) {
 		
-		return "res/enemies/" + (isJay?"jay":"kumar")+"-" +action+ ".gif";
+		return "res/enemies/" + enemy+"-" +action+ ".gif";
 		
 	}
 	

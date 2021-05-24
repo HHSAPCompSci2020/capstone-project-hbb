@@ -12,8 +12,7 @@ import destiny.core.PGif;
  */
 public class Enemy extends Character {
 
-	private boolean isJay;
-	
+	String name;
 	/**
 	 * 
 	 * Creates an enemy from the given parameters
@@ -21,38 +20,50 @@ public class Enemy extends Character {
 	 * @param id The id of the character that the enemy should take stats from
 	 * @param isJay Whether or not the enemy is Jay, if it is not it will be Kumar
 	 */
-	public Enemy(int id, boolean isJay) {
+	public Enemy(int id, String name) {
 		
 		super(id);
-		
-		this.isJay = isJay;
-        spriteStatic = new PGif(0, 0, Constants.getEnemyPath(isJay,"static"));
-        spriteAttack = new PGif(0, 0, Constants.getEnemyPath(isJay,"attack"));
-        spriteFlinch = new PGif(0, 0, Constants.getEnemyPath(isJay,"flinch"));
-        spriteMove = new PGif(0, 0, Constants.getEnemyPath(isJay,"move"));
+		this.name = name;
+        spriteStatic = new PGif(0, 0, Constants.getEnemyPath(name,"static"));
+        spriteAttack = new PGif(0, 0, Constants.getEnemyPath(name,"attack"));
+        spriteFlinch = new PGif(0, 0, Constants.getEnemyPath(name,"flinch"));
+        spriteMove = new PGif(0, 0, Constants.getEnemyPath(name,"move"));
 		
         sprite = spriteStatic;
         
-        if (!isJay)
-        	this.buff(1.5);
         
         sprites = new PGif[]{spriteAttack, spriteFlinch, spriteMove, spriteStatic};
         
-        for (PGif i : sprites)
+        for (PGif i : sprites) {
         	i.flipHorizontal();
+        	if(name.equals("kumar")) {
+        		i.resize(Constants.scaleIntToWidth(450), Constants.scaleIntToHeight(500));
+        		this.buff(1.5);
+        	}else if(name.equals("nathaniel")){
+        		i.scaleByWidth(Constants.scaleIntToWidth(300));
+        		i.setCoords(Constants.scaleIntToWidth(i.getX()), Constants.scaleIntToWidth(200));
+        	}else {
+        		i.scaleByWidth(Constants.scaleIntToWidth(300));
+        		i.setCoords(Constants.scaleIntToWidth(i.getX()), Constants.scaleIntToWidth(200));
+        	}
+        }
         
 	}
-
 	/**
-	 * 
-	 * Whether or not this enemy is Jay
-	 * 
-	 * @return If this enemy is Jay or not
+	 * reset the Coordinates to the coordinates it should be
 	 */
-	public boolean isJay() {
-		
-		return isJay;
-		
+	public void resetSprites() {
+		for (PGif i : sprites) {
+        	if(name.equals("kumar")) {
+        		i.resize(Constants.scaleIntToWidth(450), Constants.scaleIntToHeight(500));
+        		this.buff(1.5);
+        	}else if(name.equals("nathaniel")){
+        		i.resize(Constants.scaleIntToWidth(350), Constants.scaleIntToHeight(400));
+        		i.setCoords(Constants.scaleIntToWidth(i.getX()), Constants.scaleIntToWidth(200));
+        	}else {
+        		i.resize(Constants.scaleIntToWidth(300), Constants.scaleIntToHeight(400));
+        		i.setCoords(Constants.scaleIntToWidth(i.getX()), Constants.scaleIntToWidth(200));
+        	}
+        }
 	}
-	
 }

@@ -122,7 +122,6 @@ public class Player {
 		return true;
 	}
 	
-	/
 	public static void addCurrency(int amt) {
 		currency += amt;
 		MongoHandler.updateCurrency(userName, currency);

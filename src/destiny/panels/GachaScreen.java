@@ -51,6 +51,7 @@ public class GachaScreen implements Screen {
 			public void run() {
 				if(Player.getCurrency()<50) {
 					JOptionPane.showMessageDialog(null, "Not enough money :////");
+
 				}else {
 					background.setFadeSpeed(40);
 					background.setTint(255);

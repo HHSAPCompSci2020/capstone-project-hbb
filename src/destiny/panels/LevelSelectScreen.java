@@ -63,7 +63,6 @@ public class LevelSelectScreen implements Screen {
 					@Override
 					public void run() {
 						if(Player.getStamina()>=10) {
-							System.out.println(Player.getStamina());
 							background.setFadeSpeed(40);
 							background.setTint(255);
 							background.setTargetTint(0);

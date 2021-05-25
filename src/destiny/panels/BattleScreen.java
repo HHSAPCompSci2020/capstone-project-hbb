@@ -127,7 +127,6 @@ public class BattleScreen implements Screen {
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-						System.out.println(revs[revSelect].getMp());
 						if(id == 3) {
 							if(revs[revSelect].getMp() >= 60) {
 								move[revSelect] = id;
@@ -300,7 +299,6 @@ public class BattleScreen implements Screen {
 							if (enemies[target].isDead()) {
 								target--;
 							}
-							System.out.println(target);
 							if (next >= 0) {
 								revs[next].playActionOnce("attack");
 							}

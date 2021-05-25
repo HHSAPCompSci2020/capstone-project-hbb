@@ -131,11 +131,10 @@ public class Character {
 	public void takeDamage(int attack, double multi) {
 		if(attack > 0) {
 			if(isBlocking) {
-				health -= (int)(multi*attack*(140.0/(100+defense)))/2;
+				health -= (int)(multi*attack*(140.0/(100+defense*6)));
 			}
 			else{
-//				health -= 10;
-				health -= (int)(multi*attack*(140.0/(100+defense)));
+				health -= (int)(multi*attack*(140.0/(100+defense*3)));
 			}
 			
 			final PGif temp = sprite;

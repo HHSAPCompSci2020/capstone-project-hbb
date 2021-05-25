@@ -17,6 +17,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * 
+ * A class that handles all mongo queries for a user
+ * 
+ * @author Nathaniel
+ * @version 5/24/21
+ *
+ */
 public class MongoHandler {
 
 	private static MongoClient mongoClient = new MongoClient(new MongoClientURI(

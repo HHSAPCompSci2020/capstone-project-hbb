@@ -50,7 +50,7 @@ public class Enemy extends Character {
         
 	}
 	/**
-	 * reset the Coordinates to the coordinates it should be
+	 * Reset the Coordinates to the coordinates it should be
 	 */
 	public void resetSprites() {
 		for (PGif i : sprites) {

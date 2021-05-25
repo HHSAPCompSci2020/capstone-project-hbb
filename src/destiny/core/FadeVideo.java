@@ -175,6 +175,12 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Scales video given the width
+	 * 
+	 * @param width The width that you want to scale to
+	 */
 	public void scaleByWidth(int width) {
 		
 		double scale = (double)video.width/width;
@@ -182,6 +188,12 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Scales the video based on the given factor
+	 * 
+	 * @param scale The factor you want to scale by
+	 */
 	public void scale(double scale) {
 		
 		w  = (int)(w  *scale);

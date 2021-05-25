@@ -55,6 +55,18 @@ public class ScreenManager {
 	
 	/**
 	 * 
+	 * Gets the current screen that is being drawn
+	 * 
+	 * @return The screen that is currently being drawn
+	 */
+	public static Screen getCurrentScreen() {
+		
+		return allScreens.get(currentScreen);
+		
+	}
+	
+	/**
+	 * 
 	 * Draws the screen that is selected
 	 * 
 	 * @post Has the screen drawn to the PApplet

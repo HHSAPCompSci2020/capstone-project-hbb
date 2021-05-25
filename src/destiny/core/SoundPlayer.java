@@ -172,6 +172,18 @@ public class SoundPlayer {
 	
 	/**
 	 * 
+	 * Determines whether or not the clip is playing
+	 * 
+	 * @return Whether or not the sound is playing
+	 */
+	public boolean isPlaying() {
+		
+		return clip.isActive();
+		
+	}
+	
+	/**
+	 * 
 	 * Force restarts the sound
 	 * 
 	 */

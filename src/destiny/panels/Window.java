@@ -1,5 +1,6 @@
 package destiny.panels;
 
+import destiny.assets.Constants;
 import destiny.core.*;
 import processing.core.PApplet;
 import processing.video.Movie;
@@ -14,6 +15,8 @@ import processing.video.Movie;
  */
 public class Window extends PApplet {
 
+	private SoundPlayer sound = new SoundPlayer(Constants.getSoundPath("rondo.wav"));
+	
 	/**
 	 * 
 	 * Sets up the window
@@ -35,7 +38,8 @@ public class Window extends PApplet {
 		ScreenManager.addScreen("prep", new BattlePrepScreen());
 		ScreenManager.addScreen("battle", new BattleScreen());
 		ScreenManager.addScreen("gallery", new GalleryScreen());
-		
+		sound.loop();
+		sound.setVolume(70);
 		
 	}
 
@@ -45,6 +49,26 @@ public class Window extends PApplet {
 	 * 
 	 */
 	public void draw() {
+		
+		Screen currentScreen = ScreenManager.getCurrentScreen();
+		
+		if (currentScreen instanceof BattleScreen || currentScreen instanceof OpeningScreen || currentScreen instanceof GachaResultsScreen) {
+			
+			if (sound.isPlaying()) {
+				sound.stop();
+				sound.forceRestart();
+			}
+			
+		} else {
+			
+			if (!sound.isPlaying()) {
+				
+				sound.play();
+				
+			}
+			
+		}
+		
 		ScreenManager.drawCurrentScreen(this);
 	}
 	

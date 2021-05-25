@@ -265,3 +265,11 @@ Players make a team composition and play against other player’s team compositi
 *   MongoDB
 *	[https://www.youtube.com/channel/UCpQUBJrRfcpWLro4Oziff7Q](https://www.youtube.com/channel/UCpQUBJrRfcpWLro4Oziff7Q)
 *	[https://www.youtube.com/channel/UCyW-leqPXUunrXXxFjpZ7VA](https://www.youtube.com/channel/UCyW-leqPXUunrXXxFjpZ7VA)
+*	https://genshin.mihoyo.com/
+*	https://www.google.com/searchq=settings+button&sxsrf=ALeKk00H3ETJJ5VBctOIP8tXtCvwvrTS_w:1621817463242&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjivaXujOHwAhWaJTQIHYVTCWQQ_AUoAXoECAEQAw&biw=1920&bih=918#imgrc=BLOXP2oQtUFN3M
+
+https://www.google.com/search?q=star+png&sxsrf=ALeKk01h1Ef-NeX_fdOh_x62qFLs80fqBw:1621891219545&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiU-ITQn-PwAhVRDzQIHU0eDZYQ_AUoAXoECAEQAw&biw=1920&bih=975#imgrc=ta9naw4eid5UBM
+
+https://www.walpaperlist.com/2020/01/anime-wallpaper-gif-4k.html
+
+https://wallpapercave.com/chill-anime-pc-wallpapers

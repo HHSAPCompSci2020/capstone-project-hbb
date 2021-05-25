@@ -16,6 +16,7 @@ import destiny.assets.Character;
 import destiny.core.PButton;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
+import destiny.core.SoundPlayer;
 import destiny.net.MongoHandler;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -40,11 +41,14 @@ public class GachaResultsScreen implements Screen {
 	private Character result;
 	private Document doc;
 	private boolean rekt;
+	private SoundPlayer buildUp, finish;
 	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeGif("res/generalAssets/bg.gif");
 		background.setFadeSpeed(50);
+		buildUp = new SoundPlayer(Constants.getSoundPath("zelda.wav"));
+		finish = new SoundPlayer(Constants.getSoundPath("zelda2.wav"));
 		animation = new FadeVideo(window, "res/gachaScreen/roll.mp4");
 		animation.fadeWhite(true);
 		animation.setFadeSpeed(50);
@@ -93,8 +97,14 @@ public class GachaResultsScreen implements Screen {
 	@Override
 	public void draw(PApplet window) {
 		if (animation.isPlaying()) {
+			if (!buildUp.isPlaying())
+				buildUp.play();
 			animation.draw(window);
 		} else {
+			if (buildUp.isPlaying())
+				buildUp.stop();
+			if (!finish.isPlaying())
+				finish.play();
 			background.draw(window);
 			back.draw(window);
 			if(result!=null)
@@ -120,6 +130,8 @@ public class GachaResultsScreen implements Screen {
 		background = null;
 		result = null;
 		cursor = null;	
+		buildUp = null;
+		finish = null;
 	}
 
 }

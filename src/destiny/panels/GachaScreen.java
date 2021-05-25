@@ -57,7 +57,7 @@ public class GachaScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
-					
+					Player.useCurrency(50);
 					background.addListener(new Runnable() {
 	
 						@Override

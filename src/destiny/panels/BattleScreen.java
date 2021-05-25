@@ -129,7 +129,7 @@ public class BattleScreen implements Screen {
 					public void run() {
 						System.out.println(revs[revSelect].getMp());
 						if(id == 3) {
-							if(revs[revSelect].getMp() >= 40) {
+							if(revs[revSelect].getMp() >= 60) {
 								move[revSelect] = id;
 								revSelect++;
 							}

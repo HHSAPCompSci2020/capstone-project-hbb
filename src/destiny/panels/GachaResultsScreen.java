@@ -53,6 +53,7 @@ public class GachaResultsScreen implements Screen {
 		animation.fadeWhite(true);
 		animation.setFadeSpeed(50);
 		animation.play();
+		rekt = false;
 		animation.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		
 		cursor = RippleCursor.createLowPerformanceCursor();

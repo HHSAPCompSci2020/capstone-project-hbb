@@ -12,6 +12,7 @@ import destiny.assets.RippleCursor;
 import destiny.assets.Player;
 import destiny.core.FadeGif;
 import destiny.core.FadeImage;
+import destiny.core.FadeVideo;
 import destiny.core.PButton;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
@@ -26,7 +27,7 @@ import processing.core.PImage;
  */
 public class LevelSelectScreen implements Screen {
 	
-	private FadeGif background;
+	private FadeVideo background;
 	private RippleCursor cursor;
 	private PButton  back;
 	private FadeImage prev;
@@ -35,8 +36,9 @@ public class LevelSelectScreen implements Screen {
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeGif("res/generalAssets/bg.gif");
+		background = new FadeVideo(window, "res/generalAssets/bg.gif");
 		background.setFadeSpeed(50);
+		background.loop();
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {

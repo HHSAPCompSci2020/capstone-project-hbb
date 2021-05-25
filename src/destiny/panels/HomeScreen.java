@@ -10,6 +10,7 @@ import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
 import destiny.core.FadeGif;
 import destiny.core.FadeImage;
+import destiny.core.FadeVideo;
 import destiny.core.PButton;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
@@ -24,17 +25,17 @@ import processing.core.PImage;
  */
 public class HomeScreen implements Screen {
 
-	private FadeGif background;
+	private FadeVideo background;
 	private RippleCursor cursor;
 	private PButton button;
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeGif("res/levelSelectScreen/levels.gif");
+		background = new FadeVideo(window, "res/generalAssets/impact.mp4");
 		background.setFadeSpeed(50);
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {
-			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.scaleIntToHeight(200), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(300), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,13 +43,20 @@ public class HomeScreen implements Screen {
 
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+		background.loop();
 	}
 
 	@Override
 	public void draw(PApplet window) {
 			background.draw(window);
 			button.draw(window);
-			
+			window.pushStyle();
+			window.stroke(255, 255, 255);
+			window.textSize(Constants.scaleIntToWidth(70));
+			window.text("Welcome To Destiny Roll!", Constants.SCREEN_WIDTH/2 - Constants.scaleIntToWidth(400), Constants.SCREEN_HEIGHT/3);
+			window.textSize(Constants.scaleIntToWidth(30));
+			window.text("By: Nathaniel Thomas and Jay Paek", Constants.SCREEN_WIDTH/2 - Constants.scaleIntToWidth(210), Constants.SCREEN_HEIGHT/3 + Constants.scaleIntToHeight(100));
+			window.popStyle();
 			if (window.mousePressed) {
 				cursor.draw(window);
 			} else {

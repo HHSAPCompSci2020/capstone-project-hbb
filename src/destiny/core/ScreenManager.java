@@ -77,6 +77,7 @@ public class ScreenManager {
 	private static void disposeScreen(PApplet window) {
 		
 		EventHandler.clearScreen();
+		Runtime.getRuntime().gc();
 		if (currentScreen != null)
 			allScreens.get(currentScreen).dispose();
 		currentScreen = nextScreen;

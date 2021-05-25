@@ -11,6 +11,7 @@ import destiny.assets.Player;
 import destiny.assets.RippleCursor;
 import destiny.core.FadeGif;
 import destiny.core.FadeImage;
+import destiny.core.FadeVideo;
 import destiny.assets.Character;
 import destiny.core.PButton;
 import destiny.core.Screen;
@@ -33,6 +34,7 @@ import org.bson.Document;
 public class GachaResultsScreen implements Screen {
 
 	private FadeGif background;
+	private FadeVideo animation;
 	private RippleCursor cursor;
 	private PButton back;
 	private Character result;
@@ -43,7 +45,12 @@ public class GachaResultsScreen implements Screen {
 	public void setup(PApplet window) {
 		background = new FadeGif("res/generalAssets/bg.gif");
 		background.setFadeSpeed(50);
-
+		animation = new FadeVideo(window, "res/gachaScreen/roll.mp4");
+		animation.fadeWhite(true);
+		animation.setFadeSpeed(50);
+		animation.play();
+		animation.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+		
 		cursor = RippleCursor.createLowPerformanceCursor();
 	
 		try {
@@ -85,22 +92,26 @@ public class GachaResultsScreen implements Screen {
 
 	@Override
 	public void draw(PApplet window) {
-		background.draw(window);
-		back.draw(window);
-		if(result!=null)
-			result.draw(window);
-		if (window.mousePressed) {
-			cursor.draw(window);
+		if (animation.isPlaying()) {
+			animation.draw(window);
 		} else {
-			cursor.clearTrail();
-		}
-		if(rekt) {
-			window.pushStyle();
-			window.textSize(50);
-			window.stroke(255,0,0);
-			window.fill(255,0,0);
-			window.text("get rekt", Constants.scaleIntToWidth(400), Constants.scaleIntToHeight(500));
-			window.popStyle();
+			background.draw(window);
+			back.draw(window);
+			if(result!=null)
+				result.draw(window);
+			if (window.mousePressed) {
+				cursor.draw(window);
+			} else {
+				cursor.clearTrail();
+			}
+			if(rekt) {
+				window.pushStyle();
+				window.textSize(50);
+				window.stroke(255,0,0);
+				window.fill(255,0,0);
+				window.text("get rekt", Constants.scaleIntToWidth(400), Constants.scaleIntToHeight(500));
+				window.popStyle();
+			}
 		}
 	}
 

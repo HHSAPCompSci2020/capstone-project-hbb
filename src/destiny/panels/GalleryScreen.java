@@ -13,6 +13,7 @@ import destiny.assets.RippleCursor;
 import destiny.assets.StatsBox;
 import destiny.core.FadeGif;
 import destiny.core.FadeImage;
+import destiny.core.FadeVideo;
 import destiny.core.PButton;
 import destiny.core.PGif;
 import destiny.core.Screen;
@@ -31,7 +32,7 @@ import destiny.assets.Character;
  */
 public class GalleryScreen implements Screen {
 	
-	private FadeGif background;
+	private FadeVideo background;
 	private RippleCursor cursor;
 	private PButton back;
 	private PButton[] select;
@@ -41,8 +42,9 @@ public class GalleryScreen implements Screen {
 	private StatsBox stats;
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeGif("res/battlePrepScreen/bg.gif");
+		background = new FadeVideo(window, "res/levelSelectScreen/levels.mp4");
 		background.setFadeSpeed(50);
+		background.loop();
 
 		cursor = RippleCursor.createLowPerformanceCursor();
 		unlocked = Player.getCharacters();
@@ -76,8 +78,8 @@ public class GalleryScreen implements Screen {
 
 				}
 			});
+			b.setGifTexture(c);
 			select[i] = b;
-			revs[i] = c;
 
 		}
 		back.addListener(new Runnable() {
@@ -105,7 +107,6 @@ public class GalleryScreen implements Screen {
 		back.draw(window);
 		for(int i = 0; i < unlocked.size(); i++) {
 			select[i].draw(window);
-			revs[i].draw(window);
 		}
 		if(rev!=null) {
 			rev.draw(window);

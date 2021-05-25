@@ -154,6 +154,17 @@ public class FadeVideo extends Fader {
 	
 	/**
 	 * 
+	 * Plays the video once
+	 * 
+	 */
+	public void play() {
+		
+		video.play();
+		
+	}
+	
+	/**
+	 * 
 	 * The volume you want to set the video to
 	 * 
 	 * @param vol The volume that should be set for the video
@@ -161,6 +172,20 @@ public class FadeVideo extends Fader {
 	public void setVolume(float vol) {
 		
 		video.volume(vol);
+		
+	}
+	
+	public void scaleByWidth(int width) {
+		
+		double scale = (double)video.width/width;
+		this.scale(scale);
+		
+	}
+	
+	public void scale(double scale) {
+		
+		w  = (int)(w  *scale);
+		h = (int)(h * scale);
 		
 	}
 	

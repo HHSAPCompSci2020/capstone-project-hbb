@@ -74,7 +74,7 @@ public class GalleryScreen implements Screen {
 				public void run() {
 					rev = new Character(id);
 					rev.setCoords(50, 50);
-					stats = new StatsBox(MongoHandler.getStatDoc(id),Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(200),Constants.scaleIntToWidth(200),Constants.scaleIntToWidth(600));
+					stats = new StatsBox(MongoHandler.getStatDoc(id),Constants.scaleIntToWidth(200), Constants.scaleIntToHeight(440),Constants.scaleIntToWidth(200),Constants.scaleIntToWidth(600));
 
 				}
 			});

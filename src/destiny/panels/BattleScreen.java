@@ -161,7 +161,7 @@ public class BattleScreen implements Screen {
 		}
 		for (int i = 0; i < 3; i++) {
 			revs[i].setCoords(Constants.scaleIntToWidth(100 + (i * 300)), Constants.scaleIntToHeight(400));
-			enemies[i].setCoords(Constants.SCREEN_WIDTH-Constants.scaleIntToWidth(400) - Constants.scaleIntToWidth(i * 300),
+			enemies[i].setCoords(Constants.SCREEN_WIDTH-Constants.scaleIntToWidth(350) - Constants.scaleIntToWidth(i * 300),
 					Constants.scaleIntToHeight(100));
 			enemies[i].resetSprites();
 
@@ -268,6 +268,7 @@ public class BattleScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
+					sound.stop();
 					background.addListener(new Runnable() {
 
 						@Override

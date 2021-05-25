@@ -73,6 +73,13 @@ public class Main {
 			JOptionPane.showMessageDialog(null,
 					"Your saved username and password were not found (maybe the login file was tampered with?), please redo the login");
 			userLogin();
+			
+			try {
+				sc = new Scanner(new File("res/userData/login.txt"));
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 		}
 

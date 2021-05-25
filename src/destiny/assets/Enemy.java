@@ -55,7 +55,7 @@ public class Enemy extends Character {
 	public void resetSprites() {
 		for (PGif i : sprites) {
         	if(name.equals("kumar")) {
-        		i.scaleByWidth(Constants.scaleIntToWidth(400));
+        		i.resize(Constants.scaleIntToWidth(300), Constants.scaleIntToWidth(490));
         		i.setCoords(i.getX(), i.getY() + Constants.scaleIntToHeight(50));
         		this.buff(1.5);
         	}else if(name.equals("nathaniel")){

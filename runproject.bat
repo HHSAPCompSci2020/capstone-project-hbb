@@ -1,0 +1,1 @@
+"javaw.exe" -Dfile.encoding=Cp1252 -classpath "bin;lib\gif-decoder.jar;lib\gst1-java-core-1.1.0.jar;lib\jna.jar;lib\kryo5-5.0.1.jar;lib\kryonet-2.21-all.jar;lib\processing_core.jar;lib\video.jar;lib\mongo-java-driver-3.4.3.jar" destiny.main.Main

@@ -153,7 +153,7 @@ public class SoundPlayer {
 	 * 
 	 * Sets an initial delay for the sound to start playing
 	 * 
-	 * @param x
+	 * @param x The amount of initial delay that should be set for the sound
 	 */
 	public void setInitialDelay(int x) {
 		initDelay = x;

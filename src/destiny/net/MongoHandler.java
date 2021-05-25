@@ -182,7 +182,7 @@ public class MongoHandler {
 	 * 
 	 * Unlocks the next level for the given user
 	 * 
-	 * @param userName
+	 * @param userName The username of the player that should have their levels unlocked increased
 	 */
 	public static void progressLevel(String userName) {
 

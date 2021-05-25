@@ -18,7 +18,7 @@ public class Enemy extends Character {
 	 * Creates an enemy from the given parameters
 	 * 
 	 * @param id The id of the character that the enemy should take stats from
-	 * @param isJay Whether or not the enemy is Jay, if it is not it will be Kumar
+	 * @param name The name of the character
 	 */
 	public Enemy(int id, String name) {
 		

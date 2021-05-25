@@ -61,6 +61,7 @@ public class Character {
      * Draws the revolutionary to the screen
      * 
      * @param window PApplet will have the revolutionary drawn to it
+     * @post Stat box will be drawn to the window
      */
 	public void draw(PApplet window) {
 		sprite.draw(window);
@@ -274,7 +275,7 @@ public class Character {
 	 * 
 	 * Sets whether or not the character should be outlined
 	 * 
-	 * @param light
+	 * @param light Whether or not the character should be highlighted
 	 */
 	public void setHighlight(boolean light) {
 		
@@ -286,7 +287,7 @@ public class Character {
 	 * 
 	 * Adds an amount to the ultimate gauge. This can not go over 5, if it does it will be capped at 5
 	 * 
-	 * @param amt
+	 * @param amt The amount of gauge that should be added to the character
 	 */
 	public void addGauge(int amt) {
 		
@@ -369,6 +370,9 @@ public class Character {
 	}
 
 	/**
+	 * 
+	 * Gets the health of this character
+	 * 
 	 * @return The health
 	 */
 	public int getHealth() {
@@ -376,6 +380,9 @@ public class Character {
 	}
 
 	/**
+	 * 
+	 * Sets the health of this character
+	 * 
 	 * @param health The health to set
 	 */
 	public void setHealth(int health) {
@@ -383,6 +390,9 @@ public class Character {
 	}
 
 	/**
+	 * 
+	 * Gets the attack of this character
+	 * 
 	 * @return The attack
 	 */
 	public int getAttack() {
@@ -390,6 +400,9 @@ public class Character {
 	}
 
 	/**
+	 * 
+	 * Sets the attack of this character
+	 * 
 	 * @param attack The attack to set
 	 */
 	public void setAttack(int attack) {
@@ -397,6 +410,9 @@ public class Character {
 	}
 
 	/**
+	 * 
+	 * Gets the defense of this character
+	 * 
 	 * @return The defense
 	 */
 	public int getDefense() {
@@ -404,6 +420,9 @@ public class Character {
 	}
 
 	/**
+	 * 
+	 * Sets the defense of this character
+	 * 
 	 * @param defense The defense to set
 	 */
 	public void setDefense(int defense) {
@@ -411,6 +430,9 @@ public class Character {
 	}
 
 	/**
+	 * 
+	 * Gets the mp of this character
+	 * 
 	 * @return The mp
 	 */
 	public int getMp() {
@@ -418,6 +440,9 @@ public class Character {
 	}
 
 	/**
+	 * 
+	 * Sets the mp of this character
+	 * 
 	 * @param mp The mp to set
 	 */
 	public void setMp(int mp) {
@@ -425,6 +450,9 @@ public class Character {
 	}
 
 	/**
+	 * 
+	 * Gets the current gauge of this character
+	 * 
 	 * @return The gauge
 	 */
 	public int getGauge() {
@@ -432,21 +460,30 @@ public class Character {
 	}
 
 	/**
-	 * @param guage The gauge to set
+	 * 
+	 * Sets the current gauge of this character
+	 * 
+	 * @param gauge The gauge to set
 	 */
 	public void setGauge(int gauge) {
 		this.gauge = gauge;
 	}
 	
 	/**
-	 * @return if the hp < 0 or not
+	 * 
+	 * Determines whether or not this character is dead
+	 * 
+	 * @return true if the hp is less than 0 otherwise false
 	 */
 	public boolean isDead() {
 		return health <= 0;
 	}
 	
 	/**
-	 * @param blocking status
+	 * 
+	 * Sets whether or not this character is blocking
+	 * 
+	 * @param isBlock Whether or not the character is blocking
 	 */
 	public void setBlock(boolean isBlock) {
 		this.isBlocking = isBlock;

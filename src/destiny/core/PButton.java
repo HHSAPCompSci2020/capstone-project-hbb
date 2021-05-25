@@ -315,7 +315,7 @@ public class PButton implements ClickEvent {
 	 * 
 	 * Adds a listener to run on the button hold being released
 	 * 
-	 * @param code
+	 * @param code The code that should be run whenever the button is held
 	 */
 	public void addHoldReleaseListener(Runnable code) {
 		

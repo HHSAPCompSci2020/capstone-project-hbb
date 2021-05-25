@@ -70,30 +70,48 @@ public class Player {
 	}
 
 	/**
+	 * 
+	 * Gets the stamina of this player
+	 * 
 	 * @return The stamina
 	 */
 	public static int getStamina() {
 		return stamina;
 	}
 	/**
-	 * @return The level
+	 * 
+	 * Gets the level this player has currently unlocked up till
+	 * 
+	 * @return level The level
 	 */
 	public static int getLevel() {
 		return thisLevel;
 	}
 	/**
-	 * @param the level to set to
+	 * 
+	 * Sets the level to the given level
+	 * 
+	 * @param level The level to set to
 	 */
 	public static void setLevel(int level) {
 		thisLevel = level;
 	}
 	
+	/**
+	 * 
+	 * Decreases the stamina by the given amount
+	 * 
+	 * @param amt The amount to decrease the stamina by
+	 */
 	public static void decreaseStamina(int amt) {
 		stamina -= amt;
 		MongoHandler.updateStamina(userName, stamina, new Date(System.currentTimeMillis()));
 	}
 
 	/**
+	 * 
+	 * Gets the number of levels that have been unlocked by this player
+	 * 
 	 * @return The levelsUnlocked
 	 */
 	public static int getLevelsUnlocked() {
@@ -101,6 +119,9 @@ public class Player {
 	}
 
 	/**
+	 * 
+	 * Gets the currency the player currently has
+	 * 
 	 * @return The currency
 	 */
 	public static int getCurrency() {
@@ -126,7 +147,7 @@ public class Player {
 	 * 
 	 * Adds the given amount of currency to the user
 	 * 
-	 * @param amt
+	 * @param amt The amount of currency to be added
 	 */
 	public static void addCurrency(int amt) {
 		currency += amt;
@@ -155,6 +176,9 @@ public class Player {
 	}
 	
 	/**
+	 * 
+	 * Gets the username of this player
+	 * 
 	 * @return The username
 	 */
 	public static String getUserName() {

@@ -90,7 +90,7 @@ public class Constants {
 	 * 
 	 * Returns the full path to the enemy sprite
 	 * 
-	 * @param name of the enemy
+	 * @param enemy The name of the enemy
 	 * @param action The action of enemy you want
 	 * @return The full path to the enemy action gif
 	 */

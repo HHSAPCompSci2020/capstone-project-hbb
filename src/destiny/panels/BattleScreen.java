@@ -23,6 +23,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import destiny.net.MongoHandler;
 /**
+ * 
  * BattleScreen is where the user can battle with their revolutionaries
  * 
  * @author Jay Paek

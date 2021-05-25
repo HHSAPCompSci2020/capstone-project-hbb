@@ -205,7 +205,7 @@ public class FadeVideo extends Fader {
 	 * 
 	 * Fades the volume of the video to the given volume
 	 * 
-	 * @param vol
+	 * @param vol The volume that should be faded towards
 	 */
 	public void fadeVolumeTo(float vol) {
 		

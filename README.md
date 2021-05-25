@@ -132,8 +132,8 @@ This will be the main way in which players can obtain new characters. Players ca
 *   Character Gallery (Collection):  \
 There will be a page where players can view their characters and view character stats
 
-    There are 7 tiers:  \
-Common, Uncommon, Rare, Super Rare, Ultra Rare, Legendary, Divine
+    There are 6 tiers:  \
+Common, Uncommon, Rare, Super Rare, Ultra Rare, Legendary
 
 *   Settings:  \
 Settings/option will be in game to disable sound and music

@@ -15,7 +15,8 @@ import processing.core.PApplet;
 public class StatsBox {
 	
     private final int totalHealth, totalMp, attack, defense;
-    private int[] stats;
+    private final String rarity;
+    private String[] stats;
     private String[] names;
     private int width, height, x, y;
 
@@ -37,10 +38,11 @@ public class StatsBox {
 		this.defense = character.getInteger("defense");
 		this.width = width;
 		this.height = height;
+		this.rarity = character.getString("rarity");
 		this.x = x;
 		this.y = y;
-		stats = new int[]{totalHealth, totalMp, attack, defense};
-		names = new String[]{"Total Health: ", "Total MP: ", "Attack: ", "Defense: "};
+		stats = new String[]{String.valueOf(totalHealth), String.valueOf(totalMp), String.valueOf(attack), String.valueOf(defense), rarity};
+		names = new String[]{"Total Health: ", "Total MP: ", "Attack: ", "Defense: ", "Rarity: "};
 		
 	}
 	
@@ -56,7 +58,7 @@ public class StatsBox {
 		window.pushStyle();
 		window.textSize((width+height)/20);
 		for (int i = 0; i < stats.length; i ++)
-			window.text(names[i] + stats[i], x + 50, y + height/5*i);
+			window.text(names[i] + stats[i], x + 50, y + height/6*i);
 		
 		window.popStyle();
 		

@@ -72,8 +72,11 @@ public class MongoHandler {
 	 */
 	public static boolean checkUserLogin(String userName, String pswd) {
 
-		return userCol.find(eq("_id", userName)).first().getString("pswd").equals(pswd);
-
+		try {
+			return userCol.find(eq("_id", userName)).first().getString("pswd").equals(pswd);
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	/**

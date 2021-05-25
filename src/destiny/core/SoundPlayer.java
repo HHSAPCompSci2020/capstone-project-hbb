@@ -9,7 +9,7 @@ import javax.swing.Timer;
 
 /**
  * 
- * Class that plays wav files because that is all java supports
+ * A class that plays wav files because that is all java supports
  * 
  * @author Nathaniel
  * @version 5/23/21

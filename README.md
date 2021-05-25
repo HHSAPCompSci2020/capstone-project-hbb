@@ -263,3 +263,5 @@ Players make a team composition and play against other player’s team compositi
 *   Processing
 *   [https://www.spriters-resource.com/](https://www.spriters-resource.com/)
 *   MongoDB
+*	[https://www.youtube.com/channel/UCpQUBJrRfcpWLro4Oziff7Q](https://www.youtube.com/channel/UCpQUBJrRfcpWLro4Oziff7Q)
+*	[https://www.youtube.com/channel/UCyW-leqPXUunrXXxFjpZ7VA](https://www.youtube.com/channel/UCyW-leqPXUunrXXxFjpZ7VA)

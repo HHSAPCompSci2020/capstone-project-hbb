@@ -35,7 +35,7 @@ public class LevelSelectScreen implements Screen {
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeGif("res/levelSelectScreen/levels.gif");
+		background = new FadeGif("res/generalAssets/bg.gif");
 		background.setFadeSpeed(50);
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();

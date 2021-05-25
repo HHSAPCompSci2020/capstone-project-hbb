@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
+import destiny.core.FadeGif;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
@@ -26,12 +27,12 @@ import processing.core.PImage;
  */
 public class MainScreen implements Screen {
 
-	private FadeImage background;
+	private FadeGif background;
 	private RippleCursor cursor;
 	private PButton button, back, gacha, gallery;
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/mainScreen/big.jpg");
+		background = new FadeGif("res/generalAssets/bg.gif");
 		background.setFadeSpeed(50);
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {

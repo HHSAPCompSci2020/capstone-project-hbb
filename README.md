@@ -2,7 +2,7 @@ Destiny Roll
 
 **Authors**: Nathaniel Thomas, Jay Paek
 
-**Revision**: 4/26/2021
+**Revision**: 5/24/2021
 
 **<span style="text-decoration:underline;">Introduction</span>**: 
 

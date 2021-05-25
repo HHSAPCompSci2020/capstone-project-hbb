@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
@@ -16,6 +19,7 @@ import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.sound.SoundFile;
 
 /**
  * HomeScreen is the screen right after the opening screen
@@ -28,6 +32,7 @@ public class HomeScreen implements Screen {
 	private FadeVideo background;
 	private RippleCursor cursor;
 	private PButton button;
+	private PButton setting;
 	
 	@Override
 	public void setup(PApplet window) {
@@ -40,7 +45,74 @@ public class HomeScreen implements Screen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+		try {
+			setting = new PButton(
+					new Rectangle(Constants.scaleIntToWidth(50),
+							Constants.scaleIntToHeight(50), Constants.scaleIntToWidth(100),
+							Constants.scaleIntToHeight(100)),
+					new PImage(ImageIO.read(new File("res/generalAssets/setting.png"))), false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		setting.addListener(new Runnable() {
 
+			@Override
+			public void run() {
+				JPanel panel = new JPanel();
+				JLabel label = new JLabel("Select the song you would like to listen to: ");
+				String[] options = new String[] { "Again", "Air", "COLORS", "Grand Escape", "JJK", "One Last Kiss", "My Truth", "Sparkle" };
+				int choice = JOptionPane.showOptionDialog(null, panel, "Music Selection", JOptionPane.NO_OPTION,
+						JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+				if (choice == 0) {
+
+					Window.sound.stop();
+					Window.sound = new SoundFile(window, Constants.getSoundPath("again.mp3"));
+
+				} else if (choice == 1) {
+
+					Window.sound.stop();
+					Window.sound = new SoundFile(window, Constants.getSoundPath("air.mp3"));
+
+				} else if (choice == 2) {
+
+					Window.sound.stop();
+					Window.sound = new SoundFile(window, Constants.getSoundPath("colors.mp3"));
+
+				} else if (choice == 3) {
+
+					Window.sound.stop();
+					Window.sound = new SoundFile(window, Constants.getSoundPath("grandEscape.mp3"));
+
+				} else if (choice == 4) {
+
+					Window.sound.stop();
+					Window.sound = new SoundFile(window, Constants.getSoundPath("JJK.mp3"));
+					Window.sound.play();
+
+				} else if (choice == 5) {
+
+					Window.sound.stop();
+					Window.sound = new SoundFile(window, Constants.getSoundPath("oneLastKiss.mp3"));
+
+				} else if (choice == 6) {
+
+					Window.sound.stop();
+					Window.sound = new SoundFile(window, Constants.getSoundPath("rondo.mp3"));
+
+				} else if (choice == 7) {
+
+					Window.sound.stop();
+					Window.sound = new SoundFile(window, Constants.getSoundPath("sparkle.mp3"));
+
+				}
+				
+			}
+			
+		});
+		
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		background.loop();
@@ -62,6 +134,7 @@ public class HomeScreen implements Screen {
 			} else {
 				cursor.clearTrail();
 			}
+			setting.draw(window);
 			button.addListener(new Runnable() {
 				@Override
 				public void run() {

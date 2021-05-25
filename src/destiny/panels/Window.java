@@ -3,6 +3,7 @@ package destiny.panels;
 import destiny.assets.Constants;
 import destiny.core.*;
 import processing.core.PApplet;
+import processing.sound.SoundFile;
 import processing.video.Movie;
 
 /**
@@ -15,7 +16,7 @@ import processing.video.Movie;
  */
 public class Window extends PApplet {
 
-	private SoundPlayer sound = new SoundPlayer(Constants.getSoundPath("rondo.wav"));
+	public static SoundFile sound;
 	
 	/**
 	 * 
@@ -38,8 +39,8 @@ public class Window extends PApplet {
 		ScreenManager.addScreen("prep", new BattlePrepScreen());
 		ScreenManager.addScreen("battle", new BattleScreen());
 		ScreenManager.addScreen("gallery", new GalleryScreen());
+		sound = new SoundFile(this, Constants.getSoundPath("rondo.mp3"));
 		sound.loop();
-		sound.setVolume(70);
 		
 	}
 
@@ -56,7 +57,7 @@ public class Window extends PApplet {
 			
 			if (sound.isPlaying()) {
 				sound.stop();
-				sound.forceRestart();
+				sound.jump(0);
 			}
 			
 		} else {

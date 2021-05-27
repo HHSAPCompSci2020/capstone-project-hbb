@@ -36,6 +36,7 @@ public class OpeningScreen implements Screen {
 		corp.volume(0);
 		corp.play();
 		background.setCoords(0, 0);
+		background.setFadeSpeed(5);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	}
 

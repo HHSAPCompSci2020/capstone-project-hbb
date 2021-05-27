@@ -1,9 +1,13 @@
 package destiny.panels;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import destiny.assets.Constants;
 import destiny.core.*;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import processing.core.PApplet;
-import processing.sound.SoundFile;
 import processing.video.Movie;
 
 /**
@@ -16,7 +20,9 @@ import processing.video.Movie;
  */
 public class Window extends PApplet {
 
-	public static SoundFile sound;
+	public static Player sound;
+	private static String currentSong; 
+	private static boolean isPlaying;
 	
 	/**
 	 * 
@@ -39,8 +45,37 @@ public class Window extends PApplet {
 		ScreenManager.addScreen("prep", new BattlePrepScreen());
 		ScreenManager.addScreen("battle", new BattleScreen());
 		ScreenManager.addScreen("gallery", new GalleryScreen());
-		sound = new SoundFile(this, Constants.getSoundPath("rondo.mp3"));
-		sound.loop();
+		loopSound(Constants.getSoundPath("rondo.mp3"));
+		
+	}
+	
+	public static void loopSound(String path) {
+		
+		try {
+			sound = new Player(new FileInputStream(path));
+			isPlaying = true;
+			currentSong = path;
+		} catch (FileNotFoundException | JavaLayerException e) {
+			e.printStackTrace();
+		}
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				
+				try {
+					sound.play();
+				} catch (JavaLayerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				if (sound.isComplete() && path.equals(currentSong))
+					loopSound(path);
+				
+			}
+			
+		}).start();;
 		
 	}
 
@@ -55,16 +90,16 @@ public class Window extends PApplet {
 		
 		if (currentScreen instanceof BattleScreen || currentScreen instanceof OpeningScreen || currentScreen instanceof GachaResultsScreen) {
 			
-			if (sound.isPlaying()) {
-				sound.stop();
-				sound.jump(0);
+			if (sound != null) {
+				sound.close();
+				isPlaying = false;
 			}
 			
 		} else {
 			
-			if (!sound.isPlaying()) {
+			if (!isPlaying) {
 				
-				sound.play();
+				loopSound(currentSong);
 				
 			}
 			

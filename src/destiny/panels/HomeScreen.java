@@ -19,7 +19,6 @@ import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.sound.SoundFile;
 
 /**
  * HomeScreen is the screen right after the opening screen
@@ -61,51 +60,51 @@ public class HomeScreen implements Screen {
 			@Override
 			public void run() {
 				JPanel panel = new JPanel();
-				JLabel label = new JLabel("Select the song you would like to listen to: ");
+				JLabel label = new JLabel("Select the song you would like to listen to:");
+				panel.add(label);
 				String[] options = new String[] { "Again", "Air", "COLORS", "Grand Escape", "JJK", "One Last Kiss", "My Truth", "Sparkle" };
 				int choice = JOptionPane.showOptionDialog(null, panel, "Music Selection", JOptionPane.NO_OPTION,
 						JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 				if (choice == 0) {
 
-					Window.sound.stop();
-					Window.sound = new SoundFile(window, Constants.getSoundPath("again.mp3"));
+					Window.sound.close();
+					Window.loopSound(Constants.getSoundPath("again.mp3"));
 
 				} else if (choice == 1) {
 
-					Window.sound.stop();
-					Window.sound = new SoundFile(window, Constants.getSoundPath("air.mp3"));
+					Window.sound.close();
+					Window.loopSound(Constants.getSoundPath("air.mp3"));
 
 				} else if (choice == 2) {
 
-					Window.sound.stop();
-					Window.sound = new SoundFile(window, Constants.getSoundPath("colors.mp3"));
+					Window.sound.close();
+					Window.loopSound(Constants.getSoundPath("colors.mp3"));
 
 				} else if (choice == 3) {
 
-					Window.sound.stop();
-					Window.sound = new SoundFile(window, Constants.getSoundPath("grandEscape.mp3"));
+					Window.sound.close();
+					Window.loopSound(Constants.getSoundPath("grandEscape.mp3"));
 
 				} else if (choice == 4) {
 
-					Window.sound.stop();
-					Window.sound = new SoundFile(window, Constants.getSoundPath("JJK.mp3"));
-					Window.sound.play();
+					Window.sound.close();
+					Window.loopSound(Constants.getSoundPath("JJK.mp3"));
 
 				} else if (choice == 5) {
 
-					Window.sound.stop();
-					Window.sound = new SoundFile(window, Constants.getSoundPath("oneLastKiss.mp3"));
+					Window.sound.close();
+					Window.loopSound(Constants.getSoundPath("oneLastKiss.mp3"));
 
 				} else if (choice == 6) {
 
-					Window.sound.stop();
-					Window.sound = new SoundFile(window, Constants.getSoundPath("rondo.mp3"));
+					Window.sound.close();
+					Window.loopSound(Constants.getSoundPath("rondo.mp3"));
 
 				} else if (choice == 7) {
 
-					Window.sound.stop();
-					Window.sound = new SoundFile(window, Constants.getSoundPath("sparkle.mp3"));
+					Window.sound.close();
+					Window.loopSound(Constants.getSoundPath("sparkle.mp3"));
 
 				}
 				

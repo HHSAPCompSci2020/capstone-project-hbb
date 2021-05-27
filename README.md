@@ -6,7 +6,7 @@ Destiny Roll
 
 **<span style="text-decoration:underline;">Introduction</span>**: 
 
-Destiny Roll: Final Wish is a turn based role playing game (RPG) implemented with a gacha character rolling system. The game will have 3 base modes, a story mode, an endless mode, and an online battle mode. Players will be able to choose 3 starting characters from an initial 20 to build their first team.
+Destiny Roll: Final Wish is a turn based role playing game (RPG) implemented with a gacha character rolling system. The game will have a story mode. Players will be able to choose 3 starting characters from an initial 20 to build their first team.
 
 Each character will have unique abilities and stats (which will be explained and listed in features list). 
 
@@ -126,7 +126,7 @@ Right before entering battle, the user will be able to select up to 3 desired ch
 *   RPG battle system: \
 The main game will be a turn based RPG battle system similar to the popular hand-game fireball. There will be five actions: block, basic atk (rq 1 mana), special ability (rq 2-5 mana), ultimate ability (rq 4+ mana), charge (+1 mana), or do nothing. Players can set up their teams with 3 different characters with different abilities. There will be a schematic background with 3 revolutionaries and 3 enemies drawn in the upper side of the screen called the battlefield. Then there will be an interactive UI for the player to select character actions.
 *   In game currency system: \
-Players can earn in game currency by clearing story mode levels, completing quests, winning online battles, or leveling up. They can spend in game currency on claiming more characters, leveling up characters, [or unlocking new items]
+Players can earn in game currency by clearing story mode levels, completing quests, or leveling up. They can spend in game currency on claiming more characters, leveling up characters, [or unlocking new items]
 *   Gacha Roll System: \
 This will be the main way in which players can obtain new characters. Players can use in-game currency to get a chance to obtain another character.
 *   Character Gallery (Collection):  \
@@ -174,8 +174,6 @@ Endless mode will be a game mode where there will be waves of enemies, each wave
 Encrypt game data so that players can not inspect code and change values to cheat.
 *   Tutorial: \
 Implement a tutorial video at the opening screen. If the player does not interact with the opening screen for more than 10 seconds, then it will play the tutorial video. Additionally, players can watch the tutorial video in the options menu.
-*   Online Battle Mode: \
-Players make a team composition and play against other player’s team compositions for glory! (and in game currency). Players will not face a loss in currency for participating (for now) \
 
 
 **Stretch Features**:
@@ -191,10 +189,6 @@ Players make a team composition and play against other player’s team compositi
 *   Different skins for characters:
 
     Each character will start with the standard default look but some may be able to have a special skin/look that can be unlocked and equipped. Can be obtained by insane amounts of in game currency
-
-*   Different online battle arenas:
-
-    Different amounts of prize currency for each. The cost to enter higher arenas increases as the prize pot increases. Similar to how BTD Battles has different arenas you can compete in.
 
 
 **<span style="text-decoration:underline;">Class List</span>**:

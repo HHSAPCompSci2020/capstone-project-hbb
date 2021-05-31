@@ -44,7 +44,6 @@ public class BattleScreen implements Screen {
 	private boolean win = false, lose = false;;
 	private FadeImage victory, defeat;
 	private int level;
-	private SoundPlayer sound;
 	private PButton setting;
 	private int turn;
 	private FadeImage[] stars;
@@ -57,9 +56,8 @@ public class BattleScreen implements Screen {
 		cursor = RippleCursor.createLowPerformanceCursor();
 		revSelect = 0;
 		move = new int[3];
-		sound = new SoundPlayer(Constants.getSoundPath("bgm.wav"));
-		sound.loop();
-		sound.setVolume(70);
+		Window.sound.close();
+		Window.loopSound(Constants.getSoundPath("bgm.mp3"));
 		target = 2;
 		turn = 0;
 		enemyTarget = 2;
@@ -173,11 +171,12 @@ public class BattleScreen implements Screen {
 
 				if (choice == 0) {
 
-					sound.loop();
+					Window.sound.close();
+					Window.loopSound(Constants.getSoundPath("bgm.mp3"));
 
 				} else if (choice == 1) {
 
-					sound.stop();
+					Window.sound.close();
 
 				}
 				
@@ -238,7 +237,7 @@ public class BattleScreen implements Screen {
 					if(Player.getLevelsUnlocked()==level) {
 						Player.passLevel();
 					}
-					sound.stop();
+					Window.sound.close();
 					background.addListener(new Runnable() {
 						@Override
 						public void run() {
@@ -267,7 +266,7 @@ public class BattleScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
-					sound.stop();
+					Window.sound.close();
 					background.addListener(new Runnable() {
 
 						@Override

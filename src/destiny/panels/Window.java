@@ -88,7 +88,7 @@ public class Window extends PApplet {
 		
 		Screen currentScreen = ScreenManager.getCurrentScreen();
 		
-		if (currentScreen instanceof BattleScreen || currentScreen instanceof OpeningScreen || currentScreen instanceof GachaResultsScreen) {
+		if (currentScreen instanceof OpeningScreen || currentScreen instanceof GachaResultsScreen) {
 			
 			if (sound != null) {
 				sound.close();

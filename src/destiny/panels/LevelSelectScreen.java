@@ -1,4 +1,4 @@
-package destiny.panels;
+ package destiny.panels;
 
 import java.awt.Rectangle;
 import java.io.File;

@@ -20,9 +20,11 @@ import processing.video.Movie;
  */
 public class Window extends PApplet {
 
-	public static Player sound;
+	private static Player sound;
 	private static String currentSong; 
+	private static String chillSong;
 	private static boolean isPlaying;
+	private static boolean play = true;
 	
 	/**
 	 * 
@@ -45,15 +47,18 @@ public class Window extends PApplet {
 		ScreenManager.addScreen("prep", new BattlePrepScreen());
 		ScreenManager.addScreen("battle", new BattleScreen());
 		ScreenManager.addScreen("gallery", new GalleryScreen());
-		loopSound(Constants.getSoundPath("rondo.mp3"));
 		
 	}
 	
 	public static void loopSound(String path) {
 		
+		if (!path.contains("bgm"))
+			chillSong = path;
+		
 		try {
 			sound = new Player(new FileInputStream(path));
 			isPlaying = true;
+			play = true;
 			currentSong = path;
 		} catch (FileNotFoundException | JavaLayerException e) {
 			e.printStackTrace();
@@ -70,12 +75,37 @@ public class Window extends PApplet {
 					e.printStackTrace();
 				}
 				
-				if (sound.isComplete() && path.equals(currentSong))
+				if (sound.isComplete() && path.equals(currentSong) && isPlaying)
 					loopSound(path);
 				
 			}
 			
 		}).start();;
+		
+	}
+	
+	/**
+	 * 
+	 * Stops the music
+	 * 
+	 */
+	public static void stopSound() {
+		
+		sound.close();
+		isPlaying = false;
+		play = false;
+		
+	}
+	
+	/**
+	 * 
+	 * Overrides the screen default for music and plays the original BGM
+	 * 
+	 * @param override Whether or not to override the BGM
+	 */
+	public static void setBGMOverride(boolean override) {
+		
+		play = override;
 		
 	}
 
@@ -93,13 +123,14 @@ public class Window extends PApplet {
 			if (sound != null) {
 				sound.close();
 				isPlaying = false;
+				play = false;
 			}
 			
 		} else {
 			
-			if (!isPlaying) {
+			if (!isPlaying && play) {
 				
-				loopSound(currentSong);
+				loopSound(chillSong);
 				
 			}
 			

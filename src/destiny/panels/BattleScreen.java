@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import destiny.assets.Constants;
 import destiny.assets.Enemy;
@@ -56,7 +58,7 @@ public class BattleScreen implements Screen {
 		cursor = RippleCursor.createLowPerformanceCursor();
 		revSelect = 0;
 		move = new int[3];
-		Window.sound.close();
+		Window.stopSound();
 		Window.loopSound(Constants.getSoundPath("bgm.mp3"));
 		target = 2;
 		turn = 0;
@@ -167,17 +169,27 @@ public class BattleScreen implements Screen {
 
 			@Override
 			public void run() {
-				int choice = JOptionPane.showConfirmDialog(null, "Do you like the music?");
+				JPanel panel = new JPanel();
+				JLabel label = new JLabel("Do you like the music?");
+				panel.add(label);
+				String[] options = new String[] { "Yes", "No", "Play that chill music from before", "Cancel" };
+				int choice = JOptionPane.showOptionDialog(null, panel, "Music Selection", JOptionPane.NO_OPTION,
+						JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 				if (choice == 0) {
 
-					Window.sound.close();
+					Window.stopSound();
 					Window.loopSound(Constants.getSoundPath("bgm.mp3"));
 
 				} else if (choice == 1) {
 
-					Window.sound.close();
+					Window.stopSound();
 
+				} else if (choice == 2) {
+					
+					Window.stopSound();
+					Window.setBGMOverride(true);
+					
 				}
 				
 			}
@@ -237,7 +249,8 @@ public class BattleScreen implements Screen {
 					if(Player.getLevelsUnlocked()==level) {
 						Player.passLevel();
 					}
-					Window.sound.close();
+					Window.stopSound();
+					Window.setBGMOverride(true);
 					background.addListener(new Runnable() {
 						@Override
 						public void run() {
@@ -266,7 +279,8 @@ public class BattleScreen implements Screen {
 					background.setTint(255);
 					background.setTargetTint(0);
 					background.fadeWhite(true);
-					Window.sound.close();
+					Window.stopSound();
+					Window.setBGMOverride(true);
 					background.addListener(new Runnable() {
 
 						@Override

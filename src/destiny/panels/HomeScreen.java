@@ -37,6 +37,7 @@ public class HomeScreen implements Screen {
 	public void setup(PApplet window) {
 		background = new FadeVideo(window, "res/generalAssets/impact.mp4");
 		background.setFadeSpeed(50);
+		Window.loopSound(Constants.getSoundPath("rondo.mp3"));
 		cursor = RippleCursor.createLowPerformanceCursor();
 		try {
 			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - Constants.scaleIntToWidth(500), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(300), Constants.scaleIntToWidth(400), Constants.scaleIntToWidth(200)),new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
@@ -68,42 +69,42 @@ public class HomeScreen implements Screen {
 
 				if (choice == 0) {
 
-					Window.sound.close();
+					Window.stopSound();
 					Window.loopSound(Constants.getSoundPath("again.mp3"));
 
 				} else if (choice == 1) {
 
-					Window.sound.close();
+					Window.stopSound();
 					Window.loopSound(Constants.getSoundPath("air.mp3"));
 
 				} else if (choice == 2) {
 
-					Window.sound.close();
+					Window.stopSound();
 					Window.loopSound(Constants.getSoundPath("colors.mp3"));
 
 				} else if (choice == 3) {
 
-					Window.sound.close();
+					Window.stopSound();
 					Window.loopSound(Constants.getSoundPath("grandEscape.mp3"));
 
 				} else if (choice == 4) {
 
-					Window.sound.close();
+					Window.stopSound();
 					Window.loopSound(Constants.getSoundPath("JJK.mp3"));
 
 				} else if (choice == 5) {
 
-					Window.sound.close();
+					Window.stopSound();
 					Window.loopSound(Constants.getSoundPath("oneLastKiss.mp3"));
 
 				} else if (choice == 6) {
 
-					Window.sound.close();
+					Window.stopSound();
 					Window.loopSound(Constants.getSoundPath("rondo.mp3"));
 
 				} else if (choice == 7) {
 
-					Window.sound.close();
+					Window.stopSound();
 					Window.loopSound(Constants.getSoundPath("sparkle.mp3"));
 
 				}
